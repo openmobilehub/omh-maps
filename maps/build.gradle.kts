@@ -17,5 +17,4 @@ dependencies {
     // Test dependencies
     testImplementation(Libs.junit)
     androidTestImplementation(Libs.androidJunit)
-    androidTestImplementation(Libs.esspreso)
 }
