@@ -27,7 +27,7 @@ android {
 
 dependencies {
 
-    implementation("com.github.openmobilehub:maps:1.0-SNAPSHOT")
+    implementation(project(":maps"))
 
     implementation(Libs.coreKtx)
     implementation(Libs.lifecycleKtx)
