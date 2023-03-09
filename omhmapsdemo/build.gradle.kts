@@ -1,5 +1,4 @@
 plugins {
-    id("org.jetbrains.kotlin.android")
     `android-application`
 }
 
@@ -20,13 +19,12 @@ android {
         jvmTarget = "1.8"
     }
 
-    buildFeatures {
-        viewBinding = true
+    viewBinding {
+        enable = true
     }
 }
 
 dependencies {
-
     implementation(project(":maps"))
 
     implementation(Libs.coreKtx)
