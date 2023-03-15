@@ -1,7 +1,7 @@
 package com.github.mapsgms.presentation
 
 import android.annotation.SuppressLint
-import com.github.mapsgms.utils.Converter
+import com.github.mapsgms.utils.ConverterUtils
 import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhMap
 import com.github.openmobilehub.maps.presentation.models.OmhCoordinate
 import com.github.openmobilehub.maps.presentation.models.OmhOnCameraIdleListener
@@ -13,7 +13,7 @@ class OmhMapImpl(private var googleMap: GoogleMap) : OmhMap {
 
     override fun getCameraPositionCoordinate(): OmhCoordinate {
         val position = googleMap.cameraPosition.target
-        return Converter.convertToCoordinate(position)
+        return ConverterUtils.convertToOmhCoordinate(position)
     }
 
     override fun setZoomGesturesEnabled(enableZoomGestures: Boolean) {
@@ -38,7 +38,7 @@ class OmhMapImpl(private var googleMap: GoogleMap) : OmhMap {
     }
 
     override fun moveCamera(coordinate: OmhCoordinate, zoomLevel: Float) {
-        val latLng = Converter.convertToLatLng(coordinate)
+        val latLng = ConverterUtils.convertToLatLng(coordinate)
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel))
     }
 }

@@ -2,6 +2,7 @@ package com.github.mapsgms.presentation
 
 import android.annotation.SuppressLint
 import android.content.Context
+import com.github.mapsgms.utils.ConverterUtils
 import com.github.openmobilehub.maps.presentation.interfaces.location.OmhFailureListener
 import com.github.openmobilehub.maps.presentation.interfaces.location.OmhLocation
 import com.github.openmobilehub.maps.presentation.interfaces.location.OmhSuccessListener
@@ -11,6 +12,8 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationToken
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.OnTokenCanceledListener
+
+private const val LOCATION_IS_NULL = "Location is null"
 
 class OmhLocationImpl : OmhLocation {
 
@@ -38,7 +41,7 @@ class OmhLocationImpl : OmhLocation {
                 if (locationResult != null) {
                     omhOnSuccessListener.onSuccess(OmhCoordinate(locationResult.latitude, locationResult.longitude))
                 } else {
-                    omhOnFailureListener.onFailure(Exception("Location is null"))
+                    omhOnFailureListener.onFailure(Exception(LOCATION_IS_NULL))
                 }
             }
             .addOnFailureListener { exception ->
@@ -57,9 +60,9 @@ class OmhLocationImpl : OmhLocation {
         locationClient.lastLocation
             .addOnSuccessListener { location ->
                 if (location != null) {
-                    omhOnSuccessListener.onSuccess(OmhCoordinate(location.latitude, location.longitude))
+                    omhOnSuccessListener.onSuccess(ConverterUtils.convertToOmhCoordinate(location))
                 } else {
-                    omhOnFailureListener.onFailure(Exception("Location is null"))
+                    omhOnFailureListener.onFailure(Exception(LOCATION_IS_NULL))
                 }
             }
             .addOnFailureListener { exception ->
