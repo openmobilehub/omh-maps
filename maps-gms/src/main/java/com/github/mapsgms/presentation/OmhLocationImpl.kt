@@ -3,21 +3,19 @@ package com.github.mapsgms.presentation
 import android.annotation.SuppressLint
 import android.content.Context
 import com.github.mapsgms.utils.ConverterUtils
+import com.github.mapsgms.utils.LocationUtils
 import com.github.openmobilehub.maps.presentation.interfaces.location.OmhFailureListener
 import com.github.openmobilehub.maps.presentation.interfaces.location.OmhLocation
 import com.github.openmobilehub.maps.presentation.interfaces.location.OmhSuccessListener
 import com.github.openmobilehub.maps.presentation.models.OmhCoordinate
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
-import com.google.android.gms.tasks.CancellationToken
-import com.google.android.gms.tasks.CancellationTokenSource
-import com.google.android.gms.tasks.OnTokenCanceledListener
 
 private const val LOCATION_IS_NULL = "Location is null"
 
-class OmhLocationImpl : OmhLocation {
+internal class OmhLocationImpl : OmhLocation {
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission") // TODO handle properly in the corresponding task
     override fun getCurrentLocation(
         context: Context,
         omhOnSuccessListener: OmhSuccessListener,
@@ -27,15 +25,7 @@ class OmhLocationImpl : OmhLocation {
 
         locationClient.getCurrentLocation(
             Priority.PRIORITY_HIGH_ACCURACY,
-            object : CancellationToken() {
-                override fun onCanceledRequested(p0: OnTokenCanceledListener): CancellationToken {
-                    return CancellationTokenSource().token
-                }
-
-                override fun isCancellationRequested(): Boolean {
-                    return false
-                }
-            }
+            LocationUtils.createCancellationToken()
         )
             .addOnSuccessListener { locationResult ->
                 if (locationResult != null) {
@@ -49,7 +39,7 @@ class OmhLocationImpl : OmhLocation {
             }
     }
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission") // TODO handle properly in the corresponding task
     override fun getLastLocation(
         context: Context,
         omhOnSuccessListener: OmhSuccessListener,
