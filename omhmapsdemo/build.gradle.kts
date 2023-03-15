@@ -25,7 +25,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":maps"))
+    implementation(project(":maps-gms"))
 
     implementation(Libs.coreKtx)
     implementation(Libs.lifecycleKtx)

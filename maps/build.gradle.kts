@@ -4,6 +4,10 @@ plugins {
 
 android {
     namespace = "com.github.openmobilehub.maps"
+
+    viewBinding {
+        enable = true
+    }
 }
 
 dependencies {

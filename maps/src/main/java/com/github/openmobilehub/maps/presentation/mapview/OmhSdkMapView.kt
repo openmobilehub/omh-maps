@@ -1,18 +1,20 @@
 package com.github.openmobilehub.maps.presentation.mapview
 
 import android.content.Context
-import android.util.AttributeSet
 import android.widget.FrameLayout
-import com.github.openmobilehub.maps.presentation.interfaces.OmhOnMapReadyCallBack
-import com.github.openmobilehub.maps.presentation.interfaces.SdkMapView
+import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhMapView
+import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnMapReadyCallBack
+import com.github.openmobilehub.maps.presentation.interfaces.maps.SdkMapView
 
-class OmhSdkMapView(context: Context, attrs: AttributeSet) : SdkMapView, FrameLayout(context, attrs) {
+class OmhSdkMapView(context: Context) : SdkMapView, FrameLayout(context) {
 
-    var mapView: OmhSdkMapView? = null
+    var mapView: OmhMapView? = null
 
     init {
-        // mapView = MapView(context, attrs)
-        // addView(mapView)
+        // mapView =
+        // mapView?.getView()?.let {
+        //    addView(it)
+        // }
     }
 
     override fun getMapAsync(onMapReadyCallBack: OmhOnMapReadyCallBack) {
