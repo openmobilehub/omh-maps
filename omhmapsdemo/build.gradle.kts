@@ -1,5 +1,7 @@
 plugins {
     `android-application`
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android") version "2.44" apply true
 }
 
 android {
@@ -19,6 +21,10 @@ android {
         jvmTarget = "1.8"
     }
 
+    kapt {
+        correctErrorTypes = true
+    }
+
     viewBinding {
         enable = true
     }
@@ -32,6 +38,10 @@ dependencies {
     implementation(Libs.androidAppCompat)
     implementation(Libs.material)
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-compiler:2.44")
 
     testImplementation(Libs.junit)
     androidTestImplementation(Libs.androidJunit)

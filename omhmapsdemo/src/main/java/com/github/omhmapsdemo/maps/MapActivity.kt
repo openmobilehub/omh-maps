@@ -11,24 +11,23 @@ import com.github.omhmapsdemo.utils.Constants.INITIAL_TRANSLATION
 import com.github.omhmapsdemo.utils.Constants.OVERSHOOT_INTERPOLATOR
 import com.github.omhmapsdemo.utils.Constants.PRIME_MERIDIAN
 import com.github.openmobilehub.maps.presentation.interfaces.location.OmhFailureListener
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhMap
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnMapReadyCallBack
 import com.github.openmobilehub.maps.presentation.interfaces.location.OmhSuccessListener
+import com.github.openmobilehub.maps.presentation.interfaces.maps.*
 import com.github.openmobilehub.maps.presentation.models.OmhCoordinate
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnCameraIdleListener
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MapActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var omhMapView: OmhMapView
     private lateinit var binding: ActivityMapBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val omhMapView = OmhMapFactory.getOmhMapView(this)
 
         val omhOnMapReadyCallBack = object: OmhOnMapReadyCallBack {
             override fun onMapReady(omhMap: OmhMap) {
