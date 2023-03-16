@@ -1,4 +1,4 @@
-package com.github.openmobilehub.maps.presentation.interfaces.location
+package com.openmobilehub.maps.api.presentation.interfaces.location
 
 fun interface OmhFailureListener {
     fun onFailure(exception: Exception)

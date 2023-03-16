@@ -1,8 +1,8 @@
 package com.github.mapsgms.utils
 
 import android.location.Location
-import com.github.openmobilehub.maps.presentation.models.OmhCoordinate
 import com.google.android.gms.maps.model.LatLng
+import com.openmobilehub.maps.api.presentation.models.OmhCoordinate
 
 object ConverterUtils {
     fun convertToOmhCoordinate(latLng: LatLng?): OmhCoordinate {

@@ -1,22 +1,22 @@
-package com.github.omhmapsdemo.maps
+package com.openmobilehub.maps.sample.maps
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mapsgms.presentation.OmhMapFactory
-import com.github.omhmapsdemo.databinding.ActivityMapBinding
-import com.github.omhmapsdemo.utils.Constants.ANIMATION_DURATION
-import com.github.omhmapsdemo.utils.Constants.DEFAULT_ZOOM_LEVEL
-import com.github.omhmapsdemo.utils.Constants.FINAL_TRANSLATION
-import com.github.omhmapsdemo.utils.Constants.INITIAL_TRANSLATION
-import com.github.omhmapsdemo.utils.Constants.OVERSHOOT_INTERPOLATOR
-import com.github.omhmapsdemo.utils.Constants.PRIME_MERIDIAN
-import com.github.openmobilehub.maps.presentation.interfaces.location.OmhFailureListener
-import com.github.openmobilehub.maps.presentation.interfaces.location.OmhSuccessListener
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhMap
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhMapView
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnCameraIdleListener
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnMapReadyCallback
+import com.openmobilehub.maps.sample.databinding.ActivityMapBinding
+import com.openmobilehub.maps.sample.utils.Constants.ANIMATION_DURATION
+import com.openmobilehub.maps.sample.utils.Constants.DEFAULT_ZOOM_LEVEL
+import com.openmobilehub.maps.sample.utils.Constants.FINAL_TRANSLATION
+import com.openmobilehub.maps.sample.utils.Constants.INITIAL_TRANSLATION
+import com.openmobilehub.maps.sample.utils.Constants.OVERSHOOT_INTERPOLATOR
+import com.openmobilehub.maps.sample.utils.Constants.PRIME_MERIDIAN
+import com.openmobilehub.maps.api.presentation.interfaces.location.OmhFailureListener
+import com.openmobilehub.maps.api.presentation.interfaces.location.OmhSuccessListener
+import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhMap
+import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhMapView
+import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
+import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
+import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

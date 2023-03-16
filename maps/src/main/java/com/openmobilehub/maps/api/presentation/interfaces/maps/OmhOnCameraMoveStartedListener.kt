@@ -1,4 +1,4 @@
-package com.github.openmobilehub.maps.presentation.interfaces.maps
+package com.openmobilehub.maps.api.presentation.interfaces.maps
 
 fun interface OmhOnCameraMoveStartedListener {
     fun onCameraMoveStarted(var1: Int)

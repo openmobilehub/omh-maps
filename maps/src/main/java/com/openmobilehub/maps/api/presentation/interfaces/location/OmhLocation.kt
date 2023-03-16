@@ -1,4 +1,4 @@
-package com.github.openmobilehub.maps.presentation.interfaces.location
+package com.openmobilehub.maps.api.presentation.interfaces.location
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION

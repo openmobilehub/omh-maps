@@ -1,4 +1,4 @@
-package com.github.openmobilehub.maps.presentation.models
+package com.openmobilehub.maps.api.presentation.models
 
 class OmhCoordinate {
 

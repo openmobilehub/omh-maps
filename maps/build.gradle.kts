@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.github.openmobilehub.maps"
+    namespace = "com.openmobilehub.maps.api"
 
     viewBinding {
         enable = true
@@ -15,6 +15,7 @@ dependencies {
     implementation(Libs.coreKtx)
     implementation(Libs.lifecycleKtx)
 
+    // Android
     implementation(Libs.androidAppCompat)
     implementation(Libs.material)
 

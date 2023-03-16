@@ -1,4 +1,4 @@
-package com.github.omhmapsdemo
+package com.openmobilehub.maps.sample
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

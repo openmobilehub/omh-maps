@@ -1,8 +1,8 @@
 package com.github.mapsgms.presentation
 
 import android.content.Context
-import com.github.openmobilehub.maps.presentation.interfaces.location.OmhLocation
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhMapView
+import com.openmobilehub.maps.api.presentation.interfaces.location.OmhLocation
+import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhMapView
 
 object OmhMapFactory {
 

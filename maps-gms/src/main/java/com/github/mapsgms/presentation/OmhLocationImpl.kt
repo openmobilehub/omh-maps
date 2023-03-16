@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import com.github.mapsgms.utils.ConverterUtils
 import com.github.mapsgms.utils.LocationUtils
-import com.github.openmobilehub.maps.presentation.interfaces.location.OmhFailureListener
-import com.github.openmobilehub.maps.presentation.interfaces.location.OmhLocation
-import com.github.openmobilehub.maps.presentation.interfaces.location.OmhSuccessListener
-import com.github.openmobilehub.maps.presentation.models.OmhCoordinate
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import com.openmobilehub.maps.api.presentation.interfaces.location.OmhFailureListener
+import com.openmobilehub.maps.api.presentation.interfaces.location.OmhLocation
+import com.openmobilehub.maps.api.presentation.interfaces.location.OmhSuccessListener
+import com.openmobilehub.maps.api.presentation.models.OmhCoordinate
 
 private const val LOCATION_IS_NULL = "Location is null"
 

@@ -1,7 +1,7 @@
-package com.github.omhmapsdemo.utils
+package com.openmobilehub.maps.sample.utils
 
 import android.view.animation.OvershootInterpolator
-import com.github.openmobilehub.maps.presentation.models.OmhCoordinate
+import com.openmobilehub.maps.api.presentation.models.OmhCoordinate
 
 object Constants {
     const val ANIMATION_DURATION = 250L

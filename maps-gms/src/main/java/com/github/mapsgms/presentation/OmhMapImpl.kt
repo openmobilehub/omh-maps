@@ -2,13 +2,13 @@ package com.github.mapsgms.presentation
 
 import android.annotation.SuppressLint
 import com.github.mapsgms.utils.ConverterUtils
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhMap
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnCameraIdleListener
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
-import com.github.openmobilehub.maps.presentation.models.OmhCoordinate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhMap
+import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
+import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
+import com.openmobilehub.maps.api.presentation.models.OmhCoordinate
 
 internal class OmhMapImpl(private var googleMap: GoogleMap) : OmhMap {
 
