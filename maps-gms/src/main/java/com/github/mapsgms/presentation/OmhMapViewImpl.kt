@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhMapView
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnMapReadyCallBack
+import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnMapReadyCallback
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
@@ -24,10 +24,10 @@ internal class OmhMapViewImpl(context: Context) : OmhMapView {
         }
     }
 
-    override fun getMapAsync(omhOnMapReadyCallBack: OmhOnMapReadyCallBack) {
+    override fun getMapAsync(omhOnMapReadyCallback: OmhOnMapReadyCallback) {
         mapView?.getMapAsync { googleMap: GoogleMap ->
             val omhMap = OmhMapImpl(googleMap)
-            omhOnMapReadyCallBack.onMapReady(omhMap)
+            omhOnMapReadyCallback.onMapReady(omhMap)
         }
     }
 

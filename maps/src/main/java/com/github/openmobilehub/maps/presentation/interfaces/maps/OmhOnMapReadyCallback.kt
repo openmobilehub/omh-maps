@@ -1,5 +1,5 @@
 package com.github.openmobilehub.maps.presentation.interfaces.maps
 
-fun interface OmhOnMapReadyCallBack {
+fun interface OmhOnMapReadyCallback {
     fun onMapReady(omhMap: OmhMap)
 }

@@ -11,5 +11,5 @@ interface OmhMapView {
 
     fun getView(): View?
 
-    fun getMapAsync(omhOnMapReadyCallBack: OmhOnMapReadyCallBack)
+    fun getMapAsync(omhOnMapReadyCallback: OmhOnMapReadyCallback)
 }

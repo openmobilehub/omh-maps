@@ -16,12 +16,12 @@ import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhMap
 import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhMapView
 import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
-import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnMapReadyCallBack
+import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnMapReadyCallback
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MapActivity : AppCompatActivity(), OmhOnMapReadyCallBack {
+class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
 
     @Inject
     lateinit var omhMapView: OmhMapView
