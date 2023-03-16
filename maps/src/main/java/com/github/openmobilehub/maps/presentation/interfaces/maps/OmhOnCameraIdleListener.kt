@@ -1,5 +1,5 @@
 package com.github.openmobilehub.maps.presentation.interfaces.maps
 
-interface OmhOnCameraIdleListener {
+fun interface OmhOnCameraIdleListener {
     fun onCameraIdle()
 }

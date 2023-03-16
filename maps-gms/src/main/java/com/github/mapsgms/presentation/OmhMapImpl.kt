@@ -8,11 +8,12 @@ import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnCameraMov
 import com.github.openmobilehub.maps.presentation.models.OmhCoordinate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
 
 internal class OmhMapImpl(private var googleMap: GoogleMap) : OmhMap {
 
     override fun getCameraPositionCoordinate(): OmhCoordinate {
-        val position = googleMap.cameraPosition.target
+        val position: LatLng = googleMap.cameraPosition.target
         return ConverterUtils.convertToOmhCoordinate(position)
     }
 
@@ -38,7 +39,7 @@ internal class OmhMapImpl(private var googleMap: GoogleMap) : OmhMap {
     }
 
     override fun moveCamera(coordinate: OmhCoordinate, zoomLevel: Float) {
-        val latLng = ConverterUtils.convertToLatLng(coordinate)
+        val latLng: LatLng = ConverterUtils.convertToLatLng(coordinate)
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel))
     }
 }

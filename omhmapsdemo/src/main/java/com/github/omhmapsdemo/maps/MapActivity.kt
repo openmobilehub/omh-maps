@@ -12,8 +12,11 @@ import com.github.omhmapsdemo.utils.Constants.OVERSHOOT_INTERPOLATOR
 import com.github.omhmapsdemo.utils.Constants.PRIME_MERIDIAN
 import com.github.openmobilehub.maps.presentation.interfaces.location.OmhFailureListener
 import com.github.openmobilehub.maps.presentation.interfaces.location.OmhSuccessListener
-import com.github.openmobilehub.maps.presentation.interfaces.maps.*
-import com.github.openmobilehub.maps.presentation.models.OmhCoordinate
+import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhMap
+import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhMapView
+import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnCameraIdleListener
+import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
+import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhOnMapReadyCallBack
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -34,43 +37,31 @@ class MapActivity : AppCompatActivity() {
                 omhMap.setZoomGesturesEnabled(true)
                 omhMap.setMyLocationEnabled(true)
 
-                val onSuccessListener = object : OmhSuccessListener {
-                    override fun onSuccess(omhCoordinate: OmhCoordinate) {
-                        omhMap.moveCamera(omhCoordinate, DEFAULT_ZOOM_LEVEL)
-                    }
-                }
+                val onSuccessListener = OmhSuccessListener { omhCoordinate -> omhMap.moveCamera(omhCoordinate, DEFAULT_ZOOM_LEVEL) }
 
-                val onFailureListener = object : OmhFailureListener {
-                    override fun onFailure(exception: Exception) {
-                        omhMap.moveCamera(PRIME_MERIDIAN, DEFAULT_ZOOM_LEVEL)
-                    }
-                }
+                val onFailureListener = OmhFailureListener { omhMap.moveCamera(PRIME_MERIDIAN, DEFAULT_ZOOM_LEVEL) }
 
                 val omhLocation = OmhMapFactory.getOmhLocation()
                 omhLocation.getCurrentLocation(this@MapActivity, onSuccessListener, onFailureListener)
 
-                val omhOnCameraMoveStartedListener = object : OmhOnCameraMoveStartedListener {
-                    override fun onCameraMoveStarted(reason: Int) {
-                        binding.markerImageView.animate()
-                            .translationY(INITIAL_TRANSLATION)
-                            .setInterpolator(OVERSHOOT_INTERPOLATOR)
-                            .setDuration(ANIMATION_DURATION)
-                            .start()
-                    }
+                val omhOnCameraMoveStartedListener = OmhOnCameraMoveStartedListener {
+                    binding.markerImageView.animate()
+                        .translationY(INITIAL_TRANSLATION)
+                        .setInterpolator(OVERSHOOT_INTERPOLATOR)
+                        .setDuration(ANIMATION_DURATION)
+                        .start()
                 }
 
                 omhMap.setOnCameraMoveStartedListener(omhOnCameraMoveStartedListener)
 
-                val omhOnCameraIdleListener = object : OmhOnCameraIdleListener {
-                    override fun onCameraIdle() {
-                        binding.markerImageView.animate()
-                            .translationY(FINAL_TRANSLATION)
-                            .setInterpolator(OVERSHOOT_INTERPOLATOR)
-                            .setDuration(ANIMATION_DURATION)
-                            .start()
+                val omhOnCameraIdleListener = OmhOnCameraIdleListener {
+                    binding.markerImageView.animate()
+                        .translationY(FINAL_TRANSLATION)
+                        .setInterpolator(OVERSHOOT_INTERPOLATOR)
+                        .setDuration(ANIMATION_DURATION)
+                        .start()
 
-                        omhMap.getCameraPositionCoordinate()
-                    }
+                    omhMap.getCameraPositionCoordinate()
                 }
 
                 omhMap.setOnCameraIdleListener(omhOnCameraIdleListener)

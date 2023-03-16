@@ -17,10 +17,13 @@ dependencies {
     implementation(Libs.coreKtx)
     implementation(Libs.lifecycleKtx)
 
+    // Android
     implementation(Libs.androidAppCompat)
     implementation(Libs.material)
-    implementation("com.google.android.gms:play-services-maps:18.1.0")
-    implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    // Play services
+    implementation(Libs.playServicesMaps)
+    implementation(Libs.playServicesLocation)
 
     // Test dependencies
     testImplementation(Libs.junit)

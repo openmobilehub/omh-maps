@@ -6,12 +6,12 @@ import com.github.openmobilehub.maps.presentation.interfaces.maps.OmhMapView
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 
 @Module
-@InstallIn(SingletonComponent::class)
-object SingletonModule {
+@InstallIn(ActivityComponent::class)
+object OmhMapsModule {
 
     @Provides
     fun providesOmhMapView(@ApplicationContext appContext: Context): OmhMapView{
