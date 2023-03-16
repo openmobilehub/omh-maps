@@ -25,11 +25,11 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
 
     @Inject
     lateinit var omhMapView: OmhMapView
-    private lateinit var binding: ActivityMapBinding
+    private val binding: ActivityMapBinding by lazy {
+        ActivityMapBinding.inflate(layoutInflater)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         omhMapView.getMapAsync(this)
