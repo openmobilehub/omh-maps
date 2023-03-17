@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.github.omhmapsdemo"
+    namespace = "com.openmobilehub.maps.sample"
 
     buildTypes {
         release {
