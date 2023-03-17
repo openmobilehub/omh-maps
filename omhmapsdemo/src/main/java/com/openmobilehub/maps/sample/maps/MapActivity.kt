@@ -1,6 +1,7 @@
 package com.openmobilehub.maps.sample.maps
 
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mapsgms.presentation.OmhMapFactory
 import com.openmobilehub.maps.sample.databinding.ActivityMapBinding
@@ -32,8 +33,14 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val view = omhMapView.getView()?.apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT)
+        }
+        omhMapView.onCreate(savedInstanceState)
+
         omhMapView.getMapAsync(this)
-        val view = omhMapView.getView()
         binding.frameLayoutContainer.addView(view)
     }
 

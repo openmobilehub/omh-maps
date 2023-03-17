@@ -1,6 +1,7 @@
 package com.github.mapsgms.presentation
 
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.maps.GoogleMap
@@ -29,6 +30,30 @@ internal class OmhMapViewImpl(context: Context) : OmhMapView {
             val omhMap = OmhMapImpl(googleMap)
             omhOnMapReadyCallback.onMapReady(omhMap)
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        mapView?.onCreate(savedInstanceState)
+    }
+
+    override fun onDestroy() {
+        mapView?.onDestroy()
+    }
+
+    override fun onPause() {
+        mapView?.onPause()
+    }
+
+    override fun onResume() {
+        mapView?.onResume()
+    }
+
+    override fun onStart() {
+        mapView?.onStart()
+    }
+
+    override fun onStop() {
+        mapView?.onStop()
     }
 
     override fun getView(): View? {
