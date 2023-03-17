@@ -16,14 +16,14 @@ internal class ConverterTest {
     private val latLng = LatLng(latitude, longitude)
 
     @Test
-    fun `when given a OmhCoordinate object a correct LatLng object is converted`() {
+    fun `given a OmhCoordinate, when is converted to a LatLng, then a correct LatLng is returned`() {
         val latLngResult = ConverterUtils.convertToLatLng(omhCoordinate)
 
         assertTrue(latLng.latitude == latLngResult.latitude && latLng.longitude == latLngResult.longitude)
     }
 
     @Test
-    fun `when given a LatLng object a correct OmhCoordinate object is converted`() {
+    fun `given a LatLng, when is converted to OmhCoordinate, then a correct OmhCoordinate is returned`() {
         val coordinateResult = ConverterUtils.convertToOmhCoordinate(latLng)
 
         assertTrue(
@@ -32,7 +32,7 @@ internal class ConverterTest {
     }
 
     @Test
-    fun `when given a Location object a correct OmhCoordinate object is converted`() {
+    fun `given a Location, when  is converted to omhCoordinate, then a correct OmhCoordinate is returned`() {
         val mockLocation: Location = mockk {
             every { latitude } returns -16.19
             every { longitude } returns 166.16

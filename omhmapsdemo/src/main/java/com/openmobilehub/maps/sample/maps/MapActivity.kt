@@ -26,6 +26,7 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
 
     @Inject
     lateinit var omhMapView: OmhMapView
+    private var g: OmhMap? = null
     private val binding: ActivityMapBinding by lazy {
         ActivityMapBinding.inflate(layoutInflater)
     }
@@ -33,11 +34,7 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val view = omhMapView.getView()?.apply {
-            layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT)
-        }
+        val view = omhMapView.getView()
         omhMapView.onCreate(savedInstanceState)
 
         omhMapView.getMapAsync(this)
