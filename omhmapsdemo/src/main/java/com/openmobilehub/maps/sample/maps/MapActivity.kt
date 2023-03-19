@@ -1,7 +1,6 @@
 package com.openmobilehub.maps.sample.maps
 
 import android.os.Bundle
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mapsgms.presentation.OmhMapFactory
 import com.openmobilehub.maps.sample.databinding.ActivityMapBinding
@@ -26,7 +25,6 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
 
     @Inject
     lateinit var omhMapView: OmhMapView
-    private var g: OmhMap? = null
     private val binding: ActivityMapBinding by lazy {
         ActivityMapBinding.inflate(layoutInflater)
     }
