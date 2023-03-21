@@ -14,7 +14,12 @@ object Libs {
     val androidAppCompat by lazy { "androidx.appcompat:appcompat:${Versions.androidAppCompat}" }
     val material by lazy { "com.google.android.material:material:${Versions.material}" }
 
+    // Play services
+    val playServicesMaps by lazy { "com.google.android.gms:play-services-maps:${Versions.playServicesMaps}" }
+    val playServicesLocation by lazy { "com.google.android.gms:play-services-location:${Versions.playServicesLocation}" }
+
     // Testing
     val junit by lazy { "junit:junit:${Versions.junit}" }
     val androidJunit by lazy { "androidx.test.ext:junit:${Versions.androidJunit}" }
+    val mockk by lazy { "io.mockk:mockk:${Versions.mockk}"}
 }
