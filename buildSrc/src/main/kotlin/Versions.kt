@@ -13,7 +13,11 @@ object Versions {
     const val androidAppCompat = "1.6.1"
     const val material = "1.8.0"
 
+    const val playServicesMaps = "18.1.0"
+    const val playServicesLocation = "21.0.1"
+
     // Testing
     const val junit = "4.13.2"
     const val androidJunit = "1.1.5"
+    const val mockk = "1.13.4"
 }

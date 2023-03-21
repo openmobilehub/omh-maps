@@ -18,3 +18,4 @@ dependencyResolutionManagement {
 rootProject.name = "omh-maps"
 include(":maps")
 include(":omhmapsdemo")
+include(":maps-gms")

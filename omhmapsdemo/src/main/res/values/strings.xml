@@ -2,4 +2,5 @@
     <string name="app_name">OMH Maps demo</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="open_map">Open Map</string>
+    <string name="drop_pin">Drop pin</string>
 </resources>
