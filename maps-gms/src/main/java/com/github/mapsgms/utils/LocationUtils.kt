@@ -6,7 +6,7 @@ import com.google.android.gms.tasks.OnTokenCanceledListener
 
 object LocationUtils {
     fun createCancellationToken() = object : CancellationToken() {
-        override fun onCanceledRequested(p0: OnTokenCanceledListener): CancellationToken {
+        override fun onCanceledRequested(onTokenCanceledListener: OnTokenCanceledListener): CancellationToken {
             return CancellationTokenSource().token
         }
 

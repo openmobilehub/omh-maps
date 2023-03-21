@@ -6,10 +6,7 @@ import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhMapView
 
 object OmhMapFactory {
 
-    fun getOmhMapView(context: Context): OmhMapView {
-        val builder = OmhMapViewImpl.Builder()
-        return builder.build(context)
-    }
+    fun getOmhMapView(context: Context): OmhMapView = OmhMapViewImpl.Builder().build(context)
 
     fun getOmhLocation(): OmhLocation {
         return OmhLocationImpl()
