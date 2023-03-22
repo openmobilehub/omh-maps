@@ -11,12 +11,14 @@ import com.openmobilehub.maps.sample.utils.Constants.INITIAL_TRANSLATION
 import com.openmobilehub.maps.sample.utils.Constants.OVERSHOOT_INTERPOLATOR
 import com.openmobilehub.maps.sample.utils.Constants.PRIME_MERIDIAN
 import com.openmobilehub.maps.api.presentation.interfaces.location.OmhFailureListener
+import com.openmobilehub.maps.api.presentation.interfaces.location.OmhOnMyLocationButtonClickListener
 import com.openmobilehub.maps.api.presentation.interfaces.location.OmhSuccessListener
 import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhMap
 import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhMapView
 import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
 import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
+import com.openmobilehub.maps.api.presentation.models.OmhCoordinate
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -28,6 +30,8 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
     private val binding: ActivityMapBinding by lazy {
         ActivityMapBinding.inflate(layoutInflater)
     }
+    private var currentLocation: OmhCoordinate = PRIME_MERIDIAN
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -43,9 +47,14 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
         omhMap.setZoomGesturesEnabled(true)
         omhMap.setMyLocationEnabled(true)
 
-        val onSuccessListener = OmhSuccessListener { omhCoordinate -> omhMap.moveCamera(omhCoordinate, DEFAULT_ZOOM_LEVEL) }
+        val onSuccessListener = OmhSuccessListener { omhCoordinate ->
+            currentLocation = omhCoordinate
+            moveToCurrentLocation(omhMap)
+        }
 
-        val onFailureListener = OmhFailureListener { omhMap.moveCamera(PRIME_MERIDIAN, DEFAULT_ZOOM_LEVEL) }
+        val onFailureListener = OmhFailureListener {
+            moveToCurrentLocation(omhMap)
+        }
 
         val omhLocation = OmhMapFactory.getOmhLocation()
         omhLocation.getCurrentLocation(this@MapActivity, onSuccessListener, onFailureListener)
@@ -67,9 +76,20 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
                 .setDuration(ANIMATION_DURATION)
                 .start()
 
-            omhMap.getCameraPositionCoordinate()
+            currentLocation = omhMap.getCameraPositionCoordinate()
         }
 
         omhMap.setOnCameraIdleListener(omhOnCameraIdleListener)
+
+        val omhOnMyLocationButtonClickListener = OmhOnMyLocationButtonClickListener {
+            omhLocation.getCurrentLocation(this@MapActivity, onSuccessListener, onFailureListener)
+            moveToCurrentLocation(omhMap)
+            true
+        }
+        omhMap.setMyLocationButtonClickListener(omhOnMyLocationButtonClickListener)
+    }
+
+    private fun moveToCurrentLocation(omhMap: OmhMap) {
+        omhMap.moveCamera(currentLocation, DEFAULT_ZOOM_LEVEL)
     }
 }
