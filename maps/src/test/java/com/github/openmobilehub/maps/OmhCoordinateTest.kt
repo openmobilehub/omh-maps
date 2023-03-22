@@ -36,7 +36,7 @@ internal class OmhCoordinateTest {
     }
 
     @Test
-    fun `given a OmhCoordinate, when hasCode is compared to another with same lat and lng, then true is returned`() {
+    fun `given a OmhCoordinate, when hashCode is compared to another with same lat and lng, then true is returned`() {
         assertEquals(omhCoordinate.hashCode(), otherOmhCoordinate.hashCode())
     }
 
