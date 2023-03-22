@@ -5,6 +5,7 @@ import com.github.mapsgms.utils.ConverterUtils
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.openmobilehub.maps.api.presentation.interfaces.location.OmhOnMyLocationButtonClickListener
 import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhMap
 import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
@@ -24,6 +25,14 @@ internal class OmhMapImpl(private var googleMap: GoogleMap) : OmhMap {
     @SuppressLint("MissingPermission") // TODO handle properly in the corresponding task
     override fun setMyLocationEnabled(enable: Boolean) {
         googleMap.isMyLocationEnabled = enable
+    }
+
+    override fun setMyLocationButtonClickListener(
+        omhOnMyLocationButtonClickListener: OmhOnMyLocationButtonClickListener
+    ) {
+        googleMap.setOnMyLocationButtonClickListener {
+            omhOnMyLocationButtonClickListener.onMyLocationButtonClick()
+        }
     }
 
     override fun setOnCameraMoveStartedListener(listener: OmhOnCameraMoveStartedListener) {
