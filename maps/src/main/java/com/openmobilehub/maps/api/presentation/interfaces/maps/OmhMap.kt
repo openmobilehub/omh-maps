@@ -3,6 +3,7 @@ package com.openmobilehub.maps.api.presentation.interfaces.maps
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import androidx.annotation.RequiresPermission
+import com.openmobilehub.maps.api.presentation.interfaces.location.OmhOnMyLocationButtonClickListener
 import com.openmobilehub.maps.api.presentation.models.OmhCoordinate
 
 /**
@@ -43,6 +44,13 @@ interface OmhMap {
      */
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     fun setMyLocationEnabled(enable: Boolean)
+
+    /**
+     * Sets a callback that's invoked when the my location button is clicked.
+     *
+     * @param omhOnMyLocationButtonClickListener -> Callback interface for when the My Location button is clicked.
+     */
+    fun setMyLocationButtonClickListener(omhOnMyLocationButtonClickListener: OmhOnMyLocationButtonClickListener)
 
     /**
      * Sets the callback that's invoked when the camera starts moving or the reason for camera motion has changed.
