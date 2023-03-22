@@ -6,7 +6,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.openmobilehub.maps.api.presentation.models.OmhCoordinate
 import io.mockk.every
 import io.mockk.mockk
-import org.junit.Assert.assertTrue
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 internal class ConverterTest {
@@ -19,16 +19,14 @@ internal class ConverterTest {
     fun `given a OmhCoordinate, when is converted to a LatLng, then a correct LatLng is returned`() {
         val latLngResult = ConverterUtils.convertToLatLng(omhCoordinate)
 
-        assertTrue(latLng.latitude == latLngResult.latitude && latLng.longitude == latLngResult.longitude)
+        assertEquals(latLng, latLngResult)
     }
 
     @Test
     fun `given a LatLng, when is converted to OmhCoordinate, then a correct OmhCoordinate is returned`() {
         val coordinateResult = ConverterUtils.convertToOmhCoordinate(latLng)
 
-        assertTrue(
-            omhCoordinate.latitude == coordinateResult.latitude && omhCoordinate.longitude == coordinateResult.longitude
-        )
+        assertEquals(omhCoordinate, coordinateResult)
     }
 
     @Test
@@ -39,8 +37,6 @@ internal class ConverterTest {
         }
         val coordinateResult = ConverterUtils.convertToOmhCoordinate(mockLocation)
 
-        assertTrue(
-            omhCoordinate.latitude == coordinateResult.latitude && omhCoordinate.longitude == coordinateResult.longitude
-        )
+        assertEquals(omhCoordinate, coordinateResult)
     }
 }

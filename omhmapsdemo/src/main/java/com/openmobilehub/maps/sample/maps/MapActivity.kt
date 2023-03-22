@@ -1,24 +1,26 @@
 package com.openmobilehub.maps.sample.maps
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mapsgms.presentation.OmhMapFactory
+import com.openmobilehub.maps.api.presentation.interfaces.location.OmhFailureListener
+import com.openmobilehub.maps.api.presentation.interfaces.location.OmhSuccessListener
+import com.openmobilehub.maps.api.presentation.models.OmhCoordinate
 import com.openmobilehub.maps.sample.databinding.ActivityMapBinding
+import com.openmobilehub.maps.sample.start.InitialFragment
 import com.openmobilehub.maps.sample.utils.Constants.ANIMATION_DURATION
 import com.openmobilehub.maps.sample.utils.Constants.DEFAULT_ZOOM_LEVEL
 import com.openmobilehub.maps.sample.utils.Constants.FINAL_TRANSLATION
 import com.openmobilehub.maps.sample.utils.Constants.INITIAL_TRANSLATION
 import com.openmobilehub.maps.sample.utils.Constants.OVERSHOOT_INTERPOLATOR
 import com.openmobilehub.maps.sample.utils.Constants.PRIME_MERIDIAN
-import com.openmobilehub.maps.api.presentation.interfaces.location.OmhFailureListener
 import com.openmobilehub.maps.api.presentation.interfaces.location.OmhOnMyLocationButtonClickListener
-import com.openmobilehub.maps.api.presentation.interfaces.location.OmhSuccessListener
 import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhMap
 import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhMapView
 import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
 import com.openmobilehub.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
-import com.openmobilehub.maps.api.presentation.models.OmhCoordinate
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -31,7 +33,6 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
         ActivityMapBinding.inflate(layoutInflater)
     }
     private var currentLocation: OmhCoordinate = PRIME_MERIDIAN
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -41,6 +42,9 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
 
         omhMapView.getMapAsync(this)
         binding.frameLayoutContainer.addView(view)
+        binding.fabShareLocation.setOnClickListener {
+            finishAndReturnCoordinate()
+        }
     }
 
     override fun onMapReady(omhMap: OmhMap) {
@@ -77,6 +81,7 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
                 .start()
 
             currentLocation = omhMap.getCameraPositionCoordinate()
+            binding.textViewLocation.text = currentLocation.toString()
         }
 
         omhMap.setOnCameraIdleListener(omhOnCameraIdleListener)
@@ -91,5 +96,12 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
 
     private fun moveToCurrentLocation(omhMap: OmhMap) {
         omhMap.moveCamera(currentLocation, DEFAULT_ZOOM_LEVEL)
+    }
+
+    private fun finishAndReturnCoordinate() {
+        val returnIntent = Intent()
+        returnIntent.putExtra(InitialFragment.LOCATION_RESULT, currentLocation)
+        setResult(RESULT_OK, returnIntent)
+        finish()
     }
 }
