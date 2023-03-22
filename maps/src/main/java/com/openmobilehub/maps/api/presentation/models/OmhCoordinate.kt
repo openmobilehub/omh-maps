@@ -13,9 +13,19 @@ import com.openmobilehub.maps.api.presentation.utils.Constants.MIN_LONGITUDE
 import kotlin.math.max
 import kotlin.math.min
 
+/**
+ * Class representing a pair of latitude and longitude coordinates, stored as degrees.
+ */
 class OmhCoordinate() : Parcelable {
 
+    /**
+     * Latitude, in degrees. This value is in the range [-90, 90].
+     */
     var latitude: Double = DEFAULT_LATITUDE
+
+    /**
+     * Longitude, in degrees. This value is in the range [-180, 180).
+     */
     var longitude: Double = DEFAULT_LONGITUDE
 
     constructor(parcel: Parcel) : this() {
@@ -23,6 +33,14 @@ class OmhCoordinate() : Parcelable {
         longitude = parcel.readDouble()
     }
 
+    /**
+     * Constructs a LatLng with the given latitude and longitude, measured in degrees.
+     *
+     * @param latitude -> The point's latitude.
+     * This will be clamped to between -90 degrees and +90 degrees inclusive.
+     * @param longitude -> The point's longitude.
+     * This will be normalized to be within -180 degrees inclusive and +180 degrees exclusive.
+     */
     constructor(latitude: Double, longitude: Double) : this() {
         if (longitude >= MIN_LONGITUDE && longitude < MAX_LONGITUDE) {
             this.longitude = longitude
