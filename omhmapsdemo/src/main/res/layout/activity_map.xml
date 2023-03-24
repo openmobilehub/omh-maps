@@ -30,7 +30,7 @@
     <ImageView
         android:id="@+id/marker_image_view"
         android:layout_width="wrap_content"
-        android:layout_height="47dp"
+        android:layout_height="@dimen/map_marker_height"
         android:adjustViewBounds="true"
         android:contentDescription="@string/drop_pin"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,5 +39,40 @@
         app:layout_constraintTop_toTopOf="@id/marker_shadow_image_view"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_map_marker" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textView_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_16"
+            android:layout_marginEnd="@dimen/normal_16"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_share_location"
+            app:layout_constraintEnd_toStartOf="@+id/fab_share_location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fab_share_location"
+            tools:text="@string/example_coordinate" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_share_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_8"
+            android:layout_marginEnd="@dimen/normal_8"
+            android:layout_marginBottom="@dimen/normal_8"
+            android:contentDescription="@string/button_to_share_location"
+            android:src="@drawable/ic_share"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

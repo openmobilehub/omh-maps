@@ -3,4 +3,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="open_map">Open Map</string>
     <string name="drop_pin">Drop pin</string>
+    <string name="button_to_share_location">Button to share location</string>
+    <string name="example_coordinate">16.66, 66.1</string>
 </resources>
