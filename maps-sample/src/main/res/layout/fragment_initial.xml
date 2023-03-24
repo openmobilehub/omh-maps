@@ -10,6 +10,7 @@
         android:id="@+id/button_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:text="@string/open_map"
         app:layout_constraintBottom_toTopOf="@+id/textView_coordinate"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,10 +20,12 @@
 
     <TextView
         android:id="@+id/textView_coordinate"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/normal_16"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="@dimen/normal_16"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
