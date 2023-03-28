@@ -49,7 +49,7 @@ internal class OmhCoordinateTest {
     }
 
     @Test
-    fun `given a Parcel, when is called toString, then a correct string is returned`() {
+    fun `given a Parcel, when createFromParcel and compared to original OmhCoordinate, then true is returned`() {
         val parcel = mockk<Parcel>()
 
         every { parcel.writeDouble(any()) } returns Unit
@@ -60,8 +60,26 @@ internal class OmhCoordinateTest {
         every { parcel.setDataPosition(any()) } returns Unit
         every { parcel.dataPosition() } returns 0
 
-        val createdFromParcel = OmhCoordinate.CREATOR.createFromParcel(parcel)
+        val createdFromParcel: OmhCoordinate = OmhCoordinate.CREATOR.createFromParcel(parcel)
 
         assertEquals(omhCoordinate, createdFromParcel)
+    }
+
+    @Test
+    fun `given a Parcel, when createFromParcel and compared to different OmhCoordinate, then false is returned`() {
+        val compareOmhCoordinate = OmhCoordinate()
+        val parcel = mockk<Parcel>()
+
+        every { parcel.writeDouble(any()) } returns Unit
+        every { parcel.readDouble() } returns latitude andThen longitude
+
+        omhCoordinate.writeToParcel(parcel, omhCoordinate.describeContents())
+
+        every { parcel.setDataPosition(any()) } returns Unit
+        every { parcel.dataPosition() } returns 0
+
+        val createdFromParcel: OmhCoordinate = OmhCoordinate.CREATOR.createFromParcel(parcel)
+
+        assertFalse(compareOmhCoordinate == createdFromParcel)
     }
 }

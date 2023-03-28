@@ -3,8 +3,8 @@ package com.omh.android.maps.api.presentation.interfaces.maps
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import androidx.annotation.RequiresPermission
-import com.omh.android.maps.api.presentation.interfaces.location.OmhOnMyLocationButtonClickListener
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
+import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
 
 /**
  * Abstraction to provide access to the OmhMap. This is the main class of OMH Maps SDK
@@ -13,6 +13,13 @@ import com.omh.android.maps.api.presentation.models.OmhCoordinate
  * you must obtain one from the getMapAsync() method on a OmhMapView that you have added to your application.
  */
 interface OmhMap {
+
+    /**
+     * Adds a marker to this map. The marker's icon is rendered on the map at the position.
+     *
+     * @param options -> A marker options object that defines how to render the marker.
+     */
+    fun addMarker(options: OmhMarkerOptions)
 
     /**
      * Gets the camera's position.

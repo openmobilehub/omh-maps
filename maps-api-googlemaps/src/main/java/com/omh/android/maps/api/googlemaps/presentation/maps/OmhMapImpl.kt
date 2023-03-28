@@ -1,4 +1,4 @@
-package com.omh.android.maps.api.googlemaps.presentation
+package com.omh.android.maps.api.googlemaps.presentation.maps
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -6,14 +6,20 @@ import androidx.annotation.RequiresPermission
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.omh.android.maps.api.googlemaps.extensions.toMarkerOptions
 import com.omh.android.maps.api.googlemaps.utils.ConverterUtils
-import com.omh.android.maps.api.presentation.interfaces.location.OmhOnMyLocationButtonClickListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
+import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMyLocationButtonClickListener
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
+import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
 
 internal class OmhMapImpl(private var googleMap: GoogleMap) : OmhMap {
+    override fun addMarker(options: OmhMarkerOptions) {
+        val googleOptions = options.toMarkerOptions()
+        googleMap.addMarker(googleOptions)
+    }
 
     override fun getCameraPositionCoordinate(): OmhCoordinate {
         val position: LatLng = googleMap.cameraPosition.target
