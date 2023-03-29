@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     `android-application`
     id("kotlin-kapt")
@@ -6,6 +8,11 @@ plugins {
 
 android {
     namespace = "com.omh.android.maps.sample"
+
+    defaultConfig {
+        val apiKey = "MAPS_API_KEY"
+        manifestPlaceholders[apiKey] = gradleLocalProperties(rootDir)[apiKey].toString()
+    }
 
     buildTypes {
         release {
