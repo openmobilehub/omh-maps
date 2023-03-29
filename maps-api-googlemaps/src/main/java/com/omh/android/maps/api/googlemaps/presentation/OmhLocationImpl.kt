@@ -1,7 +1,9 @@
 package com.omh.android.maps.api.googlemaps.presentation
 
-import android.annotation.SuppressLint
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
+import androidx.annotation.RequiresPermission
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.omh.android.maps.api.googlemaps.utils.ConverterUtils
@@ -15,7 +17,7 @@ private const val LOCATION_IS_NULL = "Location is null"
 
 internal class OmhLocationImpl : OmhLocation {
 
-    @SuppressLint("MissingPermission") // TODO handle properly in the corresponding task
+    @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     override fun getCurrentLocation(
         context: Context,
         omhOnSuccessListener: OmhSuccessListener,
@@ -39,7 +41,7 @@ internal class OmhLocationImpl : OmhLocation {
             }
     }
 
-    @SuppressLint("MissingPermission") // TODO handle properly in the corresponding task
+    @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     override fun getLastLocation(
         context: Context,
         omhOnSuccessListener: OmhSuccessListener,

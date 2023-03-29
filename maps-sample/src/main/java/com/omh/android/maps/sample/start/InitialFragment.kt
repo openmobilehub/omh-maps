@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
 import com.omh.android.maps.sample.databinding.FragmentInitialBinding
 import com.omh.android.maps.sample.maps.MapActivity
+import com.omh.android.maps.sample.utils.Constants.PERMISSIONS
 
 class InitialFragment : Fragment() {
 
@@ -24,12 +25,20 @@ class InitialFragment : Fragment() {
         }
     }
 
+    private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+        val allPermissionsGranted = permissions.all { it.value }
+        if (allPermissionsGranted) {
+            goToMap()
+        }
+    }
+
     private fun getOmhCoordinateFromIntent(intent: Intent?): OmhCoordinate? {
         val coordinateResult: OmhCoordinate? =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 intent?.getParcelableExtra(LOCATION_RESULT, OmhCoordinate::class.java)
             } else {
-                @Suppress("DEPRECATION") // Before Android 13, API level 33(Tiramisu) use: fun <T : Parcelable?> getParcelableExtra(name: String?): T
+                // Before Android 13, API level 33(Tiramisu) use: fun <T : Parcelable?> getParcelableExtra(name: String?): T
+                @Suppress("DEPRECATION")
                 intent?.getParcelableExtra(LOCATION_RESULT)
             }
         return coordinateResult
@@ -49,9 +58,13 @@ class InitialFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            val intent = Intent(activity, MapActivity::class.java)
-            startForResult.launch(intent)
+            permissionLauncher.launch(PERMISSIONS)
         }
+    }
+
+    private fun goToMap() {
+        val intent = Intent(activity, MapActivity::class.java)
+        startForResult.launch(intent)
     }
 
     override fun onDestroyView() {

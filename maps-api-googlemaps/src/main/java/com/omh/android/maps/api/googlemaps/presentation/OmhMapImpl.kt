@@ -1,6 +1,8 @@
 package com.omh.android.maps.api.googlemaps.presentation
 
-import android.annotation.SuppressLint
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
+import androidx.annotation.RequiresPermission
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -22,9 +24,13 @@ internal class OmhMapImpl(private var googleMap: GoogleMap) : OmhMap {
         googleMap.uiSettings.isZoomGesturesEnabled = enableZoomGestures
     }
 
-    @SuppressLint("MissingPermission") // TODO handle properly in the corresponding task
+    @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     override fun setMyLocationEnabled(enable: Boolean) {
         googleMap.isMyLocationEnabled = enable
+    }
+
+    override fun isMyLocationEnabled(): Boolean {
+        return googleMap.isMyLocationEnabled
     }
 
     override fun setMyLocationButtonClickListener(

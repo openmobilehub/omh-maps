@@ -46,6 +46,13 @@ interface OmhMap {
     fun setMyLocationEnabled(enable: Boolean)
 
     /**
+     * Gets the status of the my-location layer.
+     *
+     * @return -> Returns true if the my-location layer is enabled; false otherwise.
+     */
+    fun isMyLocationEnabled(): Boolean
+
+    /**
      * Sets a callback that's invoked when the my location button is clicked.
      *
      * @param omhOnMyLocationButtonClickListener -> Callback interface for when the My Location button is clicked.
