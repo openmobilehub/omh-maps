@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.omh.android.maps.api.googlemaps.presentation.OmhMapFactory
 import com.omh.android.maps.api.presentation.interfaces.location.OmhFailureListener
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.location.OmhSuccessListener
