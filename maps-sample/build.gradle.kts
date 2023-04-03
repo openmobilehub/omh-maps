@@ -24,6 +24,17 @@ android {
         }
     }
 
+    flavorDimensions += "google_services"
+    productFlavors {
+        create("gms") {
+            dimension = "google_services"
+        }
+        // Todo: Remove comment when Non GMS module is created.
+        // create("nonGms") {
+            // dimension = "google_services"
+        // }
+    }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -37,19 +48,28 @@ android {
     }
 }
 
-dependencies {
+val gmsImplementation by configurations
+// Todo: Remove comment when Non GMS module is created.
+// val nonGmsImplementation by configurations
 
-    implementation(project(":maps-api-googlemaps"))
+dependencies {
+    // OMH SDK
+    gmsImplementation(project(":maps-api-googlemaps"))
+    // Todo: Remove comment when Non GMS module is created.
+    // nonGmsImplementation(project(":maps-api-openstreetmap"))
+
     implementation(Libs.coreKtx)
     implementation(Libs.lifecycleKtx)
     implementation(Libs.androidAppCompat)
     implementation(Libs.material)
+    implementation(Libs.reflection)
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-compiler:2.44")
 
+    // Test
     testImplementation(Libs.junit)
     androidTestImplementation(Libs.androidJunit)
 }

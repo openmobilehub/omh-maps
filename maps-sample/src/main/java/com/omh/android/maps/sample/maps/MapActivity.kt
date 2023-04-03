@@ -8,7 +8,6 @@ import com.omh.android.maps.api.presentation.interfaces.location.OmhFailureListe
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.location.OmhSuccessListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
-import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapView
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
@@ -31,8 +30,6 @@ import javax.inject.Inject
 class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
 
     @Inject
-    lateinit var omhMapView: OmhMapView
-    @Inject
     lateinit var omhLocation: OmhLocation
     private var currentLocation: OmhCoordinate = PRIME_MERIDIAN
     private val binding: ActivityMapBinding by lazy {
@@ -43,16 +40,12 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val view = omhMapView.getView()
-
-        omhMapView.onCreate(savedInstanceState)
-        binding.frameLayoutContainer.addView(view)
         binding.fabShareLocation.setOnClickListener {
             finishAndReturnCoordinate()
         }
 
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-            omhMapView.getMapAsync(this)
+            binding.fragmentMapContainer.getMapAsync(this)
         }.launch(PERMISSIONS)
     }
 

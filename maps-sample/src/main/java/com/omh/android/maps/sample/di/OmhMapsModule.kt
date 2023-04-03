@@ -1,7 +1,8 @@
 package com.omh.android.maps.sample.di
 
 import android.content.Context
-import com.omh.android.maps.api.googlemaps.presentation.OmhMapFactory
+import com.omh.android.maps.api.factories.OmhMapProvider
+import com.omh.android.maps.api.googlemaps.presentation.OmhMapFactoryImpl
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapView
 import dagger.Module
@@ -16,11 +17,11 @@ object OmhMapsModule {
 
     @Provides
     fun providesOmhMapView(@ApplicationContext appContext: Context): OmhMapView {
-        return OmhMapFactory.getOmhMapView(appContext)
+        return OmhMapProvider.provideOmhMapView(appContext)
     }
 
     @Provides
     fun providesOmhLocation(): OmhLocation {
-        return OmhMapFactory.getOmhLocation()
+        return OmhMapFactoryImpl.getOmhLocation()
     }
 }
