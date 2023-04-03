@@ -4,66 +4,85 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.omh.android.maps.api.presentation.utils.Constants.DEFAULT_LATITUDE
 import com.omh.android.maps.api.presentation.utils.Constants.DEFAULT_LONGITUDE
-import com.omh.android.maps.api.presentation.utils.Constants.FULL_CIRCLE_DEGREES
 import com.omh.android.maps.api.presentation.utils.Constants.HASH_MULTIPLIER
-import com.omh.android.maps.api.presentation.utils.Constants.MAX_LATITUDE
-import com.omh.android.maps.api.presentation.utils.Constants.MAX_LONGITUDE
-import com.omh.android.maps.api.presentation.utils.Constants.MIN_LATITUDE
-import com.omh.android.maps.api.presentation.utils.Constants.MIN_LONGITUDE
-import kotlin.math.max
-import kotlin.math.min
 
 /**
- * Class representing a pair of latitude and longitude coordinates, stored as degrees.
+ * Class representing a pair of latitude and longitude coordinates.
+ * This class doesn't require to implement restrictions related with the latitude and longitude because
+ * each time the interfaces are implemented they will parse to their own Coordinate model.
+ *
+ * Implements Parcelable interface to facilitate the usage.
  */
 class OmhCoordinate() : Parcelable {
 
     /**
-     * Latitude, in degrees. This value is in the range [-90, 90].
+     * Latitude representation.
      */
     var latitude: Double = DEFAULT_LATITUDE
 
     /**
-     * Longitude, in degrees. This value is in the range [-180, 180).
+     * Longitude representation.
      */
     var longitude: Double = DEFAULT_LONGITUDE
 
+    /**
+     * Constructs a omhCoordinate with the given Parcel.
+     *
+     * @param parcel -> Container for the latitude and longitude.
+     */
     constructor(parcel: Parcel) : this() {
         latitude = parcel.readDouble()
         longitude = parcel.readDouble()
     }
 
     /**
-     * Constructs a LatLng with the given latitude and longitude, measured in degrees.
+     * Constructs a OmhCoordinate with the given latitude and longitude.
      *
      * @param latitude -> The point's latitude.
-     * This will be clamped to between -90 degrees and +90 degrees inclusive.
      * @param longitude -> The point's longitude.
-     * This will be normalized to be within -180 degrees inclusive and +180 degrees exclusive.
      */
     constructor(latitude: Double, longitude: Double) : this() {
-        if (longitude >= MIN_LONGITUDE && longitude < MAX_LONGITUDE) {
-            this.longitude = longitude
-        } else {
-            this.longitude = ((longitude + MIN_LONGITUDE) % FULL_CIRCLE_DEGREES + FULL_CIRCLE_DEGREES) %
-                FULL_CIRCLE_DEGREES + MIN_LONGITUDE
-        }
-        this.latitude = max(MIN_LATITUDE, min(MAX_LATITUDE, latitude))
+        this.latitude = latitude
+        this.longitude = longitude
     }
 
+    /**
+     * Describe the kinds of special objects contained in this Parcelable instance's marshaled representation.
+     * Value is either 0 or CONTENTS_FILE_DESCRIPTOR
+     *
+     * @return -> A bitmask indicating the set of special object types marshaled by this Parcelable object instance.
+     */
     override fun describeContents(): Int {
         return 0
     }
 
+    /**
+     * Flatten this object in to a Parcel.
+     *
+     * @param parcel -> The Parcel in which the object should be written. This value cannot be null.
+     * @param flags -> Additional flags about how the object should be written.
+     */
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeDouble(latitude)
         parcel.writeDouble(longitude)
     }
 
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return -> Returns a default string representing the latitude and longitude.
+     */
     override fun toString(): String {
         return "lat/lng: ($latitude,$longitude)"
     }
 
+    /**
+     * Compares if this OmhCoordinate is equal to another.
+     *
+     * @param other ->
+     * @return -> True if and only if their latitudes are bitwise equal and their longitudes are bitwise equal.
+     * Otherwise false.
+     */
     override fun equals(other: Any?): Boolean {
         return if (other == null || other !is OmhCoordinate) {
             false
@@ -72,15 +91,36 @@ class OmhCoordinate() : Parcelable {
         }
     }
 
+    /**
+     * Returns hash code for the object.
+     *
+     * @return -> Returns an integer representing the current instance of the class.
+     */
     override fun hashCode(): Int {
         return HASH_MULTIPLIER * latitude.hashCode() + longitude.hashCode()
     }
 
+    /**
+     * public CREATOR field that generates instances of your Parcelable class from a Parcel.
+     */
     companion object CREATOR : Parcelable.Creator<OmhCoordinate> {
+        /**
+         * Create a new instance of the Parcelable class,
+         * instantiating it from the given Parcel whose data had previously been written by Parcelable.writeToParcel().
+         *
+         * @param parcel -> The Parcel to read the object's data from.
+         * @return -> Returns a new instance of the Parcelable class.
+         */
         override fun createFromParcel(parcel: Parcel): OmhCoordinate {
             return OmhCoordinate(parcel)
         }
 
+        /**
+         * Create a new array of the Parcelable class.
+         *
+         * @param size -> Size of the array.
+         * @return -> Returns an array of the Parcelable class, with every entry initialized to null.
+         */
         override fun newArray(size: Int): Array<OmhCoordinate?> {
             return arrayOfNulls(size)
         }
