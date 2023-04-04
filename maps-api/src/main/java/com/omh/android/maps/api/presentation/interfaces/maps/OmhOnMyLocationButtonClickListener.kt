@@ -1,4 +1,4 @@
-package com.omh.android.maps.api.presentation.interfaces.location
+package com.omh.android.maps.api.presentation.interfaces.maps
 
 /**
  * Abstraction to provide a callback interface for when the My Location button is clicked.

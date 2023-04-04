@@ -1,4 +1,4 @@
-package com.omh.android.maps.api.googlemaps.presentation
+package com.omh.android.maps.api.googlemaps.presentation.maps
 
 import android.content.Context
 import android.os.Bundle
