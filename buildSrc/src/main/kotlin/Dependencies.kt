@@ -21,6 +21,9 @@ object Libs {
     val playServicesMaps by lazy { "com.google.android.gms:play-services-maps:${Versions.playServicesMaps}" }
     val playServicesLocation by lazy { "com.google.android.gms:play-services-location:${Versions.playServicesLocation}" }
 
+    // Open Street Map
+    val osmdroid by lazy { "org.osmdroid:osmdroid-android:${Versions.osmdroid}" }
+
     // Testing
     val junit by lazy { "junit:junit:${Versions.junit}" }
     val androidJunit by lazy { "androidx.test.ext:junit:${Versions.androidJunit}" }

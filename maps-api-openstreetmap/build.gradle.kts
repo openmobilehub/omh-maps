@@ -17,9 +17,8 @@ dependencies {
     implementation(Libs.androidAppCompat)
     implementation(Libs.material)
 
-    // Play services
-    implementation(Libs.playServicesMaps)
-    implementation(Libs.playServicesLocation)
+    // Open Street Map
+    implementation(Libs.osmdroid)
 
     // Test dependencies
     testImplementation(Libs.junit)
