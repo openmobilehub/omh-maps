@@ -1,6 +1,7 @@
 package com.omh.android.maps.api.factories
 
 import android.content.Context
+import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapView
 
 /**
@@ -16,4 +17,12 @@ interface OmhMapFactory {
      * @return An [OmhMapView] instance object.
      */
     fun getOmhMapView(context: Context): OmhMapView
+
+    /**
+     * Provides the [OmhLocation] that is the entry point for Locations.
+     *
+     * @param context -> ideally your application context, but an activity context will also work.
+     * @return -> A [OmhLocation] instance object.
+     */
+    fun getOmhLocation(context: Context): OmhLocation
 }

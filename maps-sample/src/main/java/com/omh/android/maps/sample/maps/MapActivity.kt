@@ -105,7 +105,7 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
             }
             // Safe use of 'noinspection MissingPermission' since it is checking permissions in the if condition
             // noinspection MissingPermission
-            omhLocation.getCurrentLocation(this, onSuccessListener, onFailureListener)
+            omhLocation.getCurrentLocation(onSuccessListener, onFailureListener)
         } else {
             moveTo(omhMap, ZOOM_LEVEL_15)
         }

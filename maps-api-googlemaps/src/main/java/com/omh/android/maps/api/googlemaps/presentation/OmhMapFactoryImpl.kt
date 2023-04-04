@@ -11,7 +11,5 @@ object OmhMapFactoryImpl : OmhMapFactory {
 
     override fun getOmhMapView(context: Context): OmhMapView = OmhMapViewImpl.Builder().build(context)
 
-    fun getOmhLocation(): OmhLocation {
-        return OmhLocationImpl()
-    }
+    override fun getOmhLocation(context: Context): OmhLocation = OmhLocationImpl(context)
 }
