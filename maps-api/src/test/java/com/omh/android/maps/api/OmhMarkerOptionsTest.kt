@@ -39,17 +39,7 @@ internal class OmhMarkerOptionsTest {
 
     @Test
     fun `given a Parcel, when createFromParcel and compared to another with same OmhCoordinate, then is true`() {
-        val parcel = mockk<Parcel>()
-
-        every { parcel.writeParcelable(any(), any()) } returns Unit
-        every {
-            parcel.readParcelable<OmhCoordinate>(OmhCoordinate::class.java.classLoader)
-        } returns omhMarkerOptions.position
-        omhMarkerOptions.writeToParcel(parcel, omhMarkerOptions.describeContents())
-
-        every { parcel.setDataPosition(any()) } returns Unit
-        every { parcel.dataPosition() } returns 0
-
+        val parcel = createOmhCoordinateParcel()
         val createdFromParcel = OmhMarkerOptions.CREATOR.createFromParcel(parcel)
 
         assertEquals(omhMarkerOptions.position, createdFromParcel.position)
@@ -59,6 +49,13 @@ internal class OmhMarkerOptionsTest {
     fun `given a Parcel, when createFromParcel and compared to another with different OmhCoordinate, then is false`() {
         val compareOmhCoordinate = OmhCoordinate()
         val compareOmhMarkerOptions = OmhMarkerOptions().apply { position = compareOmhCoordinate }
+        val parcel = createOmhCoordinateParcel()
+        val createdFromParcel = OmhMarkerOptions.CREATOR.createFromParcel(parcel)
+
+        assertFalse(compareOmhMarkerOptions.position == createdFromParcel.position)
+    }
+
+    private fun createOmhCoordinateParcel(): Parcel {
         val parcel = mockk<Parcel>()
 
         every { parcel.writeParcelable(any(), any()) } returns Unit
@@ -70,8 +67,6 @@ internal class OmhMarkerOptionsTest {
         every { parcel.setDataPosition(any()) } returns Unit
         every { parcel.dataPosition() } returns 0
 
-        val createdFromParcel = OmhMarkerOptions.CREATOR.createFromParcel(parcel)
-
-        assertFalse(compareOmhMarkerOptions.position == createdFromParcel.position)
+        return parcel
     }
 }
