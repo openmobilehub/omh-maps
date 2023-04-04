@@ -16,11 +16,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 object OmhMapsModule {
 
     @Provides
-    fun providesOmhMapView(@ApplicationContext appContext: Context): OmhMapView {
-        return OmhMapProvider.provideOmhMapView(appContext)
-    }
-
-    @Provides
     fun providesOmhLocation(): OmhLocation {
         return OmhMapFactoryImpl.getOmhLocation()
     }

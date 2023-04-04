@@ -7,6 +7,7 @@ import android.view.View
 /**
  * Abstraction to provide access to a map view
  */
+@Suppress("TooManyFunctions") // Suppress issue since interface has more than 12 functions.
 interface OmhMapView {
     interface Builder {
 
@@ -44,6 +45,21 @@ interface OmhMapView {
     fun onDestroy()
 
     /**
+     * You must call this method from the parent WearableActivity's corresponding method.
+     */
+    fun onEnterAmbient(ambientDetails: Bundle)
+
+    /**
+     * You must call this method from the parent WearableActivity's corresponding method.
+     */
+    fun onExitAmbient()
+
+    /**
+     * You must call this method from the parent Activity/Fragment's corresponding method.
+     */
+    fun onLowMemory()
+
+    /**
      * You must call this method from the parent Activity/Fragment's corresponding method.
      */
     fun onPause()
@@ -52,6 +68,13 @@ interface OmhMapView {
      * You must call this method from the parent Activity/Fragment's corresponding method.
      */
     fun onResume()
+
+    /**
+     * You must call this method from the parent Activity/Fragment's corresponding method.
+     * Provides a Bundle to store the state of the View before it gets destroyed.
+     * It can later be retrieved when onCreate(Bundle) is called again.
+     */
+    fun onSaveInstanceState(outState: Bundle)
 
     /**
      * You must call this method from the parent Activity/Fragment's corresponding method.

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.omh.android.maps.api.presentation.fragments.OmhMapFragment
 import com.omh.android.maps.api.presentation.interfaces.location.OmhFailureListener
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.location.OmhSuccessListener
@@ -45,7 +46,8 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
         }
 
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-            binding.fragmentMapContainer.getMapAsync(this)
+            val omhMapFragment: OmhMapFragment = binding.fragmentMapContainer.getFragment()
+            omhMapFragment.getMapAsync(this)
         }.launch(PERMISSIONS)
     }
 
