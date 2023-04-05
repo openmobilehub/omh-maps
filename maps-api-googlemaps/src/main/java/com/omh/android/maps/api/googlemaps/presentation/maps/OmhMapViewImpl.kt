@@ -9,6 +9,7 @@ import com.google.android.gms.maps.MapsInitializer
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapView
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
 
+@Suppress("TooManyFunctions") // Suppress issue since interface has more than 12 functions.
 internal class OmhMapViewImpl(context: Context) : OmhMapView {
 
     private var mapView: MapView? = null
@@ -33,12 +34,20 @@ internal class OmhMapViewImpl(context: Context) : OmhMapView {
         mapView?.onDestroy()
     }
 
+    override fun onLowMemory() {
+        mapView?.onLowMemory()
+    }
+
     override fun onPause() {
         mapView?.onPause()
     }
 
     override fun onResume() {
         mapView?.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        mapView?.onSaveInstanceState(outState)
     }
 
     override fun onStart() {

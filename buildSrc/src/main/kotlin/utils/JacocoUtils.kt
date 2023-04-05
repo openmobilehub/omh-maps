@@ -90,7 +90,6 @@ private fun JacocoReportBase.setDirs(project: Project) {
             "**/presentation/**",
             "**/data/**",
             "**/utils/**",
-            "**/extensions/**",
             "**/factories/**",
             "**/*$*",
         )
