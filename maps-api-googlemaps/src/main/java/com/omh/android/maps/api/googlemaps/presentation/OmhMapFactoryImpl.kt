@@ -7,7 +7,7 @@ import com.omh.android.maps.api.googlemaps.presentation.maps.OmhMapViewImpl
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapView
 
-object OmhMapFactoryImpl : OmhMapFactory {
+internal object OmhMapFactoryImpl : OmhMapFactory {
 
     override fun getOmhMapView(context: Context): OmhMapView = OmhMapViewImpl.Builder().build(context)
 

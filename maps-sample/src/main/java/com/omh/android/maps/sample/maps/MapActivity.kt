@@ -22,7 +22,7 @@ import com.omh.android.maps.sample.utils.Constants.INITIAL_TRANSLATION
 import com.omh.android.maps.sample.utils.Constants.OVERSHOOT_INTERPOLATOR
 import com.omh.android.maps.sample.utils.Constants.PERMISSIONS
 import com.omh.android.maps.sample.utils.Constants.PRIME_MERIDIAN
-import com.omh.android.maps.sample.utils.Constants.ZOOM_LEVEL_15
+import com.omh.android.maps.sample.utils.Constants.ZOOM_LEVEL_5
 import com.omh.android.maps.sample.utils.PermissionsUtils.grantedRequiredPermissions
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -86,10 +86,6 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
             // Safe use of 'noinspection MissingPermission' since it is checking permissions in the if condition
             // noinspection MissingPermission
             omhMap.setMyLocationEnabled(true)
-            omhMap.setMyLocationButtonClickListener {
-                moveToCurrentLocation(omhMap)
-                true
-            }
         }
     }
 
@@ -107,7 +103,7 @@ class MapActivity : AppCompatActivity(), OmhOnMapReadyCallback {
             // noinspection MissingPermission
             omhLocation.getCurrentLocation(onSuccessListener, onFailureListener)
         } else {
-            moveTo(omhMap, ZOOM_LEVEL_15)
+            moveTo(omhMap, ZOOM_LEVEL_5)
         }
     }
 

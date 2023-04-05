@@ -35,6 +35,8 @@ class OmhMapFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        omhMapView = OmhMapProvider.provideOmhMapView(requireContext())
+        omhMapView.onCreate(savedInstanceState)
         _binding = FragmentOmhMapBinding.inflate(inflater, container, false)
         binding.frameLayoutMapContainer.addView(omhMapView.getView())
 
@@ -51,15 +53,6 @@ class OmhMapFragment : Fragment() {
      */
     fun getMapAsync(omhOnMapReadyCallback: OmhOnMapReadyCallback) {
         omhMapView.getMapAsync(omhOnMapReadyCallback)
-    }
-
-    /**
-     * Gets the [OmhMapView] implementation.
-     */
-    override fun onCreate(savedInstanceState: Bundle?) {
-        omhMapView = OmhMapProvider.provideOmhMapView(requireContext())
-        omhMapView.onCreate(savedInstanceState)
-        super.onCreate(savedInstanceState)
     }
 
     /**
