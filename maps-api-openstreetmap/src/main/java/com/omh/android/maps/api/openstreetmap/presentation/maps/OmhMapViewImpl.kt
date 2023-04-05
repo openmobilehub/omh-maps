@@ -39,14 +39,6 @@ class OmhMapViewImpl(context: Context) : OmhMapView {
         // osmdroid doesn't implement this method
     }
 
-    override fun onEnterAmbient(ambientDetails: Bundle) {
-        // osmdroid doesn't implement this method
-    }
-
-    override fun onExitAmbient() {
-        // osmdroid doesn't implement this method
-    }
-
     override fun onLowMemory() {
         // osmdroid doesn't implement this method
     }
