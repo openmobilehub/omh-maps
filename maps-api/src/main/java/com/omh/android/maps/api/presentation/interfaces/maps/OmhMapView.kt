@@ -45,16 +45,6 @@ interface OmhMapView {
     fun onDestroy()
 
     /**
-     * You must call this method from the parent WearableActivity's corresponding method.
-     */
-    fun onEnterAmbient(ambientDetails: Bundle)
-
-    /**
-     * You must call this method from the parent WearableActivity's corresponding method.
-     */
-    fun onExitAmbient()
-
-    /**
      * You must call this method from the parent Activity/Fragment's corresponding method.
      */
     fun onLowMemory()

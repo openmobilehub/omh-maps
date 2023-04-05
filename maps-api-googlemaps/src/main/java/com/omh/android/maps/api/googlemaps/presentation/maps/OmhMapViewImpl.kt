@@ -34,14 +34,6 @@ internal class OmhMapViewImpl(context: Context) : OmhMapView {
         mapView?.onDestroy()
     }
 
-    override fun onEnterAmbient(ambientDetails: Bundle) {
-        mapView?.onEnterAmbient(ambientDetails)
-    }
-
-    override fun onExitAmbient() {
-        mapView?.onExitAmbient()
-    }
-
     override fun onLowMemory() {
         mapView?.onLowMemory()
     }
