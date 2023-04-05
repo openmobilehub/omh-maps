@@ -16,6 +16,7 @@ object Libs {
     // Android
     val androidAppCompat by lazy { "androidx.appcompat:appcompat:${Versions.androidAppCompat}" }
     val material by lazy { "com.google.android.material:material:${Versions.material}" }
+    val preference by lazy { "androidx.preference:preference:${Versions.preference}" }
 
     // Play services
     val playServicesMaps by lazy { "com.google.android.gms:play-services-maps:${Versions.playServicesMaps}" }

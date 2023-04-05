@@ -12,6 +12,7 @@ object Versions {
     // Android
     const val androidAppCompat = "1.6.1"
     const val material = "1.8.0"
+    const val preference = "1.2.0"
 
     // Play Services
     const val playServicesMaps = "18.1.0"
