@@ -56,11 +56,15 @@ class OmhMapFragment : Fragment() {
     }
 
     /**
-     * You must call this method from the parent WearableActivity's corresponding method.
+     * Recommended to set ViewBinding to null in onDestroyView.
      */
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onDestroy() {
         omhMapView.onDestroy()
-        _binding = null
         super.onDestroy()
     }
 
