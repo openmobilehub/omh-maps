@@ -28,9 +28,11 @@ class OmhMapImpl(private var mapView: MapView) : OmhMap {
     }
 
     override fun moveCamera(coordinate: OmhCoordinate, zoomLevel: Float) {
-        val geoPoint: IGeoPoint = coordinate.toGeoPoint()
-        mapView.controller.setCenter(geoPoint)
-        mapView.controller.setZoom(zoomLevel.toDouble())
+        with(mapView.controller) {
+            val geoPoint: IGeoPoint = coordinate.toGeoPoint()
+            setCenter(geoPoint)
+            setZoom(zoomLevel.toDouble())
+        }
     }
 
     override fun setZoomGesturesEnabled(enableZoomGestures: Boolean) {

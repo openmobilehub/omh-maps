@@ -13,7 +13,7 @@ import org.osmdroid.views.MapView
 @Suppress("TooManyFunctions") // Suppress issue since interface has more than 12 functions.
 class OmhMapViewImpl(context: Context) : OmhMapView {
 
-    private var mapView: MapView? = null
+    private var mapView: MapView
 
     init {
         Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context))
@@ -25,14 +25,14 @@ class OmhMapViewImpl(context: Context) : OmhMapView {
     }
 
     override fun getMapAsync(omhOnMapReadyCallback: OmhOnMapReadyCallback) {
-        mapView?.let { secureMapView ->
+        mapView.let { secureMapView ->
             val omhMapView = OmhMapImpl(secureMapView)
             omhOnMapReadyCallback.onMapReady(omhMapView)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        mapView?.setTileSource(TileSourceFactory.MAPNIK)
+        mapView.setTileSource(TileSourceFactory.MAPNIK)
     }
 
     override fun onDestroy() {
@@ -44,11 +44,11 @@ class OmhMapViewImpl(context: Context) : OmhMapView {
     }
 
     override fun onPause() {
-        mapView?.onPause()
+        mapView.onPause()
     }
 
     override fun onResume() {
-        mapView?.onResume()
+        mapView.onResume()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
