@@ -29,10 +29,9 @@ android {
         create("gms") {
             dimension = "google_services"
         }
-        // Todo: Remove comment when Non GMS module is created.
-        // create("nonGms") {
-            // dimension = "google_services"
-        // }
+        create("nonGms") {
+            dimension = "google_services"
+        }
     }
 
     kotlinOptions {
@@ -49,14 +48,12 @@ android {
 }
 
 val gmsImplementation by configurations
-// Todo: Remove comment when Non GMS module is created.
-// val nonGmsImplementation by configurations
+val nonGmsImplementation by configurations
 
 dependencies {
     // OMH SDK
     gmsImplementation(project(":maps-api-googlemaps"))
-    // Todo: Remove comment when Non GMS module is created.
-    // nonGmsImplementation(project(":maps-api-openstreetmap"))
+    nonGmsImplementation(project(":maps-api-openstreetmap"))
 
     implementation(Libs.coreKtx)
     implementation(Libs.lifecycleKtx)

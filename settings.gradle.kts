@@ -19,3 +19,4 @@ rootProject.name = "omh-maps"
 include(":maps-api")
 include(":maps-sample")
 include(":maps-api-googlemaps")
+include(":maps-api-openstreetmap")
