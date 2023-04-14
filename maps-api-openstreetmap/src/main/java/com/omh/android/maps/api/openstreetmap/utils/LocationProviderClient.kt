@@ -39,6 +39,7 @@ class LocationProviderClient(context: Context) {
     }
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
+    @SuppressWarnings("TooGenericExceptionCaught") // Until find out any specific error.
     fun getLastLocation(onSuccess: (Location?) -> Unit, onFailure: (Exception) -> Unit) {
         try {
             val lastKnownLocation = locationManager.getAccurateLastKnownLocation()
