@@ -10,7 +10,7 @@ import kotlin.reflect.KClass
  */
 object OmhMapProvider {
 
-    private const val NON_GMS_ADDRESS = "com.omh.android.maps.api.openstreetmaps.presentation.OmhMapFactoryImpl"
+    private const val NON_GMS_ADDRESS = "com.omh.android.maps.api.openstreetmap.presentation.OmhMapFactoryImpl"
     private const val GMS_ADDRESS = "com.omh.android.maps.api.googlemaps.presentation.OmhMapFactoryImpl"
 
     /**

@@ -1,9 +1,9 @@
-package com.omh.android.maps.api.googlemaps.presentation
+package com.omh.android.maps.api.openstreetmap.presentation
 
 import android.content.Context
 import com.omh.android.maps.api.factories.OmhMapFactory
-import com.omh.android.maps.api.googlemaps.presentation.location.OmhLocationImpl
-import com.omh.android.maps.api.googlemaps.presentation.maps.OmhMapViewImpl
+import com.omh.android.maps.api.openstreetmap.presentation.location.OmhLocationImpl
+import com.omh.android.maps.api.openstreetmap.presentation.maps.OmhMapViewImpl
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapView
 
