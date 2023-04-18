@@ -1,5 +1,9 @@
 package com.omh.android.maps.api.openstreetmap
 
+import com.omh.android.maps.api.openstreetmap.Constants.LATITUDE
+import com.omh.android.maps.api.openstreetmap.Constants.LONGITUDE
+import com.omh.android.maps.api.openstreetmap.Constants.OTHER_LATITUDE
+import com.omh.android.maps.api.openstreetmap.Constants.OTHER_LONGITUDE
 import com.omh.android.maps.api.openstreetmap.extensions.toGeoPoint
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
 import org.junit.Assert.assertEquals
@@ -8,8 +12,8 @@ import org.junit.Test
 import org.osmdroid.api.IGeoPoint
 import org.osmdroid.util.GeoPoint
 
-class OmhCoordinateTest {
-    private val omhCoordinate: OmhCoordinate = OmhCoordinate(16.9, 166.0)
+internal class OmhCoordinateTest {
+    private val omhCoordinate: OmhCoordinate = OmhCoordinate(LATITUDE, LONGITUDE)
 
     @Test
     fun `given a IGeoPoint, when toOmhCoordinate, then should return a OmhCoordinate with same Lat and Lng`() {
@@ -22,7 +26,7 @@ class OmhCoordinateTest {
     @Test
     fun `given a IGeoPoint, when toOmhCoordinate and compare with a different, then should return false`() {
         val geoPoint: IGeoPoint = omhCoordinate.toGeoPoint()
-        val anotherGeoPoint = GeoPoint(10.0, 10.0)
+        val anotherGeoPoint = GeoPoint(OTHER_LATITUDE, OTHER_LONGITUDE)
 
         assertFalse(anotherGeoPoint.latitude == geoPoint.latitude)
         assertFalse(anotherGeoPoint.longitude == geoPoint.longitude)
