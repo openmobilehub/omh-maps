@@ -18,7 +18,7 @@ import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 class OmhMapImpl(private var mapView: MapView) : OmhMap {
-    private var myLocationOverlay: MyLocationNewOverlay? = null
+    private var myLocationNewOverlay: MyLocationNewOverlay? = null
     private var myLocationIconOverlay: MyLocationIconOverlay? = null
 
     override fun addMarker(options: OmhMarkerOptions) {
@@ -47,22 +47,24 @@ class OmhMapImpl(private var mapView: MapView) : OmhMap {
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     override fun setMyLocationEnabled(enable: Boolean) {
         if (!enable) { return }
-        if (myLocationOverlay?.isMyLocationEnabled != true) {
+        if (myLocationNewOverlay?.isMyLocationEnabled != true) {
             myLocationIconOverlay = MyLocationIconOverlay(mapView.context).apply {
                 addOnClickListener { setMyLocationEnabled(true) }
             }
-            myLocationOverlay = MyLocationNewOverlay(mapView).apply { enableMyLocation() }
-            mapView.overlayManager.add(myLocationOverlay)
+            myLocationNewOverlay = MyLocationNewOverlay(mapView).apply { enableMyLocation() }
+            mapView.overlayManager.add(myLocationNewOverlay)
             mapView.overlayManager.add(myLocationIconOverlay)
         }
-        myLocationOverlay?.myLocation?.let { geoPoint ->
-            mapView.controller.animateTo(geoPoint)
-            mapView.controller.setZoom(DEFAULT_ZOOM_LEVEL)
+        myLocationNewOverlay?.myLocation?.let { geoPoint ->
+            with(mapView.controller) {
+                animateTo(geoPoint)
+                setZoom(DEFAULT_ZOOM_LEVEL)
+            }
         }
     }
 
     override fun isMyLocationEnabled(): Boolean {
-        return myLocationOverlay?.isMyLocationEnabled == true
+        return myLocationNewOverlay?.isMyLocationEnabled == true
     }
 
     override fun setMyLocationButtonClickListener(
