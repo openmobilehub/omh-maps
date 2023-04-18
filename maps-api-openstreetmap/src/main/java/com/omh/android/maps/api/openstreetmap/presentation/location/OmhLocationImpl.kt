@@ -5,12 +5,12 @@ import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
 import android.location.Location
 import androidx.annotation.RequiresPermission
+import com.omh.android.maps.api.openstreetmap.extensions.toOmhCoordinate
 import com.omh.android.maps.api.openstreetmap.utils.Constants.LOCATION_IS_NULL
 import com.omh.android.maps.api.openstreetmap.utils.LocationProviderClient
 import com.omh.android.maps.api.presentation.interfaces.location.OmhFailureListener
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.location.OmhSuccessListener
-import com.omh.android.maps.api.presentation.models.OmhCoordinate
 
 class OmhLocationImpl(context: Context) : OmhLocation {
     private val locationProviderClient = LocationProviderClient(context)
@@ -21,17 +21,8 @@ class OmhLocationImpl(context: Context) : OmhLocation {
         omhOnFailureListener: OmhFailureListener
     ) {
         locationProviderClient.getCurrentLocation(
-            { location: Location? ->
-                if (location != null) {
-                    val omhCoordinate = OmhCoordinate(location.latitude, location.longitude)
-                    omhOnSuccessListener.onSuccess(omhCoordinate)
-                } else {
-                    omhOnFailureListener.onFailure(Exception(LOCATION_IS_NULL))
-                }
-            },
-            { exception ->
-                omhOnFailureListener.onFailure(exception)
-            }
+            onSuccess = getOnSuccessFunction(omhOnFailureListener, omhOnSuccessListener),
+            onFailure = getOnFailureFunction(omhOnFailureListener)
         )
     }
 
@@ -41,17 +32,25 @@ class OmhLocationImpl(context: Context) : OmhLocation {
         omhOnFailureListener: OmhFailureListener
     ) {
         locationProviderClient.getLastLocation(
-            { location: Location? ->
-                if (location != null) {
-                    omhOnSuccessListener.onSuccess(OmhCoordinate(location.latitude, location.longitude))
-                } else {
-                    omhOnFailureListener.onFailure(Exception(LOCATION_IS_NULL))
-                }
-            },
-            { exception ->
-                omhOnFailureListener.onFailure(exception)
-            }
+            onSuccess = getOnSuccessFunction(omhOnFailureListener, omhOnSuccessListener),
+            onFailure = getOnFailureFunction(omhOnFailureListener)
         )
+    }
+
+    private fun getOnFailureFunction(omhOnFailureListener: OmhFailureListener): (Exception) -> Unit =
+        { exception: Exception ->
+            omhOnFailureListener.onFailure(exception)
+        }
+
+    private fun getOnSuccessFunction(
+        omhOnFailureListener: OmhFailureListener,
+        omhOnSuccessListener: OmhSuccessListener
+    ): (Location?) -> Unit = { location: Location? ->
+        if (location == null) {
+            omhOnFailureListener.onFailure(Exception(LOCATION_IS_NULL))
+        } else {
+            omhOnSuccessListener.onSuccess(location.toOmhCoordinate())
+        }
     }
 
     internal class Builder : OmhLocation.Builder {

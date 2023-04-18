@@ -4,10 +4,10 @@ import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
 import android.location.Location
+import android.location.LocationListener
 import android.location.LocationManager
 import androidx.annotation.RequiresPermission
-import com.omh.android.maps.api.openstreetmap.extensions.getAccurateLastKnownLocation
-import com.omh.android.maps.api.openstreetmap.factories.LocationListenerFactory
+import com.omh.android.maps.api.openstreetmap.extensions.getMostAccurateLastKnownLocation
 import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_DISTANCE_M
 import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_TIME_EXECUTION_MS
 
@@ -18,14 +18,15 @@ class LocationProviderClient(context: Context) {
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     @SuppressWarnings("TooGenericExceptionCaught") // Until find out any specific error.
     fun getCurrentLocation(onSuccess: (Location?) -> Unit, onFailure: (Exception) -> Unit) {
-        val locationListener = LocationListenerFactory.create(locationManager::removeUpdates, onSuccess)
+        val locationListener =
+            MapLocationListener { locationListener: LocationListener, location: Location? ->
+                locationManager.removeUpdates(locationListener)
+                onSuccess(location)
+            }
 
         try {
-            val lastKnownLocation = locationManager.getAccurateLastKnownLocation()
-
-            if (lastKnownLocation != null) {
-                onSuccess(lastKnownLocation)
-            }
+            val lastLocation: Location? = locationManager.getMostAccurateLastKnownLocation()
+            lastLocation?.let(onSuccess)
 
             locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
@@ -42,7 +43,7 @@ class LocationProviderClient(context: Context) {
     @SuppressWarnings("TooGenericExceptionCaught") // Until find out any specific error.
     fun getLastLocation(onSuccess: (Location?) -> Unit, onFailure: (Exception) -> Unit) {
         try {
-            val lastKnownLocation = locationManager.getAccurateLastKnownLocation()
+            val lastKnownLocation = locationManager.getMostAccurateLastKnownLocation()
             onSuccess(lastKnownLocation)
         } catch (exception: RuntimeException) {
             onFailure(exception)
