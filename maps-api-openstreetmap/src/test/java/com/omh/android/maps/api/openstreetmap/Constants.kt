@@ -1,6 +1,6 @@
 package com.omh.android.maps.api.openstreetmap
 
-object Constants {
+internal object Constants {
     const val LATITUDE = 16.9
     const val LONGITUDE = 166.0
     const val OTHER_LATITUDE = 10.0

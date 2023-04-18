@@ -12,7 +12,7 @@ import org.junit.Test
 import org.osmdroid.api.IGeoPoint
 import org.osmdroid.util.GeoPoint
 
-class IGeoPointTest {
+internal class IGeoPointTest {
     private val geoPoint: IGeoPoint = GeoPoint(LATITUDE, LONGITUDE)
 
     @Test

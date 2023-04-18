@@ -7,7 +7,7 @@ import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_TIME_EXECUTION
 import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_TIME_MS
 import com.omh.android.maps.api.openstreetmap.utils.Constants.TIME_OUT_MS
 
-class MapLocationListener(val onSuccess: (LocationListener, Location?) -> Unit) : LocationListener {
+internal class MapLocationListener(val onSuccess: (LocationListener, Location?) -> Unit) : LocationListener {
     private var locationUpdates = 0
     override fun onLocationChanged(location: Location) {
         locationUpdates++

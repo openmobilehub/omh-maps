@@ -11,7 +11,7 @@ import com.omh.android.maps.api.openstreetmap.extensions.getMostAccurateLastKnow
 import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_DISTANCE_M
 import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_TIME_EXECUTION_MS
 
-class LocationProviderClient(context: Context) {
+internal class LocationProviderClient(context: Context) {
     private var locationManager: LocationManager =
         context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 

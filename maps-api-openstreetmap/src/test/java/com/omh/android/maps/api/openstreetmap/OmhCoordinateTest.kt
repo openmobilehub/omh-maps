@@ -12,7 +12,7 @@ import org.junit.Test
 import org.osmdroid.api.IGeoPoint
 import org.osmdroid.util.GeoPoint
 
-class OmhCoordinateTest {
+internal class OmhCoordinateTest {
     private val omhCoordinate: OmhCoordinate = OmhCoordinate(LATITUDE, LONGITUDE)
 
     @Test

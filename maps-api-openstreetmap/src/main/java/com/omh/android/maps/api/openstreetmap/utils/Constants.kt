@@ -1,6 +1,6 @@
 package com.omh.android.maps.api.openstreetmap.utils
 
-object Constants {
+internal object Constants {
     const val LOCATION_IS_NULL = "Location is null"
     const val MIN_TIME_EXECUTION_MS = 0L
     const val MIN_TIME_MS = 0L

@@ -14,7 +14,7 @@ import org.junit.Assert.assertNotEquals
 import org.junit.Before
 import org.junit.Test
 
-class LocationManagerTest {
+internal class LocationManagerTest {
     private lateinit var locationManager: LocationManager
     private lateinit var locationLessAccurate: Location
     private lateinit var locationMostAccurate: Location
