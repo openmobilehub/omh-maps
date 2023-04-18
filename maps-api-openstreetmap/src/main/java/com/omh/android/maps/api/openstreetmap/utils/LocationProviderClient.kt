@@ -20,8 +20,7 @@ internal class LocationProviderClient(context: Context) {
     fun getCurrentLocation(onSuccess: (Location?) -> Unit, onFailure: (Exception) -> Unit) {
         val locationListener =
             MapLocationListener { locationListener: LocationListener, location: Location? ->
-                locationManager.removeUpdates(locationListener)
-                onSuccess(location)
+                handleOnSuccess(locationListener, onSuccess, location)
             }
 
         try {
@@ -37,6 +36,16 @@ internal class LocationProviderClient(context: Context) {
         } catch (exception: RuntimeException) {
             onFailure(exception)
         }
+    }
+
+    @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
+    private fun handleOnSuccess(
+        locationListener: LocationListener,
+        onSuccess: (Location?) -> Unit,
+        location: Location?
+    ) {
+        locationManager.removeUpdates(locationListener)
+        onSuccess(location)
     }
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])

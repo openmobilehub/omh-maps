@@ -21,8 +21,12 @@ class OmhLocationImpl(context: Context) : OmhLocation {
         omhOnFailureListener: OmhFailureListener
     ) {
         locationProviderClient.getCurrentLocation(
-            onSuccess = getOnSuccessFunction(omhOnFailureListener, omhOnSuccessListener),
-            onFailure = getOnFailureFunction(omhOnFailureListener)
+            onSuccess = { location: Location? ->
+                handleOnSuccess(location, omhOnFailureListener, omhOnSuccessListener)
+            },
+            onFailure = { exception: Exception ->
+                omhOnFailureListener.onFailure(exception)
+            }
         )
     }
 
@@ -32,20 +36,20 @@ class OmhLocationImpl(context: Context) : OmhLocation {
         omhOnFailureListener: OmhFailureListener
     ) {
         locationProviderClient.getLastLocation(
-            onSuccess = getOnSuccessFunction(omhOnFailureListener, omhOnSuccessListener),
-            onFailure = getOnFailureFunction(omhOnFailureListener)
+            onSuccess = { location: Location? ->
+                handleOnSuccess(location, omhOnFailureListener, omhOnSuccessListener)
+            },
+            onFailure = { exception: Exception ->
+                omhOnFailureListener.onFailure(exception)
+            }
         )
     }
 
-    private fun getOnFailureFunction(omhOnFailureListener: OmhFailureListener): (Exception) -> Unit =
-        { exception: Exception ->
-            omhOnFailureListener.onFailure(exception)
-        }
-
-    private fun getOnSuccessFunction(
+    private fun handleOnSuccess(
+        location: Location?,
         omhOnFailureListener: OmhFailureListener,
         omhOnSuccessListener: OmhSuccessListener
-    ): (Location?) -> Unit = { location: Location? ->
+    ) {
         if (location == null) {
             omhOnFailureListener.onFailure(Exception(LOCATION_IS_NULL))
         } else {
