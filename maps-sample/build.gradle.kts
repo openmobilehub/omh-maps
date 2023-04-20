@@ -4,12 +4,20 @@ plugins {
     `android-application`
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android") version "2.44" apply true
+    id("org.jetbrains.kotlin.android")
+    id("androidx.navigation.safeargs.kotlin") version "2.5.3" apply true
 }
 
 android {
     namespace = "com.omh.android.maps.sample"
 
     defaultConfig {
+        applicationId = "com.omh.android.maps.sample"
+        minSdk = 21
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
+
         val apiKey = "MAPS_API_KEY"
         manifestPlaceholders[apiKey] = gradleLocalProperties(rootDir)[apiKey].toString()
     }
@@ -34,6 +42,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility(JavaVersion.VERSION_1_8)
+        targetCompatibility(JavaVersion.VERSION_1_8)
+    }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -42,8 +55,8 @@ android {
         correctErrorTypes = true
     }
 
-    viewBinding {
-        enable = true
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -61,6 +74,8 @@ dependencies {
     implementation(Libs.material)
     implementation(Libs.reflection)
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.44")

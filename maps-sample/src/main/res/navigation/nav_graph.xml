@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/initialFragment">
+
+    <action
+        android:id="@+id/action_global_mapFragment"
+        app:destination="@+id/mapFragment"
+        app:popUpTo="@id/mapFragment"
+        app:popUpToInclusive="true">
+        <argument
+            android:name="LOCATION_RESULT"
+            app:argType="com.omh.android.maps.api.presentation.models.OmhCoordinate" />
+    </action>
+
+    <fragment
+        android:id="@+id/initialFragment"
+        android:name="com.omh.android.maps.sample.start.InitialFragment"
+        android:label="startFragment"
+        tools:layout="@layout/fragment_initial">
+        <action
+            android:id="@+id/action_initialFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.omh.android.maps.sample.maps.MapFragment"
+        android:label="mapFragment"
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_mapFragment_to_initialFragment"
+            app:destination="@id/initialFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true">
+            <argument
+                android:name="LOCATION_RESULT"
+                app:argType="com.omh.android.maps.api.presentation.models.OmhCoordinate" />
+        </action>
+    </fragment>
+
+</navigation>
