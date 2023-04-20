@@ -1,6 +1,5 @@
 package com.omh.android.maps.sample.maps
 
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,11 +17,14 @@ import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStar
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
 import com.omh.android.maps.sample.databinding.FragmentMapBinding
-import com.omh.android.maps.sample.start.InitialFragment
+import com.omh.android.maps.sample.start.InitialFragment.Companion.LOCATION_RESULT
+import com.omh.android.maps.sample.utils.BundleUtils.getOmhCoordinate
 import com.omh.android.maps.sample.utils.Constants.ANIMATION_DURATION
 import com.omh.android.maps.sample.utils.Constants.DEFAULT_ZOOM_LEVEL
 import com.omh.android.maps.sample.utils.Constants.FINAL_TRANSLATION
 import com.omh.android.maps.sample.utils.Constants.INITIAL_TRANSLATION
+import com.omh.android.maps.sample.utils.Constants.LOCATION_KEY
+import com.omh.android.maps.sample.utils.Constants.ONLY_DISPLAY_KEY
 import com.omh.android.maps.sample.utils.Constants.OVERSHOOT_INTERPOLATOR
 import com.omh.android.maps.sample.utils.Constants.PERMISSIONS
 import com.omh.android.maps.sample.utils.Constants.PRIME_MERIDIAN
@@ -42,14 +44,10 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        displayOnlyCoordinate = savedInstanceState?.getBoolean("only display", false) ?: false
-        currentLocation = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            savedInstanceState?.getParcelable("location", OmhCoordinate::class.java)
-                ?: PRIME_MERIDIAN
-        } else {
-            // Before Android 13, API level 33(Tiramisu) use: fun <T : Parcelable?> getParcelable(name: String?): T
-            @Suppress("DEPRECATION")
-            savedInstanceState?.getParcelable("location") ?: PRIME_MERIDIAN
+        displayOnlyCoordinate = savedInstanceState?.getBoolean(ONLY_DISPLAY_KEY, false) ?: false
+        val coordinate = getOmhCoordinate(savedInstanceState, LOCATION_KEY)
+        coordinate?.let {
+            currentLocation = coordinate
         }
     }
 
@@ -64,14 +62,8 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.let {
-            val coordinate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                it.getParcelable(InitialFragment.LOCATION_RESULT, OmhCoordinate::class.java)
-            } else {
-                // Before Android 13, API level 33(Tiramisu) use: fun <T : Parcelable?> getParcelable(name: String?): T
-                @Suppress("DEPRECATION")
-                it.getParcelable(InitialFragment.LOCATION_RESULT)
-            }
+        arguments?.let { bundle ->
+            val coordinate = getOmhCoordinate(bundle, LOCATION_RESULT)
             coordinate?.let {
                 currentLocation = coordinate
                 displayOnlyCoordinate = true
@@ -155,8 +147,8 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelable("location", currentLocation)
-        outState.putBoolean("only display", displayOnlyCoordinate)
+        outState.putParcelable(LOCATION_KEY, currentLocation)
+        outState.putBoolean(ONLY_DISPLAY_KEY, displayOnlyCoordinate)
     }
 
     override fun onDestroyView() {

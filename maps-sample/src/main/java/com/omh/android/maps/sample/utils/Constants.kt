@@ -28,4 +28,8 @@ object Constants {
     const val SCHEME_PROTOCOL = "https"
     const val PATH = "maps"
     const val SHARE_TITLE = "Share link"
+
+    // Bundle keys
+    const val LOCATION_KEY = "location"
+    const val ONLY_DISPLAY_KEY = "only display"
 }

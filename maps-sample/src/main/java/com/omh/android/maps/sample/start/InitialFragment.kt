@@ -2,7 +2,8 @@ package com.omh.android.maps.sample.start
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
+import android.os.Build.VERSION.SDK_INT
+import android.os.Build.VERSION_CODES.TIRAMISU
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,7 +49,7 @@ class InitialFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
-            val coordinate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val coordinate = if (SDK_INT >= TIRAMISU) {
                 it.getParcelable(LOCATION_RESULT, OmhCoordinate::class.java)
             } else {
                 // Before Android 13, API level 33(Tiramisu) use: fun <T : Parcelable?> getParcelable(name: String?): T
