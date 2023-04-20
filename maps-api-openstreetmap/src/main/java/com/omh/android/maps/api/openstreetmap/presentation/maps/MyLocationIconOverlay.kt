@@ -6,13 +6,13 @@ import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.view.MotionEvent
 import androidx.core.content.ContextCompat
-import com.omh.android.maps.api.openstreetmap.R
 import com.omh.android.maps.api.openstreetmap.utils.Constants.PADDING_MY_LOCATION_ICON
+import org.osmdroid.library.R.drawable.ic_menu_mylocation
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Overlay
 
 internal class MyLocationIconOverlay(context: Context) : Overlay() {
-    private val icon: Drawable? = ContextCompat.getDrawable(context, R.drawable.icon_my_location)
+    private val icon: Drawable? = ContextCompat.getDrawable(context, ic_menu_mylocation)
     private val clickListeners: MutableList<() -> Unit> = mutableListOf()
 
     override fun draw(canvas: Canvas?, mapView: MapView?, shadow: Boolean) {
