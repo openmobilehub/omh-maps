@@ -1,7 +1,11 @@
 package com.omh.android.maps.api.openstreetmap.presentation.maps
 
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
+import androidx.annotation.RequiresPermission
 import com.omh.android.maps.api.openstreetmap.extensions.toGeoPoint
 import com.omh.android.maps.api.openstreetmap.extensions.toOmhCoordinate
+import com.omh.android.maps.api.openstreetmap.utils.Constants.DEFAULT_ZOOM_LEVEL
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
@@ -11,10 +15,11 @@ import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
 import org.osmdroid.api.IGeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 class OmhMapImpl(private var mapView: MapView) : OmhMap {
-
-    private var isMyLocationEnabled = false
+    private var myLocationNewOverlay: MyLocationNewOverlay? = null
+    private var myLocationIconOverlay: MyLocationIconOverlay? = null
 
     override fun addMarker(options: OmhMarkerOptions) {
         Marker(mapView).apply {
@@ -37,22 +42,37 @@ class OmhMapImpl(private var mapView: MapView) : OmhMap {
 
     override fun setZoomGesturesEnabled(enableZoomGestures: Boolean) {
         mapView.setMultiTouchControls(enableZoomGestures)
-        // Todo Enable or disable missing gestures in the corresponding task.
     }
 
+    @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     override fun setMyLocationEnabled(enable: Boolean) {
-        isMyLocationEnabled = enable
-        // Todo Enable or disable MyLocation in the corresponding task.
+        if (!enable) { return }
+        if (myLocationNewOverlay?.isMyLocationEnabled != true) {
+            myLocationIconOverlay = MyLocationIconOverlay(mapView.context).apply {
+                addOnClickListener { setMyLocationEnabled(true) }
+            }
+            myLocationNewOverlay = MyLocationNewOverlay(mapView).apply { enableMyLocation() }
+            mapView.overlayManager.add(myLocationNewOverlay)
+            mapView.overlayManager.add(myLocationIconOverlay)
+        }
+        myLocationNewOverlay?.myLocation?.let { geoPoint ->
+            with(mapView.controller) {
+                animateTo(geoPoint)
+                setZoom(DEFAULT_ZOOM_LEVEL)
+            }
+        }
     }
 
     override fun isMyLocationEnabled(): Boolean {
-        return isMyLocationEnabled
+        return myLocationNewOverlay?.isMyLocationEnabled == true
     }
 
     override fun setMyLocationButtonClickListener(
         omhOnMyLocationButtonClickListener: OmhOnMyLocationButtonClickListener
     ) {
-        // Todo Add listener when MyLocation is enabled in the corresponding task.
+        myLocationIconOverlay?.addOnClickListener {
+            omhOnMyLocationButtonClickListener.onMyLocationButtonClick()
+        }
     }
 
     override fun setOnCameraMoveStartedListener(listener: OmhOnCameraMoveStartedListener) {
