@@ -12,6 +12,12 @@ android {
     namespace = "com.omh.android.maps.sample"
 
     defaultConfig {
+        applicationId = "com.omh.android.maps.sample"
+        minSdk = 21
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
+
         val apiKey = "MAPS_API_KEY"
         manifestPlaceholders[apiKey] = gradleLocalProperties(rootDir)[apiKey].toString()
     }
@@ -34,6 +40,11 @@ android {
         create("nonGms") {
             dimension = "google_services"
         }
+    }
+
+    compileOptions {
+        sourceCompatibility(JavaVersion.VERSION_1_8)
+        targetCompatibility(JavaVersion.VERSION_1_8)
     }
 
     kotlinOptions {
