@@ -143,7 +143,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     }
 
     private fun moveToCurrentLocation(omhMap: OmhMap) {
-        if (grantedRequiredPermissions(this)) {
+        if (PermissionsUtils.grantedRequiredPermissions(requireContext())) {
             val onSuccessListener = OmhSuccessListener { omhCoordinate ->
                 currentLocation = omhCoordinate
                 moveToCurrentLocation(omhMap, DEFAULT_ZOOM_LEVEL)
