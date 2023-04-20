@@ -6,6 +6,8 @@ import androidx.annotation.RequiresPermission
 import com.omh.android.maps.api.openstreetmap.extensions.toGeoPoint
 import com.omh.android.maps.api.openstreetmap.extensions.toOmhCoordinate
 import com.omh.android.maps.api.openstreetmap.utils.Constants.DEFAULT_ZOOM_LEVEL
+import com.omh.android.maps.api.openstreetmap.utils.MapListenerController
+import com.omh.android.maps.api.openstreetmap.utils.MapTouchListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
@@ -20,6 +22,12 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 class OmhMapImpl(private var mapView: MapView) : OmhMap {
     private var myLocationNewOverlay: MyLocationNewOverlay? = null
     private var myLocationIconOverlay: MyLocationIconOverlay? = null
+    private var mapListenerController = MapListenerController()
+
+    init {
+        mapView.addMapListener(mapListenerController)
+        mapView.setOnTouchListener(MapTouchListener(mapListenerController))
+    }
 
     override fun addMarker(options: OmhMarkerOptions) {
         Marker(mapView).apply {
@@ -76,10 +84,10 @@ class OmhMapImpl(private var mapView: MapView) : OmhMap {
     }
 
     override fun setOnCameraMoveStartedListener(listener: OmhOnCameraMoveStartedListener) {
-        // Todo Add listener when camera starts moving in the corresponding task.
+        mapListenerController.addOnStartListener(listener)
     }
 
     override fun setOnCameraIdleListener(listener: OmhOnCameraIdleListener) {
-        // Todo Add listener when camera finishes moving in the corresponding task.
+        mapListenerController.addOnIdleListener(listener)
     }
 }

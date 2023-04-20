@@ -9,4 +9,6 @@ internal object Constants {
     const val TIME_OUT_MS = 2000L
     const val PADDING_MY_LOCATION_ICON = 16
     const val DEFAULT_ZOOM_LEVEL = 15.0
+    const val ONE_POINTER = 1
+    const val DELAY_MS = 200L
 }
