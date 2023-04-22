@@ -27,16 +27,21 @@ internal class OmhMapViewImpl(context: Context) : OmhMapView {
             maxZoomLevel = MAX_ZOOM_LEVEL
             isHorizontalMapRepetitionEnabled = false
             isVerticalMapRepetitionEnabled = false
-            setScrollableAreaLimitDouble(
-                BoundingBox(
-                    MapView.getTileSystem().maxLatitude,
-                    MapView.getTileSystem().maxLongitude,
-                    MapView.getTileSystem().minLatitude,
-                    MapView.getTileSystem().minLongitude
-                )
-            )
+            limitScrollArea()
             postInvalidate()
         }
+    }
+
+    private fun MapView.limitScrollArea() {
+        val tileSystem = MapView.getTileSystem()
+        setScrollableAreaLimitDouble(
+            BoundingBox(
+                tileSystem.maxLatitude,
+                tileSystem.maxLongitude,
+                tileSystem.minLatitude,
+                tileSystem.minLongitude
+            )
+        )
     }
 
     override fun getView(): View? {
