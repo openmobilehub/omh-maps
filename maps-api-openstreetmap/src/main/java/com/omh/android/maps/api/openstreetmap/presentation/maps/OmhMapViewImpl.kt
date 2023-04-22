@@ -15,7 +15,7 @@ import org.osmdroid.util.BoundingBox
 import org.osmdroid.views.MapView
 
 @Suppress("TooManyFunctions") // Suppress issue since interface has more than 12 functions.
-class OmhMapViewImpl(context: Context) : OmhMapView {
+internal class OmhMapViewImpl(context: Context) : OmhMapView {
 
     private var mapView: MapView
 

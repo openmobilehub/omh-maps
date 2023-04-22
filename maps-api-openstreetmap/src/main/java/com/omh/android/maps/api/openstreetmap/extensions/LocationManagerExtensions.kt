@@ -7,7 +7,7 @@ import android.location.LocationManager
 import androidx.annotation.RequiresPermission
 
 @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
-fun LocationManager.getMostAccurateLastKnownLocation(): Location? {
+internal fun LocationManager.getMostAccurateLastKnownLocation(): Location? {
     val providers = getProviders(true)
     var accurateLocation: Location? = null
 

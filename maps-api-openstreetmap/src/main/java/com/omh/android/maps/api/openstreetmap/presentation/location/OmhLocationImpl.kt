@@ -12,7 +12,7 @@ import com.omh.android.maps.api.presentation.interfaces.location.OmhFailureListe
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.location.OmhSuccessListener
 
-class OmhLocationImpl(context: Context) : OmhLocation {
+internal class OmhLocationImpl(context: Context) : OmhLocation {
     private val locationProviderClient = LocationProviderClient(context)
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
