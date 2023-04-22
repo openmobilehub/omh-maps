@@ -9,7 +9,6 @@ internal object Constants {
     const val MIN_DISTANCE_M = 0f
     const val MIN_TIMES_EXECUTION = 1
     const val TIME_OUT_MS = 2000L
-    const val MIN_RADIUS = 5.0f
 
     // My Location
     const val PADDING_MY_LOCATION_ICON = 16
@@ -21,5 +20,5 @@ internal object Constants {
 
     // Map marker
     const val MIN_ZOOM_LEVEL = 4.0
-    const val MAX_ZOOM_LEVEL = 22.0
+    const val MAX_ZOOM_LEVEL = 20.0
 }
