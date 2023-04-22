@@ -18,8 +18,9 @@ interface OmhMap {
      * Adds a marker to this map. The marker's icon is rendered on the map at the position.
      *
      * @param options -> A marker options object that defines how to render the marker.
+     * @return -> The Marker that was added to the map.
      */
-    fun addMarker(options: OmhMarkerOptions)
+    fun addMarker(options: OmhMarkerOptions): OmhMarker?
 
     /**
      * Gets the camera's position.

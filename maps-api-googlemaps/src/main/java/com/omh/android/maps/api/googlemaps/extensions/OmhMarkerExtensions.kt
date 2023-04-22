@@ -7,4 +7,5 @@ import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
 fun OmhMarkerOptions.toMarkerOptions(): MarkerOptions {
     return MarkerOptions()
         .position(ConverterUtils.convertToLatLng(position))
+        .title(title)
 }

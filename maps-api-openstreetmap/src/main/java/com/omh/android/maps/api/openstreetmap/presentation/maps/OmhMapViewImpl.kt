@@ -4,11 +4,14 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.preference.PreferenceManager
+import com.omh.android.maps.api.openstreetmap.utils.Constants.MAX_ZOOM_LEVEL
+import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_ZOOM_LEVEL
 import com.omh.android.maps.api.openstreetmap.utils.MapListenerController
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapView
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.BoundingBox
 import org.osmdroid.views.MapView
 
 @Suppress("TooManyFunctions") // Suppress issue since interface has more than 12 functions.
@@ -17,8 +20,23 @@ class OmhMapViewImpl(context: Context) : OmhMapView {
     private var mapView: MapView
 
     init {
-        Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context))
-        mapView = MapView(context)
+        Configuration.getInstance()
+            .load(context, PreferenceManager.getDefaultSharedPreferences(context))
+        mapView = MapView(context).apply {
+            minZoomLevel = MIN_ZOOM_LEVEL
+            maxZoomLevel = MAX_ZOOM_LEVEL
+            isHorizontalMapRepetitionEnabled = false
+            isVerticalMapRepetitionEnabled = false
+            setScrollableAreaLimitDouble(
+                BoundingBox(
+                    MapView.getTileSystem().maxLatitude,
+                    MapView.getTileSystem().maxLongitude,
+                    MapView.getTileSystem().minLatitude,
+                    MapView.getTileSystem().minLongitude
+                )
+            )
+            postInvalidate()
+        }
     }
 
     override fun getView(): View? {

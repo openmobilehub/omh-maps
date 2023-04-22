@@ -24,9 +24,6 @@ internal class LocationProviderClient(context: Context) {
             }
 
         try {
-            val lastLocation: Location? = locationManager.getMostAccurateLastKnownLocation()
-            lastLocation?.let(onSuccess)
-
             locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
                 MIN_TIME_EXECUTION_MS,

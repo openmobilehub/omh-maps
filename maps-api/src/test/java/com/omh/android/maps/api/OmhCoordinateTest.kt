@@ -1,6 +1,8 @@
 package com.omh.android.maps.api
 
 import android.os.Parcel
+import com.omh.android.maps.api.Constants.LATITUDE
+import com.omh.android.maps.api.Constants.LONGITUDE
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
 import io.mockk.every
 import io.mockk.mockk
@@ -10,17 +12,15 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 internal class OmhCoordinateTest {
-    private val latitude = -16.19
-    private val longitude = 166.16
-    private val omhCoordinate = OmhCoordinate(latitude, longitude)
-    private val otherOmhCoordinate = OmhCoordinate(latitude, longitude)
+    private val omhCoordinate = OmhCoordinate(LATITUDE, LONGITUDE)
+    private val otherOmhCoordinate = OmhCoordinate(LATITUDE, LONGITUDE)
 
     @Test
     fun `given a lat and lng, when are passed to create a OmhCoordinate, then is created with the lat and lng`() {
-        val newOmhCoordinate = OmhCoordinate(latitude, longitude)
+        val newOmhCoordinate = OmhCoordinate(LATITUDE, LONGITUDE)
 
-        assertEquals(latitude, newOmhCoordinate.latitude, 0.0)
-        assertEquals(longitude, newOmhCoordinate.longitude, 0.0)
+        assertEquals(LATITUDE, newOmhCoordinate.latitude, 0.0)
+        assertEquals(LONGITUDE, newOmhCoordinate.longitude, 0.0)
     }
 
     @Test
@@ -42,7 +42,7 @@ internal class OmhCoordinateTest {
 
     @Test
     fun `given a OmhCoordinate, when is called toString, then a correct string is returned`() {
-        val expectedStringResult = "lat/lng: ($latitude,$longitude)"
+        val expectedStringResult = "lat/lng: ($LATITUDE,$LONGITUDE)"
         val stringResult = omhCoordinate.toString()
 
         assertEquals(expectedStringResult, stringResult)
@@ -53,7 +53,7 @@ internal class OmhCoordinateTest {
         val parcel = mockk<Parcel>()
 
         every { parcel.writeDouble(any()) } returns Unit
-        every { parcel.readDouble() } returns latitude andThen longitude
+        every { parcel.readDouble() } returns LATITUDE andThen LONGITUDE
 
         omhCoordinate.writeToParcel(parcel, omhCoordinate.describeContents())
 
@@ -71,7 +71,7 @@ internal class OmhCoordinateTest {
         val parcel = mockk<Parcel>()
 
         every { parcel.writeDouble(any()) } returns Unit
-        every { parcel.readDouble() } returns latitude andThen longitude
+        every { parcel.readDouble() } returns LATITUDE andThen LONGITUDE
 
         omhCoordinate.writeToParcel(parcel, omhCoordinate.describeContents())
 

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -12,11 +13,10 @@ import com.omh.android.maps.api.presentation.fragments.OmhMapFragment
 import com.omh.android.maps.api.presentation.interfaces.location.OmhFailureListener
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.location.OmhSuccessListener
-import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
-import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
-import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
-import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
+import com.omh.android.maps.api.presentation.interfaces.maps.*
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
+import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
+import com.omh.android.maps.sample.R
 import com.omh.android.maps.sample.databinding.FragmentMapBinding
 import com.omh.android.maps.sample.utils.BundleUtils.getOmhCoordinate
 import com.omh.android.maps.sample.utils.Constants.ANIMATION_DURATION
@@ -109,9 +109,18 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
         if (displayOnlyCoordinate) {
             moveTo(omhMap, DEFAULT_ZOOM_LEVEL)
         } else {
-            enableMyLocation(omhMap)
-            moveToCurrentLocation(omhMap)
+            shareFunctionality(omhMap)
         }
+    }
+
+    private fun shareFunctionality(omhMap: OmhMap) {
+        val omhMarkerOptions = OmhMarkerOptions().apply {
+            position = currentLocation
+            title = "MERIDIAN LOCATION"
+        }
+        omhMap.addMarker(omhMarkerOptions)
+        enableMyLocation(omhMap)
+        moveToCurrentLocation(omhMap)
     }
 
     private fun enableMyLocation(omhMap: OmhMap) {
@@ -119,6 +128,10 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
             // Safe use of 'noinspection MissingPermission' since it is checking permissions in the if condition
             // noinspection MissingPermission
             omhMap.setMyLocationEnabled(true)
+            omhMap.setMyLocationButtonClickListener {
+                Toast.makeText(requireContext(), R.string.center_message, Toast.LENGTH_SHORT).show()
+                true
+            }
         }
     }
 

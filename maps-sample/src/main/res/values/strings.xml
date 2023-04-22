@@ -6,4 +6,6 @@
     <string name="button_to_share_location">Button to share location</string>
     <string name="example_coordinate">16.66, 66.1</string>
     <string name="share_location">Share Location</string>
+    <string name="center_message">Center location</string>
+    <string name="share_link">"Share link"</string>
 </resources>
