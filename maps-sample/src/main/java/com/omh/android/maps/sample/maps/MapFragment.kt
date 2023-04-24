@@ -83,6 +83,11 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     override fun onMapReady(omhMap: OmhMap) {
         omhMap.setZoomGesturesEnabled(true)
 
+        if (displayOnlyCoordinate) {
+            displaySharedLocation(omhMap)
+            return
+        }
+
         val omhOnCameraMoveStartedListener = OmhOnCameraMoveStartedListener {
             binding.markerImageView.animate()
                 .translationY(INITIAL_TRANSLATION)
@@ -105,22 +110,20 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
         }
 
         omhMap.setOnCameraIdleListener(omhOnCameraIdleListener)
-
-        if (displayOnlyCoordinate) {
-            moveTo(omhMap, DEFAULT_ZOOM_LEVEL)
-        } else {
-            shareFunctionality(omhMap)
-        }
-    }
-
-    private fun shareFunctionality(omhMap: OmhMap) {
-        val omhMarkerOptions = OmhMarkerOptions().apply {
-            position = currentLocation
-            title = "MERIDIAN LOCATION"
-        }
-        omhMap.addMarker(omhMarkerOptions)
         enableMyLocation(omhMap)
         moveToCurrentLocation(omhMap)
+    }
+
+    private fun displaySharedLocation(omhMap: OmhMap) {
+        binding.constraintLayoutBottomContainer.visibility = View.GONE
+        binding.markerImageView.visibility = View.GONE
+        binding.markerShadowImageView.visibility = View.GONE
+        val omhMarkerOptions = OmhMarkerOptions().apply {
+            position = currentLocation
+            title = "Lat: ${currentLocation.latitude} \n Lng: ${currentLocation.longitude}"
+        }
+        omhMap.addMarker(omhMarkerOptions)
+        moveToCurrentLocation(omhMap, DEFAULT_ZOOM_LEVEL)
     }
 
     private fun enableMyLocation(omhMap: OmhMap) {
@@ -139,21 +142,21 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
         if (PermissionsUtils.grantedRequiredPermissions(requireContext())) {
             val onSuccessListener = OmhSuccessListener { omhCoordinate ->
                 currentLocation = omhCoordinate
-                moveTo(omhMap, DEFAULT_ZOOM_LEVEL)
+                moveToCurrentLocation(omhMap, DEFAULT_ZOOM_LEVEL)
             }
             val onFailureListener = OmhFailureListener {
                 currentLocation = PRIME_MERIDIAN
-                moveTo(omhMap, DEFAULT_ZOOM_LEVEL)
+                moveToCurrentLocation(omhMap, DEFAULT_ZOOM_LEVEL)
             }
             // Safe use of 'noinspection MissingPermission' since it is checking permissions in the if condition
             // noinspection MissingPermission
             omhLocation.getCurrentLocation(onSuccessListener, onFailureListener)
         } else {
-            moveTo(omhMap, ZOOM_LEVEL_5)
+            moveToCurrentLocation(omhMap, ZOOM_LEVEL_5)
         }
     }
 
-    private fun moveTo(omhMap: OmhMap, zoomLevel: Float) {
+    private fun moveToCurrentLocation(omhMap: OmhMap, zoomLevel: Float) {
         omhMap.moveCamera(currentLocation, zoomLevel)
     }
 
