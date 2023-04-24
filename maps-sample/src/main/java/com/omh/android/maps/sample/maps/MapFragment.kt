@@ -133,7 +133,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
             omhMap.setMyLocationEnabled(true)
             omhMap.setMyLocationButtonClickListener {
                 Toast.makeText(requireContext(), R.string.center_message, Toast.LENGTH_SHORT).show()
-                true
+                false
             }
         }
     }
