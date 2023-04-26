@@ -1,6 +1,7 @@
 package com.omh.android.maps.api.openstreetmap.presentation.maps
 
 import android.view.MotionEvent
+import android.view.ViewConfiguration
 import com.omh.android.maps.api.openstreetmap.utils.Constants.ONE_POINTER
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Overlay
@@ -12,6 +13,7 @@ internal class GestureOverlay : Overlay() {
     private var doubleTapped = false
     private var isScrolling = false
     private var lastPointerY = 0f
+    private var lastTime = 0L
 
     override fun onDoubleTap(event: MotionEvent?, mapView: MapView?): Boolean {
         doubleTapped = true
@@ -34,6 +36,7 @@ internal class GestureOverlay : Overlay() {
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
                 lastPointerY = event.y
+                lastTime = System.currentTimeMillis()
             }
             MotionEvent.ACTION_MOVE -> {
                 if (doubleTapped && lastPointerY != event.y) {
@@ -47,16 +50,20 @@ internal class GestureOverlay : Overlay() {
             }
             MotionEvent.ACTION_POINTER_UP,
             MotionEvent.ACTION_UP -> {
+                val newTime = System.currentTimeMillis()
                 if (event.pointerCount == TWO_POINTERS && !isScrolling) {
                     mapView?.controller?.zoomOut()
                 }
                 if (doubleTapped && event.y == lastPointerY && event.pointerCount == ONE_POINTER) {
-                    mapView?.controller?.zoomIn()
+                    if (newTime - lastTime <= ViewConfiguration.getDoubleTapTimeout()) {
+                        mapView?.controller?.zoomIn()
+                    }
                 }
                 lastPointerY = event.y
                 doubleTapped = false
             }
         }
+        isScrolling = false
         return super.onTouchEvent(event, mapView)
     }
 
