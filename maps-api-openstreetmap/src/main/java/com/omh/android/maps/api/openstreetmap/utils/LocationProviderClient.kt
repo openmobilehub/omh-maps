@@ -10,7 +10,6 @@ import android.location.LocationManager
 import androidx.annotation.RequiresPermission
 import com.omh.android.maps.api.openstreetmap.extensions.getMostAccurateLastKnownLocation
 import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_DISTANCE_M
-import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_RADIUS
 import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_TIME_EXECUTION_MS
 
 internal class LocationProviderClient(context: Context) {
@@ -20,15 +19,12 @@ internal class LocationProviderClient(context: Context) {
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     @SuppressWarnings("TooGenericExceptionCaught") // Until find out any specific error.
     fun getCurrentLocation(onSuccess: (Location?) -> Unit, onFailure: (Exception) -> Unit) {
-        val lastKnownLocation: Location? = locationManager.getMostAccurateLastKnownLocation()
         val locationListener =
             MapLocationListener { locationListener: LocationListener, location: Location? ->
-                handleOnSuccess(locationListener, onSuccess, location, lastKnownLocation)
+                handleOnSuccess(locationListener, onSuccess, location)
             }
         val criteria = Criteria()
         val provider = locationManager.getBestProvider(criteria, true) ?: LocationManager.GPS_PROVIDER
-
-        lastKnownLocation?.let(onSuccess)
 
         try {
             locationManager.requestLocationUpdates(
@@ -46,14 +42,10 @@ internal class LocationProviderClient(context: Context) {
     private fun handleOnSuccess(
         locationListener: LocationListener,
         onSuccess: (Location?) -> Unit,
-        location: Location?,
-        lastKnownLocation: Location?
+        location: Location?
     ) {
         locationManager.removeUpdates(locationListener)
-        val distance: Float? = location?.let { lastKnownLocation?.distanceTo(it) }
-        if (distance != null && distance < MIN_RADIUS) {
-            onSuccess(location)
-        }
+        onSuccess(location)
     }
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
