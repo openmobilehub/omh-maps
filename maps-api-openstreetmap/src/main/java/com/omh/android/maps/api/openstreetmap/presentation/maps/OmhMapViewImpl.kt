@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.preference.PreferenceManager
+import com.omh.android.maps.api.openstreetmap.utils.MapListenerController
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapView
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
 import org.osmdroid.config.Configuration
@@ -26,7 +27,7 @@ class OmhMapViewImpl(context: Context) : OmhMapView {
 
     override fun getMapAsync(omhOnMapReadyCallback: OmhOnMapReadyCallback) {
         mapView.let { secureMapView ->
-            val omhMapView = OmhMapImpl(secureMapView)
+            val omhMapView = OmhMapImpl(secureMapView, MapListenerController())
             omhOnMapReadyCallback.onMapReady(omhMapView)
         }
     }

@@ -19,10 +19,12 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
-class OmhMapImpl(private var mapView: MapView) : OmhMap {
+internal class OmhMapImpl(
+    private val mapView: MapView,
+    private val mapListenerController: MapListenerController
+) : OmhMap {
     private var myLocationNewOverlay: MyLocationNewOverlay? = null
     private var myLocationIconOverlay: MyLocationIconOverlay? = null
-    private var mapListenerController = MapListenerController()
 
     init {
         mapView.addMapListener(mapListenerController)
@@ -54,7 +56,9 @@ class OmhMapImpl(private var mapView: MapView) : OmhMap {
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     override fun setMyLocationEnabled(enable: Boolean) {
-        if (!enable) { return }
+        if (!enable) {
+            return
+        }
         if (myLocationNewOverlay?.isMyLocationEnabled != true) {
             myLocationIconOverlay = MyLocationIconOverlay(mapView.context).apply {
                 addOnClickListener { setMyLocationEnabled(true) }
