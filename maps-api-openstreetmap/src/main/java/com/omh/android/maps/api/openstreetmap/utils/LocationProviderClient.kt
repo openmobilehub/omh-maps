@@ -3,13 +3,13 @@ package com.omh.android.maps.api.openstreetmap.utils
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
+import android.location.Criteria
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import androidx.annotation.RequiresPermission
 import com.omh.android.maps.api.openstreetmap.extensions.getMostAccurateLastKnownLocation
 import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_DISTANCE_M
-import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_RADIUS
 import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_TIME_EXECUTION_MS
 
 internal class LocationProviderClient(context: Context) {
@@ -19,17 +19,16 @@ internal class LocationProviderClient(context: Context) {
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     @SuppressWarnings("TooGenericExceptionCaught") // Until find out any specific error.
     fun getCurrentLocation(onSuccess: (Location?) -> Unit, onFailure: (Exception) -> Unit) {
-        val lastKnownLocation: Location? = locationManager.getMostAccurateLastKnownLocation()
         val locationListener =
             MapLocationListener { locationListener: LocationListener, location: Location? ->
-                handleOnSuccess(locationListener, onSuccess, location, lastKnownLocation)
+                handleOnSuccess(locationListener, onSuccess, location)
             }
-
-        lastKnownLocation?.let(onSuccess)
+        val criteria = Criteria()
+        val provider = locationManager.getBestProvider(criteria, true) ?: LocationManager.GPS_PROVIDER
 
         try {
             locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
+                provider,
                 MIN_TIME_EXECUTION_MS,
                 MIN_DISTANCE_M,
                 locationListener
@@ -43,14 +42,10 @@ internal class LocationProviderClient(context: Context) {
     private fun handleOnSuccess(
         locationListener: LocationListener,
         onSuccess: (Location?) -> Unit,
-        location: Location?,
-        lastKnownLocation: Location?
+        location: Location?
     ) {
         locationManager.removeUpdates(locationListener)
-        val distance: Float? = location?.let { lastKnownLocation?.distanceTo(it) }
-        if (distance != null && distance < MIN_RADIUS) {
-            onSuccess(location)
-        }
+        onSuccess(location)
     }
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])

@@ -13,7 +13,10 @@ import com.omh.android.maps.api.presentation.fragments.OmhMapFragment
 import com.omh.android.maps.api.presentation.interfaces.location.OmhFailureListener
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.location.OmhSuccessListener
-import com.omh.android.maps.api.presentation.interfaces.maps.*
+import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
+import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
+import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
+import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
 import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
 import com.omh.android.maps.sample.R
@@ -75,8 +78,9 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
         }
 
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-            val omhMapFragment: OmhMapFragment = binding.fragmentMapContainer.getFragment()
-            omhMapFragment.getMapAsync(this)
+            val omhMapFragment =
+                childFragmentManager.findFragmentById(R.id.fragment_map_container) as? OmhMapFragment
+            omhMapFragment?.getMapAsync(this)
         }.launch(PERMISSIONS)
     }
 
