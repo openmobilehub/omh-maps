@@ -33,7 +33,7 @@ internal class GestureOverlay : Overlay() {
 
     override fun onTouchEvent(event: MotionEvent?, mapView: MapView?): Boolean {
         if (!enableZoomGestures) { return super.onTouchEvent(event, mapView) }
-        when (event?.action) {
+        when (event?.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 lastPointerY = event.y
                 lastTime = System.currentTimeMillis()
