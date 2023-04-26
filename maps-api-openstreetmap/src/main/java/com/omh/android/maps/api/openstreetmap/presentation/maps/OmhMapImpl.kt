@@ -16,6 +16,7 @@ import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMyLocationButt
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
 import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
 import org.osmdroid.api.IGeoPoint
+import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
@@ -26,10 +27,12 @@ internal class OmhMapImpl(
 ) : OmhMap {
     private var myLocationNewOverlay: MyLocationNewOverlay? = null
     private var myLocationIconOverlay: MyLocationIconOverlay? = null
+    private val gestureOverlay = GestureOverlay()
 
     init {
         mapView.addMapListener(mapListenerController)
         mapView.setOnTouchListener(MapTouchListener(mapListenerController))
+        mapView.overlayManager.add(gestureOverlay)
     }
 
     override fun addMarker(options: OmhMarkerOptions): OmhMarker? {
@@ -60,7 +63,11 @@ internal class OmhMapImpl(
     }
 
     override fun setZoomGesturesEnabled(enableZoomGestures: Boolean) {
+        gestureOverlay.setEnableZoomGestures(enableZoomGestures)
         mapView.setMultiTouchControls(enableZoomGestures)
+        if (!enableZoomGestures) {
+            mapView.zoomController.setVisibility(CustomZoomButtonsController.Visibility.NEVER)
+        }
     }
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
