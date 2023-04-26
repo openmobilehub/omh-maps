@@ -25,12 +25,6 @@ internal class OmhMapImpl(
 ) : OmhMap {
     private var myLocationNewOverlay: MyLocationNewOverlay? = null
     private var myLocationIconOverlay: MyLocationIconOverlay? = null
-    private var mapListenerController = MapListenerController()
-
-    init {
-        mapView.addMapListener(mapListenerController)
-        mapView.setOnTouchListener(MapTouchListener(mapListenerController))
-    }
 
     init {
         mapView.addMapListener(mapListenerController)
