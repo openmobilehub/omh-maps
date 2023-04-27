@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.omh.android.maps.api.presentation.fragments.OmhMapFragment
 import com.omh.android.maps.api.presentation.interfaces.location.OmhFailureListener
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
@@ -17,7 +18,6 @@ import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStar
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
 import com.omh.android.maps.sample.databinding.FragmentMapBinding
-import com.omh.android.maps.sample.start.InitialFragment.Companion.LOCATION_RESULT
 import com.omh.android.maps.sample.utils.BundleUtils.getOmhCoordinate
 import com.omh.android.maps.sample.utils.Constants.ANIMATION_DURATION
 import com.omh.android.maps.sample.utils.Constants.DEFAULT_ZOOM_LEVEL
@@ -41,6 +41,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
     private var displayOnlyCoordinate = false
+    private val args: MapFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,12 +63,10 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.let { bundle ->
-            val coordinate = getOmhCoordinate(bundle, LOCATION_RESULT)
-            coordinate?.let {
-                currentLocation = coordinate
-                displayOnlyCoordinate = true
-            }
+        val coordinate: OmhCoordinate? = args.coordinate
+        coordinate?.let {
+            currentLocation = coordinate
+            displayOnlyCoordinate = true
         }
 
         binding.fabShareLocation.setOnClickListener {

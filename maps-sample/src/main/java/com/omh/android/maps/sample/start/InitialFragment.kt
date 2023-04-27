@@ -2,8 +2,6 @@ package com.omh.android.maps.sample.start
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Build.VERSION.SDK_INT
-import android.os.Build.VERSION_CODES.TIRAMISU
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
 import com.omh.android.maps.sample.R
 import com.omh.android.maps.sample.databinding.FragmentInitialBinding
@@ -24,9 +23,9 @@ import com.omh.android.maps.sample.utils.Constants.SHARE_TITLE
 import com.omh.android.maps.sample.utils.Constants.TYPE_TEXT_PLAIN
 
 class InitialFragment : Fragment() {
-
     private var _binding: FragmentInitialBinding? = null
     private val binding get() = _binding!!
+    private val args: InitialFragmentArgs by navArgs()
 
     private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         val allPermissionsGranted = permissions.all { it.value }
@@ -39,29 +38,18 @@ class InitialFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentInitialBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        arguments?.let {
-            val coordinate = if (SDK_INT >= TIRAMISU) {
-                it.getParcelable(LOCATION_RESULT, OmhCoordinate::class.java)
-            } else {
-                // Before Android 13, API level 33(Tiramisu) use: fun <T : Parcelable?> getParcelable(name: String?): T
-                @Suppress("DEPRECATION")
-                it.getParcelable(LOCATION_RESULT)
-            }
-            coordinate?.let {
-                binding.textViewCoordinate.text = coordinate.toString()
-                binding.buttonShareLocation.visibility = View.VISIBLE
-                binding.buttonShareLocation.setOnClickListener {
-                    intentSend(coordinate)
-                }
+        val coordinate: OmhCoordinate? = args.coordinate
+        coordinate?.let {
+            binding.textViewCoordinate.text = coordinate.toString()
+            binding.buttonShareLocation.visibility = View.VISIBLE
+            binding.buttonShareLocation.setOnClickListener {
+                intentSend(coordinate)
             }
         }
         binding.buttonFirst.setOnClickListener {
@@ -88,7 +76,6 @@ class InitialFragment : Fragment() {
     }
 
     companion object {
-        const val LOCATION_RESULT = "LOCATION_RESULT"
         fun instantiate(): InitialFragment {
             return InitialFragment()
         }
