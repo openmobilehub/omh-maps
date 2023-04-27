@@ -14,15 +14,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OMHMaps">
         <activity
-            android:name=".maps.MapActivity"
-            android:exported="false" />
-        <activity
             android:name=".start.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.OMHMaps.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="https"
+                    android:host="com.omh.android.maps.sample" />
             </intent-filter>
         </activity>
 

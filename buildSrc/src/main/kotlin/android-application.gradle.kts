@@ -10,6 +10,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        targetSdk = ConfigData.targetSdkVersion
     }
 
     packagingOptions {

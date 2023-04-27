@@ -1,70 +1,73 @@
 package com.omh.android.maps.sample.start
 
-import android.app.Activity
 import android.content.Intent
-import android.os.Build
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
+import com.omh.android.maps.sample.R
 import com.omh.android.maps.sample.databinding.FragmentInitialBinding
-import com.omh.android.maps.sample.maps.MapActivity
+import com.omh.android.maps.sample.utils.Constants.AUTHORITY_URL
+import com.omh.android.maps.sample.utils.Constants.LAT_PARAM
+import com.omh.android.maps.sample.utils.Constants.LNG_PARAM
+import com.omh.android.maps.sample.utils.Constants.PATH
 import com.omh.android.maps.sample.utils.Constants.PERMISSIONS
+import com.omh.android.maps.sample.utils.Constants.SCHEME_PROTOCOL
+import com.omh.android.maps.sample.utils.Constants.SHARE_TITLE
+import com.omh.android.maps.sample.utils.Constants.TYPE_TEXT_PLAIN
 
 class InitialFragment : Fragment() {
-
     private var _binding: FragmentInitialBinding? = null
     private val binding get() = _binding!!
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            binding.textViewCoordinate.text = getOmhCoordinateFromIntent(result.data).toString()
-        }
-    }
+    private val args: InitialFragmentArgs by navArgs()
 
     private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         val allPermissionsGranted = permissions.all { it.value }
         if (allPermissionsGranted) {
-            goToMap()
+            findNavController().navigate(R.id.action_initialFragment_to_mapFragment)
         }
-    }
-
-    private fun getOmhCoordinateFromIntent(intent: Intent?): OmhCoordinate? {
-        val coordinateResult: OmhCoordinate? =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                intent?.getParcelableExtra(LOCATION_RESULT, OmhCoordinate::class.java)
-            } else {
-                // Before Android 13, API level 33(Tiramisu) use: fun <T : Parcelable?> getParcelableExtra(name: String?): T
-                @Suppress("DEPRECATION")
-                intent?.getParcelableExtra(LOCATION_RESULT)
-            }
-        return coordinateResult
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentInitialBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val coordinate: OmhCoordinate? = args.coordinate
+        coordinate?.let {
+            binding.textViewCoordinate.text = coordinate.toString()
+            binding.buttonShareLocation.visibility = View.VISIBLE
+            binding.buttonShareLocation.setOnClickListener {
+                intentSend(coordinate)
+            }
+        }
         binding.buttonFirst.setOnClickListener {
             permissionLauncher.launch(PERMISSIONS)
         }
     }
 
-    private fun goToMap() {
-        val intent = Intent(activity, MapActivity::class.java)
-        startForResult.launch(intent)
+    private fun intentSend(coordinate: OmhCoordinate) {
+        val intent = Intent(Intent.ACTION_SEND)
+        val uriBuilder = Uri.Builder()
+            .scheme(SCHEME_PROTOCOL)
+            .authority(AUTHORITY_URL)
+            .appendPath(PATH)
+            .appendQueryParameter(LAT_PARAM, coordinate.latitude.toString())
+            .appendQueryParameter(LNG_PARAM, coordinate.longitude.toString())
+        intent.type = TYPE_TEXT_PLAIN
+        intent.putExtra(Intent.EXTRA_TEXT, uriBuilder.build().toString())
+        startActivity(Intent.createChooser(intent, SHARE_TITLE))
     }
 
     override fun onDestroyView() {
@@ -73,7 +76,6 @@ class InitialFragment : Fragment() {
     }
 
     companion object {
-        const val LOCATION_RESULT = "LOCATION_RESULT"
         fun instantiate(): InitialFragment {
             return InitialFragment()
         }

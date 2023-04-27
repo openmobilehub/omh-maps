@@ -10,7 +10,7 @@
         android:id="@+id/button_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="@dimen/small_4"
         android:text="@string/open_map"
         app:layout_constraintBottom_toTopOf="@+id/textView_coordinate"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/normal_16"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/small_4"
         android:layout_marginEnd="@dimen/normal_16"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,5 +31,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_first"
         tools:text="@string/example_coordinate" />
+
+    <Button
+        android:id="@+id/button_share_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal_16"
+        android:layout_marginTop="@dimen/small_4"
+        android:layout_marginEnd="@dimen/normal_16"
+        android:text="@string/share_location"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_coordinate"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

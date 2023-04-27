@@ -19,4 +19,17 @@ object Constants {
 
     // Permissions
     val PERMISSIONS: Array<String> = arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION)
+
+    // Share intent
+    const val TYPE_TEXT_PLAIN = "text/plain"
+    const val LAT_PARAM = "lat"
+    const val LNG_PARAM = "lng"
+    const val AUTHORITY_URL = "com.omh.android.maps.sample"
+    const val SCHEME_PROTOCOL = "https"
+    const val PATH = "maps"
+    const val SHARE_TITLE = "Share link"
+
+    // Bundle keys
+    const val LOCATION_KEY = "location"
+    const val ONLY_DISPLAY_KEY = "only display"
 }

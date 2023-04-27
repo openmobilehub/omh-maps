@@ -45,8 +45,9 @@ internal class OmhMapImpl(
     override fun moveCamera(coordinate: OmhCoordinate, zoomLevel: Float) {
         with(mapView.controller) {
             val geoPoint: IGeoPoint = coordinate.toGeoPoint()
-            setCenter(geoPoint)
             setZoom(zoomLevel.toDouble())
+            setCenter(geoPoint)
+            mapView.postInvalidate()
         }
     }
 
