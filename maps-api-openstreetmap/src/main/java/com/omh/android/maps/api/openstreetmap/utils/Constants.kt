@@ -16,6 +16,7 @@ internal object Constants {
 
     // Gestures and animation
     const val ONE_POINTER = 1
+    const val TWO_POINTERS = 2
     const val DELAY_MS = 200L
 
     // Map marker

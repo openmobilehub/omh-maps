@@ -14,9 +14,10 @@ internal class MapListenerController : MapListener {
     private var onCameraMoveStartedListenerList: MutableList<OmhOnCameraMoveStartedListener> = mutableListOf()
     private var onIdleCameraListenerList: MutableList<OmhOnCameraIdleListener> = mutableListOf()
     private var stopped = true
+    private var touched = false
     private val handler = Handler(Looper.getMainLooper())
     private val idleRunnable = Runnable {
-        if (stopped) {
+        if ((isMoving && stopped) || !touched) {
             isMoving = false
             idleCamera()
         }
@@ -32,9 +33,10 @@ internal class MapListenerController : MapListener {
         return handleMove()
     }
 
-    private fun handleMove(): Boolean {
+    fun handleMove(): Boolean {
         if (!isMoving) {
             isMoving = true
+            stopped = false
             cameraMoveStarted()
         }
         handler.removeCallbacks(idleRunnable)
@@ -51,13 +53,13 @@ internal class MapListenerController : MapListener {
         onIdleCameraListenerList.add(onIdleListener)
     }
 
-    fun cameraMoveStarted() {
+    private fun cameraMoveStarted() {
         onCameraMoveStartedListenerList.forEach { listener ->
             listener.onCameraMoveStarted(REASON_GESTURE)
         }
     }
 
-    fun idleCamera() {
+    private fun idleCamera() {
         onIdleCameraListenerList.forEach { listener ->
             listener.onCameraIdle()
         }
@@ -65,5 +67,9 @@ internal class MapListenerController : MapListener {
 
     fun setStopped(stopped: Boolean) {
         this.stopped = stopped
+    }
+
+    fun setTouch(touched: Boolean) {
+        this.touched = touched
     }
 }
