@@ -37,7 +37,7 @@ internal class OmhMapImpl(
             position = options.position.toGeoPoint()
             title = options.title
         }
-        with(mapView) {
+        mapView.run {
             overlayManager.add(marker)
             postInvalidate()
         }
@@ -65,7 +65,7 @@ internal class OmhMapImpl(
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     override fun setMyLocationEnabled(enable: Boolean) {
-        if (!enable) { return }
+        if (!enable) return
         if (myLocationNewOverlay?.isMyLocationEnabled != true) {
             myLocationIconOverlay = MyLocationIconOverlay(mapView.context).apply {
                 addOnClickListener { setMyLocationEnabled(true) }

@@ -18,9 +18,9 @@ internal fun LocationManager.getMostAccurateLastKnownLocation(): Location? {
     }
     val provider = getBestProvider(criteria, true)
 
-    provider?.let {
-        getLastKnownLocation(it)?.let { lastKnownLocation: Location? -> accurateLocation = lastKnownLocation }
-    }
+    provider
+        ?.let(::getLastKnownLocation)
+        ?.let { lastKnownLocation: Location? -> accurateLocation = lastKnownLocation }
 
     return accurateLocation
 }
