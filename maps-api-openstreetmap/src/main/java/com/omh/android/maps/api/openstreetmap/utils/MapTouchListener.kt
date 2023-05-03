@@ -3,7 +3,8 @@ package com.omh.android.maps.api.openstreetmap.utils
 import android.view.MotionEvent
 import android.view.View
 
-internal class MapTouchListener(private val mapListenerController: MapListenerController) : View.OnTouchListener {
+internal class MapTouchListener(private val mapListenerController: MapListenerController) :
+    View.OnTouchListener {
     private var lastPointerX = 0f
     private var lastPointerY = 0f
     override fun onTouch(view: View?, event: MotionEvent?): Boolean {
@@ -19,7 +20,7 @@ internal class MapTouchListener(private val mapListenerController: MapListenerCo
                 mapListenerController.handleMove()
             }
             MotionEvent.ACTION_MOVE -> {
-                if (event.x != lastPointerX || event.y != lastPointerY) {
+                if (isMoving(event)) {
                     mapListenerController.handleMove()
                 }
             }
@@ -27,10 +28,17 @@ internal class MapTouchListener(private val mapListenerController: MapListenerCo
             MotionEvent.ACTION_POINTER_UP -> {
                 mapListenerController.setStopped(true)
                 mapListenerController.setTouch(false)
-                mapListenerController.handleMove()
+                if (isMoving(event)) {
+                    mapListenerController.handleMove()
+                }
             }
         }
 
         return false
     }
+
+    private fun isMoving(event: MotionEvent?) =
+        event != null && eventMoved(event) && mapListenerController.isMoving
+
+    private fun eventMoved(event: MotionEvent) = event.x != lastPointerX || event.y != lastPointerY
 }
