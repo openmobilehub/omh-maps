@@ -9,6 +9,7 @@ import com.omh.android.maps.api.openstreetmap.utils.Constants.DEFAULT_ZOOM_LEVEL
 import com.omh.android.maps.api.openstreetmap.utils.MapListenerController
 import com.omh.android.maps.api.openstreetmap.utils.MapTouchListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
+import com.omh.android.maps.api.presentation.interfaces.maps.OmhMarker
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMyLocationButtonClickListener
@@ -31,10 +32,17 @@ internal class OmhMapImpl(
         mapView.setOnTouchListener(MapTouchListener(mapListenerController))
     }
 
-    override fun addMarker(options: OmhMarkerOptions) {
-        Marker(mapView).apply {
+    override fun addMarker(options: OmhMarkerOptions): OmhMarker? {
+        val marker: Marker = Marker(mapView).apply {
             position = options.position.toGeoPoint()
+            title = options.title
         }
+        mapView.run {
+            overlayManager.add(marker)
+            postInvalidate()
+        }
+
+        return OmhMarkerImpl(marker)
     }
 
     override fun getCameraPositionCoordinate(): OmhCoordinate {
@@ -47,8 +55,8 @@ internal class OmhMapImpl(
             val geoPoint: IGeoPoint = coordinate.toGeoPoint()
             setZoom(zoomLevel.toDouble())
             setCenter(geoPoint)
-            mapView.postInvalidate()
         }
+        mapView.postInvalidate()
     }
 
     override fun setZoomGesturesEnabled(enableZoomGestures: Boolean) {
@@ -57,9 +65,7 @@ internal class OmhMapImpl(
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     override fun setMyLocationEnabled(enable: Boolean) {
-        if (!enable) {
-            return
-        }
+        if (!enable) return
         if (myLocationNewOverlay?.isMyLocationEnabled != true) {
             myLocationIconOverlay = MyLocationIconOverlay(mapView.context).apply {
                 addOnClickListener { setMyLocationEnabled(true) }
@@ -70,9 +76,10 @@ internal class OmhMapImpl(
         }
         myLocationNewOverlay?.myLocation?.let { geoPoint ->
             with(mapView.controller) {
-                animateTo(geoPoint)
                 setZoom(DEFAULT_ZOOM_LEVEL)
+                animateTo(geoPoint)
             }
+            mapView.postInvalidate()
         }
     }
 

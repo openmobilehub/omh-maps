@@ -3,6 +3,7 @@ package com.omh.android.maps.api.openstreetmap.utils
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
+import android.location.Criteria
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -22,13 +23,12 @@ internal class LocationProviderClient(context: Context) {
             MapLocationListener { locationListener: LocationListener, location: Location? ->
                 handleOnSuccess(locationListener, onSuccess, location)
             }
+        val criteria = Criteria()
+        val provider = locationManager.getBestProvider(criteria, true) ?: LocationManager.GPS_PROVIDER
 
         try {
-            val lastLocation: Location? = locationManager.getMostAccurateLastKnownLocation()
-            lastLocation?.let(onSuccess)
-
             locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
+                provider,
                 MIN_TIME_EXECUTION_MS,
                 MIN_DISTANCE_M,
                 locationListener

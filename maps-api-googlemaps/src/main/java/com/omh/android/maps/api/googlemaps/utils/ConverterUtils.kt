@@ -4,7 +4,7 @@ import android.location.Location
 import com.google.android.gms.maps.model.LatLng
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
 
-object ConverterUtils {
+internal object ConverterUtils {
     fun convertToOmhCoordinate(latLng: LatLng?): OmhCoordinate {
         return if (latLng == null) {
             OmhCoordinate()
