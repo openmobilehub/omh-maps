@@ -21,5 +21,5 @@ internal object Constants {
 
     // Map marker
     const val MIN_ZOOM_LEVEL = 4.0
-    const val MAX_ZOOM_LEVEL = 20.0
+    const val MAX_ZOOM_LEVEL = 22.0
 }
