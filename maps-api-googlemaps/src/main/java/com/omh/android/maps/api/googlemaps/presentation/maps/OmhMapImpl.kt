@@ -6,9 +6,11 @@ import androidx.annotation.RequiresPermission
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.omh.android.maps.api.googlemaps.extensions.toMarkerOptions
 import com.omh.android.maps.api.googlemaps.utils.ConverterUtils
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
+import com.omh.android.maps.api.presentation.interfaces.maps.OmhMarker
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMyLocationButtonClickListener
@@ -16,9 +18,11 @@ import com.omh.android.maps.api.presentation.models.OmhCoordinate
 import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
 
 internal class OmhMapImpl(private var googleMap: GoogleMap) : OmhMap {
-    override fun addMarker(options: OmhMarkerOptions) {
+    override fun addMarker(options: OmhMarkerOptions): OmhMarker? {
         val googleOptions = options.toMarkerOptions()
-        googleMap.addMarker(googleOptions)
+        val marker: Marker? = googleMap.addMarker(googleOptions)
+
+        return marker?.let { OmhMarkerImpl(it) }
     }
 
     override fun getCameraPositionCoordinate(): OmhCoordinate {

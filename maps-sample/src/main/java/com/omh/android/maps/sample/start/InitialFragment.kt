@@ -19,7 +19,6 @@ import com.omh.android.maps.sample.utils.Constants.LNG_PARAM
 import com.omh.android.maps.sample.utils.Constants.PATH
 import com.omh.android.maps.sample.utils.Constants.PERMISSIONS
 import com.omh.android.maps.sample.utils.Constants.SCHEME_PROTOCOL
-import com.omh.android.maps.sample.utils.Constants.SHARE_TITLE
 import com.omh.android.maps.sample.utils.Constants.TYPE_TEXT_PLAIN
 
 class InitialFragment : Fragment() {
@@ -67,7 +66,7 @@ class InitialFragment : Fragment() {
             .appendQueryParameter(LNG_PARAM, coordinate.longitude.toString())
         intent.type = TYPE_TEXT_PLAIN
         intent.putExtra(Intent.EXTRA_TEXT, uriBuilder.build().toString())
-        startActivity(Intent.createChooser(intent, SHARE_TITLE))
+        startActivity(Intent.createChooser(intent, R.string.share_link.toString()))
     }
 
     override fun onDestroyView() {

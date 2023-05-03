@@ -27,7 +27,6 @@ object Constants {
     const val AUTHORITY_URL = "com.omh.android.maps.sample"
     const val SCHEME_PROTOCOL = "https"
     const val PATH = "maps"
-    const val SHARE_TITLE = "Share link"
 
     // Bundle keys
     const val LOCATION_KEY = "location"

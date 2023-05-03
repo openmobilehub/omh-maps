@@ -27,6 +27,7 @@ internal class LocationManagerTest {
         every { locationManager.getProviders(true) } returns listOf(PROVIDER_ONE, PROVIDER_TWO)
         every { locationManager.getLastKnownLocation(PROVIDER_ONE) } returns locationLessAccurate
         every { locationManager.getLastKnownLocation(PROVIDER_TWO) } returns locationMostAccurate
+        every { locationManager.getBestProvider(any(), true) } returns PROVIDER_TWO
     }
 
     @Test

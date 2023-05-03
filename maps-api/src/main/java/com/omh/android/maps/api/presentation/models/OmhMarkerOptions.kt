@@ -17,6 +17,11 @@ class OmhMarkerOptions() : Parcelable {
     var position: OmhCoordinate = OmhCoordinate()
 
     /**
+     * The title for the marker.
+     */
+    var title: String? = null
+
+    /**
      * Constructs a OmhMarkerOptions with the given Parcel.
      *
      * @param parcel -> Container for the OmhCoordinate.
@@ -33,6 +38,7 @@ class OmhMarkerOptions() : Parcelable {
         if (omhCoordinate != null) {
             position = omhCoordinate
         }
+        title = parcel.readString()
     }
 
     /**
@@ -53,6 +59,7 @@ class OmhMarkerOptions() : Parcelable {
      */
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeParcelable(position, flags)
+        parcel.writeString(title)
     }
 
     /**
