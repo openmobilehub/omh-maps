@@ -11,30 +11,40 @@ internal class MapTouchListener(private val mapListenerController: MapListenerCo
         when (event?.actionMasked) {
             MotionEvent.ACTION_DOWN,
             MotionEvent.ACTION_POINTER_DOWN -> {
-                mapListenerController.setTouch(true)
-                lastPointerX = event.x
-                lastPointerY = event.y
+                actionDown(event)
             }
             MotionEvent.ACTION_SCROLL,
             MotionEvent.ACTION_HOVER_MOVE -> {
                 mapListenerController.handleMove()
             }
             MotionEvent.ACTION_MOVE -> {
-                if (isMoving(event)) {
-                    mapListenerController.handleMove()
-                }
+                actionMove(event)
             }
             MotionEvent.ACTION_UP,
             MotionEvent.ACTION_POINTER_UP -> {
-                mapListenerController.setStopped(true)
-                mapListenerController.setTouch(false)
-                if (isMoving(event)) {
-                    mapListenerController.handleMove()
-                }
+                actionUp(event)
             }
         }
 
         return false
+    }
+
+    private fun actionUp(event: MotionEvent?) {
+        mapListenerController.setStopped(true)
+        mapListenerController.setTouch(false)
+        actionMove(event)
+    }
+
+    private fun actionMove(event: MotionEvent?) {
+        if (isMoving(event)) {
+            mapListenerController.handleMove()
+        }
+    }
+
+    private fun actionDown(event: MotionEvent) {
+        mapListenerController.setTouch(true)
+        lastPointerX = event.x
+        lastPointerY = event.y
     }
 
     private fun isMoving(event: MotionEvent?) =

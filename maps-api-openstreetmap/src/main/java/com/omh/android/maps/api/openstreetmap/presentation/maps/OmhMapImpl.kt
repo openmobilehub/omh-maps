@@ -75,7 +75,7 @@ internal class OmhMapImpl(
         if (!enable) return
         if (myLocationNewOverlay?.isMyLocationEnabled != true) {
             myLocationIconOverlay = MyLocationIconOverlay(mapView.context).apply {
-                addOnClickListener { setMyLocationEnabled(true) }
+                setCenterLocation { setMyLocationEnabled(true) }
             }
             myLocationNewOverlay = MyLocationNewOverlay(mapView).apply { enableMyLocation() }
             mapView.overlayManager.add(myLocationNewOverlay)
@@ -97,16 +97,16 @@ internal class OmhMapImpl(
     override fun setMyLocationButtonClickListener(
         omhOnMyLocationButtonClickListener: OmhOnMyLocationButtonClickListener
     ) {
-        myLocationIconOverlay?.addOnClickListener {
+        myLocationIconOverlay?.setOnClickListener {
             omhOnMyLocationButtonClickListener.onMyLocationButtonClick()
         }
     }
 
     override fun setOnCameraMoveStartedListener(listener: OmhOnCameraMoveStartedListener) {
-        mapListenerController.addOnStartListener(listener)
+        mapListenerController.setOnStartListener(listener)
     }
 
     override fun setOnCameraIdleListener(listener: OmhOnCameraIdleListener) {
-        mapListenerController.addOnIdleListener(listener)
+        mapListenerController.setOnIdleListener(listener)
     }
 }

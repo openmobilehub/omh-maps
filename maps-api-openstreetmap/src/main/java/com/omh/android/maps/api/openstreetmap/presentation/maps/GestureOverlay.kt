@@ -38,24 +38,32 @@ internal class GestureOverlay : Overlay() {
                 startTouchTime = System.currentTimeMillis()
             }
             MotionEvent.ACTION_MOVE -> {
-                if (isDoubleTapAndHoldFinger(event.y)) {
-                    zoomCamera(event.y, mapView)
-                }
+                actionMove(event, mapView)
             }
             MotionEvent.ACTION_POINTER_UP,
             MotionEvent.ACTION_UP -> {
-                val actionTime = System.currentTimeMillis()
-                if (isTwoFingerTap(event.pointerCount)) {
-                    mapView?.controller?.zoomOut()
-                } else if (isSingleFingerDoubleTap(event, actionTime)) {
-                    mapView?.controller?.zoomIn()
-                }
-                lastPointerY = event.y
-                doubleTapped = false
-                isScrolling = false
+                actionUp(event, mapView)
             }
         }
         return super.onTouchEvent(event, mapView)
+    }
+
+    private fun actionUp(event: MotionEvent, mapView: MapView?) {
+        val actionTime = System.currentTimeMillis()
+        if (isTwoFingerTap(event.pointerCount)) {
+            mapView?.controller?.zoomOut()
+        } else if (isSingleFingerDoubleTap(event, actionTime)) {
+            mapView?.controller?.zoomIn()
+        }
+        lastPointerY = event.y
+        doubleTapped = false
+        isScrolling = false
+    }
+
+    private fun actionMove(event: MotionEvent, mapView: MapView?) {
+        if (isDoubleTapAndHoldFinger(event.y)) {
+            zoomCamera(event.y, mapView)
+        }
     }
 
     private fun isSingleFingerDoubleTap(event: MotionEvent, actionTime: Long) =
