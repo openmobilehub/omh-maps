@@ -13,7 +13,8 @@ import org.osmdroid.views.overlay.Overlay
 
 internal class MyLocationIconOverlay(context: Context) : Overlay() {
     private val icon: Drawable? = ContextCompat.getDrawable(context, ic_menu_mylocation)
-    private val clickListeners: MutableList<() -> Unit> = mutableListOf()
+    private var clickListener: (() -> Unit)? = null
+    private var centerLocation: (() -> Unit)? = null
 
     override fun draw(canvas: Canvas?, mapView: MapView?, shadow: Boolean) {
         super.draw(canvas, mapView, shadow)
@@ -44,14 +45,19 @@ internal class MyLocationIconOverlay(context: Context) : Overlay() {
             )
 
             if (iconBounds.contains(event.x.toInt(), event.y.toInt())) {
-                clickListeners.forEach { onClick -> onClick.invoke() }
+                clickListener?.invoke()
+                centerLocation?.invoke()
                 return true
             }
         }
         return super.onTouchEvent(event, mapView)
     }
 
-    fun addOnClickListener(onClick: () -> Unit) {
-        clickListeners.add(onClick)
+    fun setOnClickListener(onClick: () -> Unit) {
+        clickListener = onClick
+    }
+
+    fun setCenterLocation(centerLocation: () -> Unit) {
+        this.centerLocation = centerLocation
     }
 }
