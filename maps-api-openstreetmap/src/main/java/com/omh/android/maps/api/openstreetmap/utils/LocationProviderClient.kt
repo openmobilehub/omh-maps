@@ -3,14 +3,18 @@ package com.omh.android.maps.api.openstreetmap.utils
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
-import android.location.Criteria
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.location.LocationManager.GPS_PROVIDER
+import android.location.LocationManager.NETWORK_PROVIDER
 import androidx.annotation.RequiresPermission
-import com.omh.android.maps.api.openstreetmap.extensions.getMostAccurateLastKnownLocation
+import com.omh.android.maps.api.openstreetmap.extensions.getLastKnownLocation
 import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_DISTANCE_M
 import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_TIME_EXECUTION_MS
+import com.omh.android.maps.api.presentation.models.OmhMapException
+import com.omh.android.maps.api.presentation.models.OmhMapStatusCodes.INVALID_LOOPER
+import com.omh.android.maps.api.presentation.models.OmhMapStatusCodes.NULL_LISTENER
 
 internal class LocationProviderClient(context: Context) {
     private var locationManager: LocationManager =
@@ -19,42 +23,53 @@ internal class LocationProviderClient(context: Context) {
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     @SuppressWarnings("TooGenericExceptionCaught") // Until find out any specific error.
     fun getCurrentLocation(onSuccess: (Location?) -> Unit, onFailure: (Exception) -> Unit) {
+        val providers = listOf(GPS_PROVIDER, NETWORK_PROVIDER)
         val locationListener =
             MapLocationListener { locationListener: LocationListener, location: Location? ->
                 handleOnSuccess(locationListener, onSuccess, location)
             }
-        val criteria = Criteria()
-        val provider = locationManager.getBestProvider(criteria, true) ?: LocationManager.GPS_PROVIDER
 
         try {
-            locationManager.requestLocationUpdates(
-                provider,
-                MIN_TIME_EXECUTION_MS,
-                MIN_DISTANCE_M,
-                locationListener
-            )
+            providers.forEach { provider ->
+                locationManager.requestLocationUpdates(
+                    provider,
+                    MIN_TIME_EXECUTION_MS,
+                    MIN_DISTANCE_M,
+                    locationListener
+                )
+            }
+        } catch (exception: IllegalArgumentException) {
+            onFailure(OmhMapException.InvalidArgument(NULL_LISTENER, exception))
         } catch (exception: RuntimeException) {
+            onFailure(OmhMapException.RunTimeError(INVALID_LOOPER, exception))
+        } catch (exception: SecurityException) {
+            onFailure(OmhMapException.PermissionError(exception))
+        } catch (exception: OmhMapException.InvalidArgument) {
             onFailure(exception)
         }
     }
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
+    @Throws(OmhMapException.InvalidArgument::class)
     private fun handleOnSuccess(
         locationListener: LocationListener,
         onSuccess: (Location?) -> Unit,
         location: Location?
     ) {
-        locationManager.removeUpdates(locationListener)
-        onSuccess(location)
+        try {
+            locationManager.removeUpdates(locationListener)
+            onSuccess(location)
+        } catch (exception: IllegalArgumentException) {
+            throw OmhMapException.InvalidArgument(NULL_LISTENER, exception)
+        }
     }
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
-    @SuppressWarnings("TooGenericExceptionCaught") // Until find out any specific error.
     fun getLastLocation(onSuccess: (Location?) -> Unit, onFailure: (Exception) -> Unit) {
         try {
-            val lastKnownLocation = locationManager.getMostAccurateLastKnownLocation()
+            val lastKnownLocation = locationManager.getLastKnownLocation()
             onSuccess(lastKnownLocation)
-        } catch (exception: RuntimeException) {
+        } catch (exception: OmhMapException) {
             onFailure(exception)
         }
     }

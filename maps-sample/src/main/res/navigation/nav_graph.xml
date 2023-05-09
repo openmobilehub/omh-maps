@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/initialFragment"
         android:name="com.omh.android.maps.sample.start.InitialFragment"
-        android:label="initialFragment"
+        android:label="@string/initial_fragment_text"
         tools:layout="@layout/fragment_initial">
         <argument
             android:name="coordinate"
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.omh.android.maps.sample.maps.MapFragment"
-        android:label="mapFragment"
+        android:label="@string/map_fragment_text"
         tools:layout="@layout/fragment_map">
         <argument
             android:name="coordinate"

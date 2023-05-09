@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.omh.android.maps.api.presentation.fragments.OmhMapFragment
@@ -19,6 +20,7 @@ import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStar
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
 import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
+import com.omh.android.maps.api.utils.NetworkUtils.isNetworkAvailable
 import com.omh.android.maps.sample.R
 import com.omh.android.maps.sample.databinding.FragmentMapBinding
 import com.omh.android.maps.sample.utils.BundleUtils.getOmhCoordinate
@@ -77,6 +79,16 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
             findNavController().navigate(action)
         }
 
+        binding.markerImageView.setOnClickListener {
+            val isVisible = binding.textViewLocation.isVisible
+
+            if (isVisible) {
+                binding.textViewLocation.visibility = View.GONE
+            } else {
+                binding.textViewLocation.visibility = View.VISIBLE
+            }
+        }
+
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             val omhMapFragment =
                 childFragmentManager.findFragmentById(R.id.fragment_map_container) as? OmhMapFragment
@@ -85,6 +97,10 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     }
 
     override fun onMapReady(omhMap: OmhMap) {
+
+        if (!isNetworkAvailable(requireContext())) {
+            Toast.makeText(requireContext(), R.string.no_internet_connection, Toast.LENGTH_SHORT).show()
+        }
         omhMap.setZoomGesturesEnabled(true)
 
         if (displayOnlyCoordinate) {
@@ -110,7 +126,11 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
                 .start()
 
             currentLocation = omhMap.getCameraPositionCoordinate()
-            binding.textViewLocation.text = currentLocation.toString()
+            binding.textViewLocation.text = getString(
+                R.string.latitude_longitude_text,
+                currentLocation.latitude.toString(),
+                currentLocation.longitude.toString()
+            )
         }
 
         omhMap.setOnCameraIdleListener(omhOnCameraIdleListener)
@@ -119,12 +139,16 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     }
 
     private fun displaySharedLocation(omhMap: OmhMap) {
-        binding.constraintLayoutBottomContainer.visibility = View.GONE
+        binding.fabShareLocation.visibility = View.GONE
         binding.markerImageView.visibility = View.GONE
         binding.markerShadowImageView.visibility = View.GONE
         val omhMarkerOptions = OmhMarkerOptions().apply {
             position = currentLocation
-            title = "Lat: ${currentLocation.latitude} \n Lng: ${currentLocation.longitude}"
+            title = getString(
+                R.string.latitude_longitude_text,
+                currentLocation.latitude.toString(),
+                currentLocation.longitude.toString()
+            )
         }
         omhMap.addMarker(omhMarkerOptions)
         moveToCurrentLocation(omhMap, DEFAULT_ZOOM_LEVEL)

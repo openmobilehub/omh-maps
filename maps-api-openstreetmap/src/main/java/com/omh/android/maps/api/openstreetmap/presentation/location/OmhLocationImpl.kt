@@ -6,11 +6,13 @@ import android.content.Context
 import android.location.Location
 import androidx.annotation.RequiresPermission
 import com.omh.android.maps.api.openstreetmap.extensions.toOmhCoordinate
-import com.omh.android.maps.api.openstreetmap.utils.Constants.LOCATION_IS_NULL
 import com.omh.android.maps.api.openstreetmap.utils.LocationProviderClient
 import com.omh.android.maps.api.presentation.interfaces.location.OmhFailureListener
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.location.OmhSuccessListener
+import com.omh.android.maps.api.presentation.models.OmhMapException
+import com.omh.android.maps.api.presentation.models.OmhMapStatusCodes.NULL_LOCATION
+import com.omh.android.maps.api.presentation.models.OmhMapStatusCodes.getStatusCodeString
 
 internal class OmhLocationImpl(context: Context) : OmhLocation {
     private val locationProviderClient = LocationProviderClient(context)
@@ -51,7 +53,11 @@ internal class OmhLocationImpl(context: Context) : OmhLocation {
         omhOnSuccessListener: OmhSuccessListener
     ) {
         if (location == null) {
-            omhOnFailureListener.onFailure(Exception(LOCATION_IS_NULL))
+            omhOnFailureListener.onFailure(
+                exception = OmhMapException.NullLocation(
+                    cause = IllegalStateException(getStatusCodeString(NULL_LOCATION))
+                )
+            )
         } else {
             omhOnSuccessListener.onSuccess(location.toOmhCoordinate())
         }

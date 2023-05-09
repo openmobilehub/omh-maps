@@ -1,14 +1,21 @@
 package com.omh.android.maps.api.presentation.fragments
 
+import android.Manifest.permission.ACCESS_NETWORK_STATE
+import android.Manifest.permission.INTERNET
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresPermission
 import androidx.fragment.app.Fragment
 import com.omh.android.maps.api.databinding.FragmentOmhMapBinding
+import com.omh.android.maps.api.extensions.tag
 import com.omh.android.maps.api.factories.OmhMapProvider
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapView
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
+import com.omh.android.maps.api.utils.Constants.NO_INTERNET_CONNECTION
+import com.omh.android.maps.api.utils.NetworkUtils.isNetworkAvailable
 
 /**
  * A Map component in an app. This fragment is the simplest way to place a map in an application.
@@ -17,6 +24,7 @@ import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallba
  */
 class OmhMapFragment : Fragment() {
 
+    private val logTag = OmhMapFragment::class.java.tag()
     private var _binding: FragmentOmhMapBinding? = null
     private val binding get() = _binding!!
 
@@ -38,7 +46,9 @@ class OmhMapFragment : Fragment() {
         omhMapView = OmhMapProvider.provideOmhMapView(requireContext())
         omhMapView.onCreate(savedInstanceState)
         _binding = FragmentOmhMapBinding.inflate(inflater, container, false)
-        binding.frameLayoutMapContainer.addView(omhMapView.getView())
+        omhMapView.getView()?.let { view ->
+            binding.frameLayoutMapContainer.addView(view)
+        }
 
         return binding.root
     }
@@ -51,7 +61,11 @@ class OmhMapFragment : Fragment() {
      *
      * @param omhOnMapReadyCallback -> the callback object that will be triggered when the map is ready to be used.
      */
+    @RequiresPermission(allOf = [ACCESS_NETWORK_STATE, INTERNET])
     fun getMapAsync(omhOnMapReadyCallback: OmhOnMapReadyCallback) {
+        if (!isNetworkAvailable(requireContext())) {
+            Log.w(logTag, NO_INTERNET_CONNECTION)
+        }
         omhMapView.getMapAsync(omhOnMapReadyCallback)
     }
 

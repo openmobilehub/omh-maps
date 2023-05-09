@@ -33,6 +33,7 @@ internal class OmhMapImpl(
         mapView.addMapListener(mapListenerController)
         mapView.setOnTouchListener(MapTouchListener(mapListenerController))
         mapView.overlayManager.add(gestureOverlay)
+        setZoomGesturesEnabled(true)
     }
 
     override fun addMarker(options: OmhMarkerOptions): OmhMarker? {
@@ -72,7 +73,17 @@ internal class OmhMapImpl(
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     override fun setMyLocationEnabled(enable: Boolean) {
-        if (!enable) return
+        if (enable) {
+            enableMyLocation()
+        } else {
+            myLocationNewOverlay?.disableMyLocation()
+            mapView.overlayManager.remove(myLocationIconOverlay)
+            mapView.overlayManager.remove(myLocationNewOverlay)
+        }
+    }
+
+    @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
+    private fun enableMyLocation() {
         if (myLocationNewOverlay?.isMyLocationEnabled != true) {
             myLocationIconOverlay = MyLocationIconOverlay(mapView.context).apply {
                 setCenterLocation { setMyLocationEnabled(true) }
