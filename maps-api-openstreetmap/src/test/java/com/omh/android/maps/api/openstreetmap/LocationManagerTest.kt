@@ -2,69 +2,94 @@ package com.omh.android.maps.api.openstreetmap
 
 import android.location.Location
 import android.location.LocationManager
+import android.location.LocationManager.GPS_PROVIDER
+import android.location.LocationManager.NETWORK_PROVIDER
 import com.omh.android.maps.api.openstreetmap.Constants.LESS_ACCURATE
 import com.omh.android.maps.api.openstreetmap.Constants.MOST_ACCURATE
-import com.omh.android.maps.api.openstreetmap.Constants.PROVIDER_ONE
-import com.omh.android.maps.api.openstreetmap.Constants.PROVIDER_TWO
-import com.omh.android.maps.api.openstreetmap.extensions.getMostAccurateLastKnownLocation
+import com.omh.android.maps.api.openstreetmap.extensions.getLastKnownLocation
+import com.omh.android.maps.api.presentation.models.OmhMapException
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
 internal class LocationManagerTest {
     private lateinit var locationManager: LocationManager
-    private lateinit var locationLessAccurate: Location
-    private lateinit var locationMostAccurate: Location
+    private lateinit var networkLocation: Location
+    private lateinit var gpsLocation: Location
 
     @Before
     fun setUp() {
         locationManager = mockk(relaxed = true)
-        locationLessAccurate = locationLessAccurate()
-        locationMostAccurate = locationMostAccurate()
-        every { locationManager.getProviders(true) } returns listOf(PROVIDER_ONE, PROVIDER_TWO)
-        every { locationManager.getLastKnownLocation(PROVIDER_ONE) } returns locationLessAccurate
-        every { locationManager.getLastKnownLocation(PROVIDER_TWO) } returns locationMostAccurate
-        every { locationManager.getBestProvider(any(), true) } returns PROVIDER_TWO
+        networkLocation = mockLocation(LESS_ACCURATE)
+        gpsLocation = mockLocation(MOST_ACCURATE)
+        every { locationManager.getLastKnownLocation(NETWORK_PROVIDER) } returns networkLocation
+        every { locationManager.getLastKnownLocation(GPS_PROVIDER) } returns gpsLocation
     }
 
     @Test
-    fun `given a LocationManager, when getLastKnownLocation with Providers, then an accurate Location returns`() {
-        val result = locationManager.getMostAccurateLastKnownLocation()
+    fun `given a LocationManager, when getLastKnownLocation, then gps location returns`() {
+        val result = locationManager.getLastKnownLocation()
 
-        assertEquals(locationMostAccurate, result)
+        assertEquals(gpsLocation, result)
     }
 
     @Test
-    fun `given a LocationManager, when getLastKnownLocation with Providers, then an non accurate Location returns`() {
-        val result = locationManager.getMostAccurateLastKnownLocation()
+    fun `given a LocationManager, when getLastKnownLocation with gps null, then a network location returns`() {
+        every { locationManager.getLastKnownLocation(GPS_PROVIDER) } returns null
+        val result = locationManager.getLastKnownLocation()
 
-        assertNotEquals(locationLessAccurate, result)
+        assertEquals(networkLocation, result)
     }
 
     @Test
-    fun `given a LocationManager, when getLastKnownLocation with no Providers, then returns null`() {
-        every { locationManager.getProviders(true) } returns emptyList()
-        every { locationManager.getLastKnownLocation(any()) } returns null
+    fun `given a LocationManager, when getLastKnownLocation, then an non gps location returns`() {
+        val result = locationManager.getLastKnownLocation()
 
-        val result = locationManager.getMostAccurateLastKnownLocation()
+        assertNotEquals(networkLocation, result)
+    }
+
+    @Test
+    fun `given a LocationManager, when getLastKnownLocation and Providers returns null, then returns null`() {
+        every { locationManager.getLastKnownLocation(GPS_PROVIDER) } returns null
+        every { locationManager.getLastKnownLocation(NETWORK_PROVIDER) } returns null
+
+        val result = locationManager.getLastKnownLocation()
 
         assertEquals(null, result)
     }
 
-    private fun locationMostAccurate(): Location {
-        val locationMoreAccurate = mockk<Location>()
-        every { locationMoreAccurate.accuracy } returns MOST_ACCURATE
+    @Test
+    fun `given a LocationManager, when getLastKnownLocation without permissions, then throws PermissionError`() {
+        val securityException = SecurityException()
+        every { locationManager.getLastKnownLocation(any()) } throws securityException
 
-        return locationMoreAccurate
+        try {
+            locationManager.getLastKnownLocation()
+        } catch (exception: OmhMapException.PermissionError) {
+            assertTrue(exception is OmhMapException.PermissionError)
+        }
     }
 
-    private fun locationLessAccurate(): Location {
-        val locationLessAccurate = mockk<Location>()
-        every { locationLessAccurate.accuracy } returns LESS_ACCURATE
+    @Test
+    fun `given a LocationManager, when getLastKnownLocation with invalid argument, then throws InvalidArgument`() {
+        val illegalArgumentException = IllegalArgumentException()
+        every { locationManager.getLastKnownLocation(any()) } throws illegalArgumentException
 
-        return locationLessAccurate
+        try {
+            locationManager.getLastKnownLocation()
+        } catch (exception: OmhMapException.InvalidArgument) {
+            assertTrue(exception is OmhMapException.InvalidArgument)
+        }
+    }
+
+    private fun mockLocation(accuracy: Float): Location {
+        val location = mockk<Location>()
+        every { location.accuracy } returns accuracy
+
+        return location
     }
 }

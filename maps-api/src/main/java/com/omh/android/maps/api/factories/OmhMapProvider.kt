@@ -25,6 +25,7 @@ class OmhMapProvider private constructor(
      * @return an [OmhMapView] to interact with the map from the OMH Maps library.
      */
 
+    @JvmStatic
     fun provideOmhMapView(context: Context): OmhMapView {
         val omhMapFactory = getOmhMapFactory(context)
         return omhMapFactory.getOmhMapView(context)
@@ -37,6 +38,7 @@ class OmhMapProvider private constructor(
      * @return -> [OmhLocation] to interact with the location from the OMH Maps library.
      */
 
+    @JvmStatic
     fun provideOmhLocation(context: Context): OmhLocation {
         val omhMapFactory = getOmhMapFactory(context)
         return omhMapFactory.getOmhLocation(context)

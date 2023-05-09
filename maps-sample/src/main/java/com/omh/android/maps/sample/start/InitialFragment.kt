@@ -51,7 +51,7 @@ class InitialFragment : Fragment() {
                 intentSend(coordinate)
             }
         }
-        binding.buttonFirst.setOnClickListener {
+        binding.buttonOpenMap.setOnClickListener {
             permissionLauncher.launch(PERMISSIONS)
         }
     }

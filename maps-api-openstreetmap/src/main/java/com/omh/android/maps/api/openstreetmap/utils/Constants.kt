@@ -3,7 +3,6 @@ package com.omh.android.maps.api.openstreetmap.utils
 internal object Constants {
 
     // Location
-    const val LOCATION_IS_NULL = "Location is null"
     const val MIN_TIME_EXECUTION_MS = 0L
     const val MIN_TIME_MS = 0L
     const val MIN_DISTANCE_M = 0f
@@ -22,4 +21,9 @@ internal object Constants {
     // Map marker
     const val MIN_ZOOM_LEVEL = 4.0
     const val MAX_ZOOM_LEVEL = 22.0
+
+    // Map Copyright
+    const val TEXT_SIZE = 36f
+    const val TEXT_COORDINATE_X = 25f
+    const val TEXT_COPYRIGHT = "@ OpenStreetMap contributors"
 }
