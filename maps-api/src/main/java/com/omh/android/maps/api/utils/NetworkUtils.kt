@@ -11,6 +11,7 @@ import com.omh.android.maps.api.presentation.models.OmhMapStatusCodes
 
 object NetworkUtils {
 
+    @JvmStatic
     @RequiresPermission(ACCESS_NETWORK_STATE)
     @Throws(OmhMapException.ApiException::class)
     @SuppressWarnings("TooGenericExceptionCaught")
