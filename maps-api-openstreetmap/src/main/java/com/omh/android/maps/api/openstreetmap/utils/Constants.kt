@@ -9,7 +9,6 @@ internal object Constants {
     const val MIN_DISTANCE_M = 0f
     const val MIN_TIMES_EXECUTION = 1
     const val TIME_OUT_MS = 2000L
-    const val MIN_RADIUS = 5.0f
 
     // My Location
     const val PADDING_MY_LOCATION_ICON = 16
@@ -17,6 +16,7 @@ internal object Constants {
 
     // Gestures and animation
     const val ONE_POINTER = 1
+    const val TWO_POINTERS = 2
     const val DELAY_MS = 200L
 
     // Map marker

@@ -11,18 +11,20 @@ import org.osmdroid.events.ScrollEvent
 import org.osmdroid.events.ZoomEvent
 
 internal class MapListenerController : MapListener {
-    private var onCameraMoveStartedListenerList: MutableList<OmhOnCameraMoveStartedListener> = mutableListOf()
-    private var onIdleCameraListenerList: MutableList<OmhOnCameraIdleListener> = mutableListOf()
+    private var onCameraMoveStartedListener: OmhOnCameraMoveStartedListener? = null
+    private var onIdleCameraListener: OmhOnCameraIdleListener? = null
     private var stopped = true
+    private var touched = false
     private val handler = Handler(Looper.getMainLooper())
     private val idleRunnable = Runnable {
-        if (stopped) {
+        if (isCameraIdle) {
             isMoving = false
             idleCamera()
         }
     }
     var isMoving = false
         private set
+    private val isCameraIdle = (isMoving && stopped) || !touched
 
     override fun onScroll(event: ScrollEvent?): Boolean {
         return handleMove()
@@ -32,9 +34,10 @@ internal class MapListenerController : MapListener {
         return handleMove()
     }
 
-    private fun handleMove(): Boolean {
+    fun handleMove(): Boolean {
         if (!isMoving) {
             isMoving = true
+            stopped = false
             cameraMoveStarted()
         }
         handler.removeCallbacks(idleRunnable)
@@ -43,27 +46,27 @@ internal class MapListenerController : MapListener {
         return true
     }
 
-    fun addOnStartListener(onStartListener: OmhOnCameraMoveStartedListener) {
-        onCameraMoveStartedListenerList.add(onStartListener)
+    fun setOnStartListener(onStartListener: OmhOnCameraMoveStartedListener) {
+        onCameraMoveStartedListener = onStartListener
     }
 
-    fun addOnIdleListener(onIdleListener: OmhOnCameraIdleListener) {
-        onIdleCameraListenerList.add(onIdleListener)
+    fun setOnIdleListener(onIdleListener: OmhOnCameraIdleListener) {
+        onIdleCameraListener = onIdleListener
     }
 
-    fun cameraMoveStarted() {
-        onCameraMoveStartedListenerList.forEach { listener ->
-            listener.onCameraMoveStarted(REASON_GESTURE)
-        }
+    private fun cameraMoveStarted() {
+        onCameraMoveStartedListener?.onCameraMoveStarted(REASON_GESTURE)
     }
 
-    fun idleCamera() {
-        onIdleCameraListenerList.forEach { listener ->
-            listener.onCameraIdle()
-        }
+    private fun idleCamera() {
+        onIdleCameraListener?.onCameraIdle()
     }
 
     fun setStopped(stopped: Boolean) {
         this.stopped = stopped
+    }
+
+    fun setTouch(touched: Boolean) {
+        this.touched = touched
     }
 }
