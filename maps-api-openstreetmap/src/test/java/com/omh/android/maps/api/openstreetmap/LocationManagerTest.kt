@@ -81,8 +81,8 @@ internal class LocationManagerTest {
 
         try {
             locationManager.getLastKnownLocation()
-        } catch (exception: OmhMapException.ApiException) {
-            assertTrue(exception is OmhMapException.ApiException)
+        } catch (exception: OmhMapException.InvalidArgument) {
+            assertTrue(exception is OmhMapException.InvalidArgument)
         }
     }
 
