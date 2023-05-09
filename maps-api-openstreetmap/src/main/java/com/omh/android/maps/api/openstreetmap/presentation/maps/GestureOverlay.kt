@@ -66,11 +66,12 @@ internal class GestureOverlay : Overlay() {
         }
     }
 
-    private fun isSingleFingerDoubleTap(event: MotionEvent, actionTime: Long) =
-        doubleTapped &&
-            event.y == lastPointerY &&
-            event.pointerCount == ONE_POINTER &&
-            actionTime - startTouchTime <= ViewConfiguration.getDoubleTapTimeout()
+    private fun isSingleFingerDoubleTap(event: MotionEvent, actionTime: Long): Boolean {
+        val axisYNotMoved = event.y == lastPointerY
+        val isOnePointer = event.pointerCount == ONE_POINTER
+        val isInDoubleTapTime = actionTime - startTouchTime <= ViewConfiguration.getDoubleTapTimeout()
+        return doubleTapped && axisYNotMoved && isOnePointer && isInDoubleTapTime
+    }
 
     private fun isTwoFingerTap(eventPointerCount: Int) =
         eventPointerCount == TWO_POINTERS && !isScrolling
