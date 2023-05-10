@@ -15,6 +15,7 @@ class SingletonModule {
     @Provides
     fun omhMapProvider(@ApplicationContext context: Context): OmhMapProvider {
         return OmhMapProvider.Builder()
+            .addGmsPath()
             .addNonGmsPath()
             .build(context)
     }

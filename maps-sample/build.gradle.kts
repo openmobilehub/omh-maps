@@ -34,6 +34,9 @@ android {
         create("nonGms") {
             dimension = "google_services"
         }
+        create("singleBuild") {
+            dimension = "google_services"
+        }
     }
 
     kotlinOptions {
@@ -51,11 +54,14 @@ android {
 
 val gmsImplementation by configurations
 val nonGmsImplementation by configurations
+val singleBuildImplementation by configurations
 
 dependencies {
     // OMH SDK
     gmsImplementation(project(":maps-api-googlemaps"))
     nonGmsImplementation(project(":maps-api-openstreetmap"))
+    singleBuildImplementation(project(":maps-api-googlemaps"))
+    singleBuildImplementation(project(":maps-api-openstreetmap"))
 
     implementation(Libs.coreKtx)
     implementation(Libs.lifecycleKtx)
