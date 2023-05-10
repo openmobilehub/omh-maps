@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.omh.android.maps.api.factories.OmhMapProvider
 import com.omh.android.maps.api.presentation.fragments.OmhMapFragment
 import com.omh.android.maps.api.presentation.interfaces.location.OmhFailureListener
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
@@ -38,8 +40,13 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MapFragment : Fragment(), OmhOnMapReadyCallback {
+
     @Inject
     lateinit var omhLocation: OmhLocation
+
+    @Inject
+    lateinit var omhMapProvider: OmhMapProvider
+
     private var currentLocation: OmhCoordinate = PRIME_MERIDIAN
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
@@ -58,13 +65,21 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    private fun setupMapView() {
+        val fragmentMapContainer: FragmentContainerView? = _binding?.fragmentMapContainer
+        val omhMapFragment: OmhMapFragment? = fragmentMapContainer?.getFragment<OmhMapFragment>()
+        omhMapFragment?.initializeMapView(omhMapProvider)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupMapView()
 
         val coordinate: OmhCoordinate? = args.coordinate
         coordinate?.let {
