@@ -20,6 +20,8 @@ dependencies {
     implementation(Libs.material)
     implementation(Libs.reflection)
 
+    implementation(Libs.googlePlayBase)
+
     // Test dependencies
     testImplementation(Libs.junit)
     androidTestImplementation(Libs.androidJunit)
