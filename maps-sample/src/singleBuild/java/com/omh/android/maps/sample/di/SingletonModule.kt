@@ -1,9 +1,11 @@
 package com.omh.android.maps.sample.di
 
+import android.content.Context
 import com.omh.android.maps.api.factories.OmhMapProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
 @Module
@@ -11,10 +13,10 @@ import dagger.hilt.components.SingletonComponent
 class SingletonModule {
 
     @Provides
-    fun omhMapProvider(): OmhMapProvider {
+    fun omhMapProvider(@ApplicationContext context: Context): OmhMapProvider {
         return OmhMapProvider.Builder()
             .addGmsPath()
             .addNonGmsPath()
-            .build()
+            .build(context)
     }
 }
