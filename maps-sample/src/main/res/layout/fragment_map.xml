@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".maps.MapFragment">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_map_container"
         android:name="com.omh.android.maps.api.presentation.fragments.OmhMapFragment"
         android:layout_width="0dp"
