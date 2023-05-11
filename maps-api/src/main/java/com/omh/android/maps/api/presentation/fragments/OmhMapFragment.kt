@@ -16,7 +16,7 @@ import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallba
  * Being a fragment, this component can be added to an activity's layout file simply with the XML below.
  */
 @SuppressWarnings("TooManyFunctions")
-class OmhMapFragment : Fragment() {
+class OmhMapFragment(omhMapProvider: OmhMapProvider) : Fragment() {
 
     private var _binding: FragmentOmhMapBinding? = null
     private val binding get() = _binding!!
@@ -24,7 +24,7 @@ class OmhMapFragment : Fragment() {
     /**
      * [OmhMapView] instance to display in the view.
      */
-    private var omhMapView: OmhMapView? = null
+    private var omhMapView: OmhMapView = omhMapProvider.provideOmhMapView()
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -36,18 +36,13 @@ class OmhMapFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        omhMapView?.onCreate(savedInstanceState)
+        omhMapView.onCreate(savedInstanceState)
         _binding = FragmentOmhMapBinding.inflate(inflater, container, false)
-        val mapView = omhMapView?.getView()
+        val mapView = omhMapView.getView()
         if (mapView != null) {
             binding.frameLayoutMapContainer.addView(mapView)
         }
         return binding.root
-    }
-
-    fun initializeMapView(omhMapProvider: OmhMapProvider) {
-        omhMapView = omhMapProvider.provideOmhMapView()
-        _binding?.frameLayoutMapContainer?.addView(omhMapView?.getView())
     }
 
     /**
@@ -59,7 +54,7 @@ class OmhMapFragment : Fragment() {
      * @param omhOnMapReadyCallback -> the callback object that will be triggered when the map is ready to be used.
      */
     fun getMapAsync(omhOnMapReadyCallback: OmhOnMapReadyCallback) {
-        omhMapView?.getMapAsync(omhOnMapReadyCallback)
+        omhMapView.getMapAsync(omhOnMapReadyCallback)
     }
 
     /**
@@ -71,23 +66,23 @@ class OmhMapFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        omhMapView?.onDestroy()
+        omhMapView.onDestroy()
         super.onDestroy()
     }
 
     override fun onLowMemory() {
-        omhMapView?.onLowMemory()
+        omhMapView.onLowMemory()
         super.onLowMemory()
     }
 
     override fun onPause() {
-        omhMapView?.onPause()
+        omhMapView.onPause()
         super.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        omhMapView?.onResume()
+        omhMapView.onResume()
     }
 
     /**
@@ -96,16 +91,16 @@ class OmhMapFragment : Fragment() {
      */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        omhMapView?.onSaveInstanceState(outState)
+        omhMapView.onSaveInstanceState(outState)
     }
 
     override fun onStart() {
         super.onStart()
-        omhMapView?.onStart()
+        omhMapView.onStart()
     }
 
     override fun onStop() {
-        omhMapView?.onStop()
+        omhMapView.onStop()
         super.onStop()
     }
 
@@ -117,6 +112,8 @@ class OmhMapFragment : Fragment() {
          * @return A new instance of fragment OmhMapFragment.
          */
         @JvmStatic
-        fun newInstance() = OmhMapFragment()
+        fun newInstance(omhMapProvider: OmhMapProvider): OmhMapFragment {
+            return OmhMapFragment(omhMapProvider)
+        }
     }
 }
