@@ -1,6 +1,8 @@
 package com.omh.android.maps.api.factories
 
 import android.content.Context
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
@@ -13,10 +15,14 @@ import kotlin.reflect.KClass
 class OmhMapProvider private constructor(
     private val gmsPath: String?,
     private val nonGmsPath: String?,
-    private val context: Context, // Application Context
-) {
+) : Parcelable {
 
     private val isSingleBuild = gmsPath != null && nonGmsPath != null
+
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString()
+    )
 
     /**
      * Provides [OmhMapView] interface to interact with the map from the OMH Maps library.
@@ -26,8 +32,8 @@ class OmhMapProvider private constructor(
      * @return an [OmhMapView] to interact with the map from the OMH Maps library.
      */
 
-    fun provideOmhMapView(): OmhMapView {
-        val omhMapFactory = getOmhMapFactory()
+    fun provideOmhMapView(context: Context): OmhMapView {
+        val omhMapFactory = getOmhMapFactory(context)
         return omhMapFactory.getOmhMapView(context)
     }
 
@@ -38,8 +44,8 @@ class OmhMapProvider private constructor(
      * @return -> [OmhLocation] to interact with the location from the OMH Maps library.
      */
 
-    fun provideOmhLocation(): OmhLocation {
-        val omhMapFactory = getOmhMapFactory()
+    fun provideOmhLocation(context: Context): OmhLocation {
+        val omhMapFactory = getOmhMapFactory(context)
         return omhMapFactory.getOmhLocation(context)
     }
 
@@ -50,15 +56,15 @@ class OmhMapProvider private constructor(
      * @return -> a [OmhMapFactory] instance that is created using reflection.
      */
     @Throws(Exception::class) // TODO map to OMH API exception with DEVELOPER status code
-    private fun getOmhMapFactory(): OmhMapFactory = when {
-        isSingleBuild -> reflectSingleBuild()
+    private fun getOmhMapFactory(context: Context): OmhMapFactory = when {
+        isSingleBuild -> reflectSingleBuild(context)
         gmsPath != null -> getFactoryImplementation(gmsPath)
         nonGmsPath != null -> getFactoryImplementation(nonGmsPath)
         else -> error("NO PATHS PROVIDED")
     }
 
     @Throws(ClassNotFoundException::class)
-    private fun reflectSingleBuild(): OmhMapFactory {
+    private fun reflectSingleBuild(context: Context): OmhMapFactory {
         val googleApiAvailability = GoogleApiAvailability.getInstance()
         return when (googleApiAvailability.isGooglePlayServicesAvailable(context)) {
             ConnectionResult.SUCCESS -> getFactoryImplementation(gmsPath!!)
@@ -89,15 +95,31 @@ class OmhMapProvider private constructor(
             return this
         }
 
-        fun build(context: Context): OmhMapProvider {
-            return OmhMapProvider(gmsPath, nonGmsPath, context.applicationContext)
+        fun build(): OmhMapProvider {
+            return OmhMapProvider(gmsPath, nonGmsPath)
         }
     }
 
-    companion object {
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(gmsPath)
+        parcel.writeString(nonGmsPath)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<OmhMapProvider> {
         private const val NON_GMS_ADDRESS =
             "com.omh.android.maps.api.openstreetmap.presentation.OmhMapFactoryImpl"
         private const val GMS_ADDRESS =
             "com.omh.android.maps.api.googlemaps.presentation.OmhMapFactoryImpl"
+        override fun createFromParcel(parcel: Parcel): OmhMapProvider {
+            return OmhMapProvider(parcel)
+        }
+
+        override fun newArray(size: Int): Array<OmhMapProvider?> {
+            return arrayOfNulls(size)
+        }
     }
 }
