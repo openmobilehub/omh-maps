@@ -12,7 +12,7 @@ class MapsFragmentFactory @Inject constructor(
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (className) {
-            OmhMapFragment::class.java.name -> OmhMapFragment.newInstance(omhMapProvider)
+            OmhMapFragment::class.java.name -> OmhMapFragment(omhMapProvider)
             else -> return super.instantiate(classLoader, className)
         }
     }
