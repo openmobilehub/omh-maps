@@ -15,9 +15,8 @@ object OmhMapsModule {
 
     @Provides
     fun providesOmhLocation(
-        provider: OmhMapProvider,
         @ApplicationContext context: Context
     ): OmhLocation {
-        return provider.provideOmhLocation(context)
+        return OmhMapProvider.getInstance().provideOmhLocation(context)
     }
 }

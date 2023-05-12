@@ -1,16 +1,14 @@
 package com.omh.android.maps.sample.maps
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.FragmentContainerView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.omh.android.maps.api.factories.OmhMapProvider
 import com.omh.android.maps.api.presentation.fragments.OmhMapFragment
 import com.omh.android.maps.api.presentation.interfaces.location.OmhFailureListener
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
@@ -43,9 +41,6 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
 
     @Inject
     lateinit var omhLocation: OmhLocation
-
-    @Inject
-    lateinit var omhMapProvider: OmhMapProvider
 
     private var currentLocation: OmhCoordinate = PRIME_MERIDIAN
     private var _binding: FragmentMapBinding? = null

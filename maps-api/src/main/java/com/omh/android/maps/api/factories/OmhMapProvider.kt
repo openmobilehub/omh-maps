@@ -17,10 +17,6 @@ class OmhMapProvider private constructor(
 
     private val isSingleBuild = gmsPath != null && nonGmsPath != null
 
-    init {
-        singletonInstance = this
-    }
-
     /**
      * Provides [OmhMapView] interface to interact with the map from the OMH Maps library.
      *
@@ -92,8 +88,8 @@ class OmhMapProvider private constructor(
             return this
         }
 
-        fun build(): OmhMapProvider {
-            return OmhMapProvider(gmsPath, nonGmsPath)
+        internal fun build() {
+            singletonInstance = OmhMapProvider(gmsPath, nonGmsPath)
         }
     }
 
@@ -104,5 +100,10 @@ class OmhMapProvider private constructor(
             "com.omh.android.maps.api.googlemaps.presentation.OmhMapFactoryImpl"
 
         internal var singletonInstance: OmhMapProvider? = null
+
+        fun getInstance(): OmhMapProvider {
+            if (singletonInstance == null) error("SDK NOT INITIALIZED")
+            return singletonInstance!!
+        }
     }
 }
