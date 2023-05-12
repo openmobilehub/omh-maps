@@ -17,6 +17,6 @@ class SingletonModule {
         return OmhMapProvider.Builder()
             .addGmsPath()
             .addNonGmsPath()
-            .build()
+            .build(context)
     }
 }
