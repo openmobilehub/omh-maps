@@ -11,10 +11,9 @@ import dagger.hilt.components.SingletonComponent
 class SingletonModule {
 
     @Provides
-    fun omhMapProvider(): OmhMapProvider {
+    fun omhMapProvider(): OmhMapProvider.Builder {
         return OmhMapProvider.Builder()
             .addGmsPath()
             .addNonGmsPath()
-            .build()
     }
 }
