@@ -70,16 +70,8 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
         return binding.root
     }
 
-    private fun setupMapView() {
-        val fragmentMapContainer: FragmentContainerView? = _binding?.fragmentMapContainer
-        val omhMapFragment: OmhMapFragment? = fragmentMapContainer?.getFragment<OmhMapFragment>()
-        omhMapFragment?.initializeMapView(omhMapProvider)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setupMapView()
 
         val coordinate: OmhCoordinate? = args.coordinate
         coordinate?.let {
