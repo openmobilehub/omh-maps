@@ -20,7 +20,7 @@ import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStar
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
 import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
-import com.omh.android.maps.api.utils.NetworkUtils.isNetworkAvailable
+import com.omh.android.maps.api.utils.NetworkConnectivityChecker
 import com.omh.android.maps.sample.R
 import com.omh.android.maps.sample.databinding.FragmentMapBinding
 import com.omh.android.maps.sample.utils.BundleUtils.getOmhCoordinate
@@ -47,6 +47,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     private val binding get() = _binding!!
     private var displayOnlyCoordinate = false
     private val args: MapFragmentArgs by navArgs()
+    private var networkConnectivityChecker: NetworkConnectivityChecker? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,20 +75,28 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
             displayOnlyCoordinate = true
         }
 
+        networkConnectivityChecker = NetworkConnectivityChecker(requireContext()).apply {
+            startListeningForConnectivityChanges {
+                Toast.makeText(requireContext(), R.string.lost_internet_connection, Toast.LENGTH_SHORT).show()
+            }
+        }
         binding.fabShareLocation.setOnClickListener {
             val action = MapFragmentDirections.actionMapFragmentToInitialFragment(currentLocation)
             findNavController().navigate(action)
         }
 
-        binding.markerImageView.setOnClickListener {
+        val displayText: (v: View) -> Unit = {
             val isVisible = binding.textViewLocation.isVisible
 
-            if (isVisible) {
-                binding.textViewLocation.visibility = View.GONE
+            binding.textViewLocation.visibility = if (isVisible) {
+                View.GONE
             } else {
-                binding.textViewLocation.visibility = View.VISIBLE
+                View.VISIBLE
             }
         }
+
+        binding.textViewLocation.setOnClickListener(displayText)
+        binding.markerImageView.setOnClickListener(displayText)
 
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             val omhMapFragment =
@@ -98,7 +107,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
 
     override fun onMapReady(omhMap: OmhMap) {
 
-        if (!isNetworkAvailable(requireContext())) {
+        if (networkConnectivityChecker?.isNetworkAvailable() != true) {
             Toast.makeText(requireContext(), R.string.no_internet_connection, Toast.LENGTH_SHORT).show()
         }
         omhMap.setZoomGesturesEnabled(true)
@@ -197,6 +206,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        networkConnectivityChecker?.stopListeningForConnectivity()
     }
 
     companion object {

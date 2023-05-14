@@ -15,10 +15,12 @@ internal class MyLocationIconOverlay(context: Context) : Overlay() {
     private val icon: Drawable? = ContextCompat.getDrawable(context, ic_menu_mylocation)
     private var clickListener: (() -> Unit)? = null
     private var centerLocation: (() -> Unit)? = null
+    private var wasDrawn = false
 
     override fun draw(canvas: Canvas?, mapView: MapView?, shadow: Boolean) {
         super.draw(canvas, mapView, shadow)
 
+        if (wasDrawn) return
         if (!shadow && icon != null && mapView != null) {
             val coordinateX = mapView.width - icon.intrinsicWidth - PADDING_MY_LOCATION_ICON
             val coordinateY = PADDING_MY_LOCATION_ICON

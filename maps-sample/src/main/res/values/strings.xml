@@ -12,4 +12,5 @@
     <string name="initial_fragment_text">Initial Fragment</string>
     <string name="map_fragment_text">Map Fragment</string>
     <string name="no_internet_connection">"No internet connection"</string>
+    <string name="lost_internet_connection">"No way to connect to internet"</string>
 </resources>

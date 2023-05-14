@@ -22,8 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:visibility="gone"
         android:padding="@dimen/small_4"
+        android:textColor="@color/black"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/marker_shadow_image_view"
         app:layout_constraintEnd_toEndOf="@+id/marker_image_view"
         app:layout_constraintStart_toStartOf="@+id/marker_image_view"
@@ -62,7 +63,7 @@
         android:layout_marginEnd="@dimen/normal_8"
         android:layout_marginBottom="@dimen/normal_8"
         android:contentDescription="@string/button_to_share_location"
-        android:src="@drawable/ic_share"
+        android:src="@drawable/ic_confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

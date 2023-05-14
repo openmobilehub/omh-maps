@@ -2,7 +2,7 @@ package com.omh.android.maps.api.utils
 
 object Constants {
     // Network
-    const val NO_INTERNET_CONNECTION = "No internet connection"
+    const val LOST_INTERNET_CONNECTION = "No way to connect to internet"
 
     // Log
     const val MAX_NAME_LENGTH = 23
