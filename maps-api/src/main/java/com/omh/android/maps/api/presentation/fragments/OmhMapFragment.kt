@@ -15,6 +15,7 @@ import com.omh.android.maps.api.factories.OmhMapProvider
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapView
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
 import com.omh.android.maps.api.utils.Constants.LOST_INTERNET_CONNECTION
+import com.omh.android.maps.api.utils.Constants.NO_INTERNET_CONNECTION
 import com.omh.android.maps.api.utils.NetworkConnectivityChecker
 
 /**
@@ -64,6 +65,11 @@ class OmhMapFragment : Fragment() {
     @RequiresPermission(allOf = [ACCESS_NETWORK_STATE, INTERNET])
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (networkConnectivityChecker?.isNetworkAvailable() != true) {
+            Log.w(logTag, NO_INTERNET_CONNECTION)
+        }
+
         networkConnectivityChecker = NetworkConnectivityChecker(requireContext()).apply {
             startListeningForConnectivityChanges {
                 Log.w(logTag, LOST_INTERNET_CONNECTION)
@@ -79,7 +85,6 @@ class OmhMapFragment : Fragment() {
      *
      * @param omhOnMapReadyCallback -> the callback object that will be triggered when the map is ready to be used.
      */
-    @RequiresPermission(allOf = [ACCESS_NETWORK_STATE, INTERNET])
     fun getMapAsync(omhOnMapReadyCallback: OmhOnMapReadyCallback) {
         omhMapView?.getMapAsync(omhOnMapReadyCallback)
     }
@@ -94,6 +99,7 @@ class OmhMapFragment : Fragment() {
 
     override fun onDestroy() {
         omhMapView?.onDestroy()
+        networkConnectivityChecker?.stopListeningForConnectivity()
         super.onDestroy()
     }
 
