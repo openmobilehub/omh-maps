@@ -54,8 +54,8 @@ val nonGmsImplementation by configurations
 
 dependencies {
     // OMH SDK
-    gmsImplementation("com.openmobilehub.android:maps-api-googlemaps:1.0")
-    nonGmsImplementation("com.openmobilehub.android:maps-api-openstreetmap:1.0")
+    gmsImplementation(project(":maps-api-googlemaps"))
+    nonGmsImplementation(project(":maps-api-openstreetmap"))
 
     implementation(Libs.coreKtx)
     implementation(Libs.lifecycleKtx)
