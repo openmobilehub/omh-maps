@@ -11,23 +11,25 @@ import com.omh.android.maps.api.presentation.models.OmhMapException
 import com.omh.android.maps.api.presentation.models.OmhMapStatusCodes.INVALID_PROVIDER
 
 @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
-@Throws(OmhMapException::class)
 internal fun LocationManager.getLastKnownLocation(
     providers: List<String> = listOf(GPS_PROVIDER, NETWORK_PROVIDER)
 ): Location? {
-    providers.forEach { provider ->
-        try {
-            provider
-                .let(::getLastKnownLocation)
-                ?.let { lastKnownLocation: Location ->
-                    return lastKnownLocation
-                }
-        } catch (exception: SecurityException) {
-            throw OmhMapException.PermissionError(exception)
-        } catch (exception: IllegalArgumentException) {
-            throw OmhMapException.ApiException(INVALID_PROVIDER, exception)
-        }
+    for (provider in providers) {
+        val location = this.obtainLastKnownLocation(provider)
+        if (location != null) return location
     }
 
     return null
+}
+
+@RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
+@Throws(OmhMapException::class)
+private fun LocationManager.obtainLastKnownLocation(provider: String): Location? {
+    return try {
+        getLastKnownLocation(provider)
+    } catch (exception: SecurityException) {
+        throw OmhMapException.PermissionError(exception)
+    } catch (exception: IllegalArgumentException) {
+        throw OmhMapException.ApiException(INVALID_PROVIDER, exception)
+    }
 }

@@ -83,12 +83,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
 
         binding.markerImageView.setOnClickListener {
             val isVisible = binding.textViewLocation.isVisible
-
-            if (isVisible) {
-                binding.textViewLocation.visibility = View.GONE
-            } else {
-                binding.textViewLocation.visibility = View.VISIBLE
-            }
+            binding.textViewLocation.visibility = if (isVisible) { View.GONE } else { View.VISIBLE }
         }
 
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {

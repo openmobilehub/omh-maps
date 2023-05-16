@@ -44,7 +44,7 @@ class OmhMapFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        omhMapView = OmhMapProvider.getInstance().provideOmhMapView(requireContext())
+        omhMapView = context?.let { OmhMapProvider.getInstance().provideOmhMapView(it) }
         omhMapView?.onCreate(savedInstanceState)
         _binding = FragmentOmhMapBinding.inflate(inflater, container, false)
         val mapView = omhMapView?.getView()

@@ -29,12 +29,12 @@ internal class GestureOverlay : Overlay() {
 
     override fun draw(canvas: Canvas?, mapView: MapView?, shadow: Boolean) {
         super.draw(canvas, mapView, shadow)
-        if (!shadow) {
-            val height = paint.fontMetrics.bottom - paint.fontMetrics.top
-            val coordinateX = TEXT_COORDINATE_X
-            val coordinateY = mapView?.height?.minus(height) ?: 0f
-            canvas?.drawText(TEXT_COPYRIGHT, coordinateX, coordinateY, paint)
-        }
+        if (!shadow) return
+
+        val height = paint.fontMetrics.bottom - paint.fontMetrics.top
+        val coordinateX = TEXT_COORDINATE_X
+        val coordinateY = mapView?.height?.minus(height) ?: 0f
+        canvas?.drawText(TEXT_COPYRIGHT, coordinateX, coordinateY, paint)
     }
 
     override fun onDoubleTap(event: MotionEvent?, mapView: MapView?): Boolean {
