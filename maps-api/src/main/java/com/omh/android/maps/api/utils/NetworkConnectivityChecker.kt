@@ -4,7 +4,6 @@ import android.Manifest.permission.ACCESS_NETWORK_STATE
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
-import android.net.NetworkCapabilities
 import android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET
 import android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED
 import android.net.NetworkRequest
@@ -92,13 +91,7 @@ class NetworkConnectivityChecker(context: Context) {
     fun isNetworkAvailable(): Boolean {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                val network = connectivityManager?.activeNetwork
-                return if (network != null) {
-                    val networkCapabilities = connectivityManager?.getNetworkCapabilities(network)
-                    hasInternetCapabilities(networkCapabilities)
-                } else {
-                    false
-                }
+                return isConnectedToInternet()
             } else {
                 @Suppress("DEPRECATION")
                 // Before Android 6(API Level 23) it is safe to use this function
@@ -110,10 +103,13 @@ class NetworkConnectivityChecker(context: Context) {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun hasInternetCapabilities(networkCapabilities: NetworkCapabilities?): Boolean {
-        if (networkCapabilities == null) return false
+    @RequiresPermission(anyOf = [ACCESS_NETWORK_STATE])
+    private fun isConnectedToInternet(): Boolean {
+        val network = connectivityManager?.activeNetwork ?: return false
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
 
-        return networkCapabilities.hasCapability(NET_CAPABILITY_INTERNET) &&
+        return networkCapabilities != null &&
+            networkCapabilities.hasCapability(NET_CAPABILITY_INTERNET) &&
             networkCapabilities.hasCapability(NET_CAPABILITY_VALIDATED)
     }
 }
