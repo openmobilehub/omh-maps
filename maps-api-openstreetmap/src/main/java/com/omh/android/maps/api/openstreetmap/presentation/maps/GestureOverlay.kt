@@ -33,7 +33,7 @@ internal class GestureOverlay : Overlay() {
 
     override fun draw(canvas: Canvas?, mapView: MapView?, shadow: Boolean) {
         super.draw(canvas, mapView, shadow)
-        if (!shadow && !wasDrawn) return
+        if (wasDrawn) return
 
         val height = paint.fontMetrics.bottom - paint.fontMetrics.top - PADDING_TEXT
         val coordinateX = TEXT_COORDINATE_X

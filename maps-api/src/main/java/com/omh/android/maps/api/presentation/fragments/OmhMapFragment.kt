@@ -70,10 +70,9 @@ class OmhMapFragment : Fragment() {
             Log.w(logTag, NO_INTERNET_CONNECTION)
         }
 
-        networkConnectivityChecker = NetworkConnectivityChecker(requireContext()).apply {
-            startListeningForConnectivityChanges {
-                Log.w(logTag, LOST_INTERNET_CONNECTION)
-            }
+        networkConnectivityChecker = context?.let { NetworkConnectivityChecker(it) }
+        networkConnectivityChecker?.startListeningForConnectivityChanges {
+            Log.w(logTag, LOST_INTERNET_CONNECTION)
         }
     }
 
