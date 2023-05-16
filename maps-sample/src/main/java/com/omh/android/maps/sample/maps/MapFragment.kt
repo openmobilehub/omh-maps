@@ -1,12 +1,12 @@
 package com.omh.android.maps.sample.maps
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.omh.android.maps.api.presentation.fragments.OmhMapFragment
@@ -38,8 +38,10 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MapFragment : Fragment(), OmhOnMapReadyCallback {
+
     @Inject
     lateinit var omhLocation: OmhLocation
+
     private var currentLocation: OmhCoordinate = PRIME_MERIDIAN
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
@@ -58,7 +60,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         return binding.root
     }
