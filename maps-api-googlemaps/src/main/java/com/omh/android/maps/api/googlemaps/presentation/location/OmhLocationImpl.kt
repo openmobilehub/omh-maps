@@ -7,13 +7,15 @@ import androidx.annotation.RequiresPermission
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
-import com.omh.android.maps.api.googlemaps.utils.Constants.LOCATION_IS_NULL
 import com.omh.android.maps.api.googlemaps.utils.ConverterUtils
 import com.omh.android.maps.api.googlemaps.utils.LocationUtils
 import com.omh.android.maps.api.presentation.interfaces.location.OmhFailureListener
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.location.OmhSuccessListener
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
+import com.omh.android.maps.api.presentation.models.OmhMapException
+import com.omh.android.maps.api.presentation.models.OmhMapStatusCodes.NULL_LOCATION
+import com.omh.android.maps.api.presentation.models.OmhMapStatusCodes.getStatusCodeString
 
 internal class OmhLocationImpl(context: Context) : OmhLocation {
 
@@ -41,7 +43,11 @@ internal class OmhLocationImpl(context: Context) : OmhLocation {
                         )
                     )
                 } else {
-                    omhOnFailureListener.onFailure(Exception(LOCATION_IS_NULL))
+                    omhOnFailureListener.onFailure(
+                        exception = OmhMapException.NullLocation(
+                            cause = IllegalStateException(getStatusCodeString(NULL_LOCATION))
+                        )
+                    )
                 }
             }
             .addOnFailureListener { exception ->
@@ -59,7 +65,11 @@ internal class OmhLocationImpl(context: Context) : OmhLocation {
                 if (location != null) {
                     omhOnSuccessListener.onSuccess(ConverterUtils.convertToOmhCoordinate(location))
                 } else {
-                    omhOnFailureListener.onFailure(Exception(LOCATION_IS_NULL))
+                    omhOnFailureListener.onFailure(
+                        exception = OmhMapException.NullLocation(
+                            cause = IllegalStateException(getStatusCodeString(NULL_LOCATION))
+                        )
+                    )
                 }
             }
             .addOnFailureListener { exception ->

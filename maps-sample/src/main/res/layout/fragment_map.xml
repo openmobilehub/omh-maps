@@ -11,11 +11,24 @@
         android:name="com.omh.android.maps.api.presentation.fragments.OmhMapFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout_bottom_container"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_omh_map" />
+
+    <TextView
+        android:id="@+id/textView_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:visibility="gone"
+        android:padding="@dimen/small_4"
+        app:layout_constraintBottom_toTopOf="@+id/marker_shadow_image_view"
+        app:layout_constraintEnd_toEndOf="@+id/marker_image_view"
+        app:layout_constraintStart_toStartOf="@+id/marker_image_view"
+        tools:text="@string/example_coordinate"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/marker_shadow_image_view"
@@ -42,40 +55,15 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_map_marker" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout_bottom_container"
-        android:layout_width="0dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_share_location"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:layout_marginEnd="@dimen/normal_8"
+        android:layout_marginBottom="@dimen/normal_8"
+        android:contentDescription="@string/button_to_share_location"
+        android:src="@drawable/ic_share"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/textView_location"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/normal_16"
-            android:layout_marginEnd="@dimen/normal_16"
-            app:layout_constraintBottom_toBottomOf="@+id/fab_share_location"
-            app:layout_constraintEnd_toStartOf="@+id/fab_share_location"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/fab_share_location"
-            tools:text="@string/example_coordinate" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_share_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/normal_8"
-            android:layout_marginEnd="@dimen/normal_8"
-            android:layout_marginBottom="@dimen/normal_8"
-            android:contentDescription="@string/button_to_share_location"
-            android:src="@drawable/ic_share"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
