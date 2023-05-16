@@ -39,18 +39,18 @@ internal class LocationProviderClient(context: Context) {
                 )
             }
         } catch (exception: IllegalArgumentException) {
-            onFailure(OmhMapException.InvalidArgument(NULL_LISTENER, exception))
+            onFailure(OmhMapException.ApiException(NULL_LISTENER, exception))
         } catch (exception: RuntimeException) {
-            onFailure(OmhMapException.RunTimeError(INVALID_LOOPER, exception))
+            onFailure(OmhMapException.ApiException(INVALID_LOOPER, exception))
         } catch (exception: SecurityException) {
             onFailure(OmhMapException.PermissionError(exception))
-        } catch (exception: OmhMapException.InvalidArgument) {
+        } catch (exception: OmhMapException.ApiException) {
             onFailure(exception)
         }
     }
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
-    @Throws(OmhMapException.InvalidArgument::class)
+    @Throws(OmhMapException.ApiException::class)
     private fun handleOnSuccess(
         locationListener: LocationListener,
         onSuccess: (Location?) -> Unit,
@@ -60,7 +60,7 @@ internal class LocationProviderClient(context: Context) {
             locationManager.removeUpdates(locationListener)
             onSuccess(location)
         } catch (exception: IllegalArgumentException) {
-            throw OmhMapException.InvalidArgument(NULL_LISTENER, exception)
+            throw OmhMapException.ApiException(NULL_LISTENER, exception)
         }
     }
 
