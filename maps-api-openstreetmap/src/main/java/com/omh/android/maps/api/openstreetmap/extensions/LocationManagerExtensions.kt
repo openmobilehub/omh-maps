@@ -25,7 +25,7 @@ internal fun LocationManager.getLastKnownLocation(
         } catch (exception: SecurityException) {
             throw OmhMapException.PermissionError(exception)
         } catch (exception: IllegalArgumentException) {
-            throw OmhMapException.InvalidArgument(INVALID_PROVIDER, exception)
+            throw OmhMapException.ApiException(INVALID_PROVIDER, exception)
         }
     }
 
