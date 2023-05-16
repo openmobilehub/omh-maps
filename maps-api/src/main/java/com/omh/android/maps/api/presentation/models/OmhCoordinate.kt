@@ -2,6 +2,7 @@ package com.omh.android.maps.api.presentation.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.Keep
 import com.omh.android.maps.api.presentation.utils.Constants.DEFAULT_LATITUDE
 import com.omh.android.maps.api.presentation.utils.Constants.DEFAULT_LONGITUDE
 import com.omh.android.maps.api.presentation.utils.Constants.HASH_MULTIPLIER
@@ -13,6 +14,7 @@ import com.omh.android.maps.api.presentation.utils.Constants.HASH_MULTIPLIER
  *
  * Implements Parcelable interface to facilitate the usage.
  */
+@Keep
 class OmhCoordinate() : Parcelable {
 
     /**

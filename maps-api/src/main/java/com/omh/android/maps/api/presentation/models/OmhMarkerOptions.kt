@@ -3,12 +3,14 @@ package com.omh.android.maps.api.presentation.models
 import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.Keep
 
 /**
  * Defines OmhMarkerOptions for a marker.
  *
  * Implements Parcelable interface to facilitate the usage.
  */
+@Keep
 class OmhMarkerOptions() : Parcelable {
     /**
      * The location for the marker.
