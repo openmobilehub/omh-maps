@@ -1,5 +1,7 @@
 package com.omh.android.maps.sample.start
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -25,21 +27,29 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        intent?.data?.let { uri: Uri ->
-            val latitude = uri.getQueryParameter(LAT_PARAM)
-            val longitude = uri.getQueryParameter(LNG_PARAM)
-            if (latitude != null && longitude != null) {
-                val coordinate  = OmhCoordinate(latitude.toDouble(), longitude.toDouble())
-                val action = NavGraphDirections.actionGlobalMapFragment(coordinate)
-                findNavController(R.id.nav_host_fragment_content_main).navigate(action)
-            }
-        }
-
+        handleIntent(intent)
         setSupportActionBar(binding.toolbar)
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    @SuppressLint("MissingSuperCall") // Android error: https://issuetracker.google.com/issues/67035929
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        handleIntent(intent)
+    }
+
+    private fun handleIntent(intent: Intent?) {
+        intent?.data?.let { uri: Uri ->
+            val latitude = uri.getQueryParameter(LAT_PARAM)
+            val longitude = uri.getQueryParameter(LNG_PARAM)
+            if (latitude != null && longitude != null) {
+                val coordinate = OmhCoordinate(latitude.toDouble(), longitude.toDouble())
+                val action = NavGraphDirections.actionGlobalMapFragment(coordinate)
+                findNavController(R.id.nav_host_fragment_content_main).navigate(action)
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
