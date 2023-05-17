@@ -8,6 +8,7 @@ plugins {
     id("com.google.dagger.hilt.android") version "2.44" apply true
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin") version "2.5.3" apply true
+    id("omh-core")
 }
 
 android {
