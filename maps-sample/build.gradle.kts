@@ -8,6 +8,34 @@ plugins {
     id("com.google.dagger.hilt.android") version "2.44" apply true
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin") version "2.5.3" apply true
+    id("com.openmobilehub.android.omh-core")
+}
+
+omhConfig {
+    bundle("singleBuild") {
+        maps {
+            gmsService {
+                dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0"
+            }
+            nonGmsService {
+                dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0"
+            }
+        }
+    }
+    bundle("gms") {
+        maps {
+            gmsService {
+                dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0"
+            }
+        }
+    }
+    bundle("nongms") {
+        maps {
+            nonGmsService {
+                dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0"
+            }
+        }
+    }
 }
 
 android {
@@ -29,19 +57,6 @@ android {
         }
     }
 
-    flavorDimensions += "google_services"
-    productFlavors {
-        create("gms") {
-            dimension = "google_services"
-        }
-        create("nonGms") {
-            dimension = "google_services"
-        }
-        create("singleBuild") {
-            dimension = "google_services"
-        }
-    }
-
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -55,17 +70,7 @@ android {
     }
 }
 
-val gmsImplementation by configurations
-val nonGmsImplementation by configurations
-val singleBuildImplementation by configurations
-
 dependencies {
-    // OMH SDK
-    gmsImplementation(project(":maps-api-googlemaps"))
-    nonGmsImplementation(project(":maps-api-openstreetmap"))
-    singleBuildImplementation(project(":maps-api-googlemaps"))
-    singleBuildImplementation(project(":maps-api-openstreetmap"))
-
     implementation(Libs.coreKtx)
     implementation(Libs.lifecycleKtx)
     implementation(Libs.androidAppCompat)
