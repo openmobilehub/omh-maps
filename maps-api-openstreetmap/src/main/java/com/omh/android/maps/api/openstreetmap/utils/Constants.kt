@@ -17,6 +17,7 @@ internal object Constants {
     const val ONE_POINTER = 1
     const val TWO_POINTERS = 2
     const val DELAY_MS = 200L
+    const val MIN_DISTANCE = 5
 
     // Map marker
     const val MIN_ZOOM_LEVEL = 4.0
@@ -24,6 +25,7 @@ internal object Constants {
 
     // Map Copyright
     const val TEXT_SIZE = 36f
-    const val TEXT_COORDINATE_X = 25f
+    const val TEXT_COORDINATE_X = 50f
+    const val PADDING_TEXT = 20f
     const val TEXT_COPYRIGHT = "@ OpenStreetMap contributors"
 }

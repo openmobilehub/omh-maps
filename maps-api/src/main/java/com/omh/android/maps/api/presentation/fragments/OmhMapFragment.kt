@@ -14,8 +14,9 @@ import com.omh.android.maps.api.extensions.tag
 import com.omh.android.maps.api.factories.OmhMapProvider
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapView
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
+import com.omh.android.maps.api.utils.Constants.LOST_INTERNET_CONNECTION
 import com.omh.android.maps.api.utils.Constants.NO_INTERNET_CONNECTION
-import com.omh.android.maps.api.utils.NetworkUtils.isNetworkAvailable
+import com.omh.android.maps.api.utils.NetworkConnectivityChecker
 
 /**
  * A Map component in an app. This fragment is the simplest way to place a map in an application.
@@ -28,6 +29,7 @@ class OmhMapFragment : Fragment() {
     private val logTag = OmhMapFragment::class.java.tag()
     private var _binding: FragmentOmhMapBinding? = null
     private val binding get() = _binding!!
+    private var networkConnectivityChecker: NetworkConnectivityChecker? = null
 
     /**
      * [OmhMapView] instance to display in the view.
@@ -55,6 +57,26 @@ class OmhMapFragment : Fragment() {
     }
 
     /**
+     * Called immediately after onCreateView has returned, but before any saved state has been restored in to the view.
+     * This gives subclasses a chance to initialize themselves once they know their view hierarchy
+     * has been completely created.
+     * The fragment's view hierarchy is not however attached to its parent at this point.
+     */
+    @RequiresPermission(allOf = [ACCESS_NETWORK_STATE, INTERNET])
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (networkConnectivityChecker?.isNetworkAvailable() != true) {
+            Log.w(logTag, NO_INTERNET_CONNECTION)
+        }
+
+        networkConnectivityChecker = context?.let { NetworkConnectivityChecker(it) }
+        networkConnectivityChecker?.startListeningForConnectivityChanges {
+            Log.w(logTag, LOST_INTERNET_CONNECTION)
+        }
+    }
+
+    /**
      * Sets a callback object which will be triggered when the OmhMap instance is ready to be used.
      * Note that:
      * This method must be called from the main thread.
@@ -62,11 +84,7 @@ class OmhMapFragment : Fragment() {
      *
      * @param omhOnMapReadyCallback -> the callback object that will be triggered when the map is ready to be used.
      */
-    @RequiresPermission(allOf = [ACCESS_NETWORK_STATE, INTERNET])
     fun getMapAsync(omhOnMapReadyCallback: OmhOnMapReadyCallback) {
-        if (!isNetworkAvailable(requireContext())) {
-            Log.w(logTag, NO_INTERNET_CONNECTION)
-        }
         omhMapView?.getMapAsync(omhOnMapReadyCallback)
     }
 
@@ -80,6 +98,7 @@ class OmhMapFragment : Fragment() {
 
     override fun onDestroy() {
         omhMapView?.onDestroy()
+        networkConnectivityChecker?.stopListeningForConnectivity()
         super.onDestroy()
     }
 

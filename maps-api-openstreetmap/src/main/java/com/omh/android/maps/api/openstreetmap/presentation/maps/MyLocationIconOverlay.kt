@@ -15,22 +15,22 @@ internal class MyLocationIconOverlay(context: Context) : Overlay() {
     private val icon: Drawable? = ContextCompat.getDrawable(context, ic_menu_mylocation)
     private var clickListener: (() -> Unit)? = null
     private var centerLocation: (() -> Unit)? = null
+    private var wasDrawn = false
 
     override fun draw(canvas: Canvas?, mapView: MapView?, shadow: Boolean) {
         super.draw(canvas, mapView, shadow)
+        if (wasDrawn || icon == null || mapView == null) return
 
-        if (!shadow && icon != null && mapView != null) {
-            val coordinateX = mapView.width - icon.intrinsicWidth - PADDING_MY_LOCATION_ICON
-            val coordinateY = PADDING_MY_LOCATION_ICON
+        val coordinateX = mapView.width - icon.intrinsicWidth - PADDING_MY_LOCATION_ICON
+        val coordinateY = PADDING_MY_LOCATION_ICON
 
-            icon.setBounds(
-                coordinateX,
-                coordinateY,
-                coordinateX + icon.intrinsicWidth,
-                coordinateY + icon.intrinsicHeight
-            )
-            canvas?.let { icon.draw(it) }
-        }
+        icon.setBounds(
+            coordinateX,
+            coordinateY,
+            coordinateX + icon.intrinsicWidth,
+            coordinateY + icon.intrinsicHeight
+        )
+        canvas?.let { icon.draw(it) }
     }
 
     override fun onTouchEvent(event: MotionEvent?, mapView: MapView?): Boolean {

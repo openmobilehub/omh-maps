@@ -6,13 +6,16 @@ import android.graphics.Paint
 import android.graphics.Typeface
 import android.view.MotionEvent
 import android.view.ViewConfiguration
+import com.omh.android.maps.api.openstreetmap.utils.Constants.MIN_DISTANCE
 import com.omh.android.maps.api.openstreetmap.utils.Constants.ONE_POINTER
+import com.omh.android.maps.api.openstreetmap.utils.Constants.PADDING_TEXT
 import com.omh.android.maps.api.openstreetmap.utils.Constants.TEXT_COORDINATE_X
 import com.omh.android.maps.api.openstreetmap.utils.Constants.TEXT_COPYRIGHT
 import com.omh.android.maps.api.openstreetmap.utils.Constants.TEXT_SIZE
 import com.omh.android.maps.api.openstreetmap.utils.Constants.TWO_POINTERS
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Overlay
+import kotlin.math.abs
 
 internal class GestureOverlay : Overlay() {
     private var enableZoomGestures = true
@@ -20,6 +23,7 @@ internal class GestureOverlay : Overlay() {
     private var isScrolling = false
     private var lastPointerY = 0f
     private var startTouchTime = 0L
+    private var wasDrawn = false
     private val paint = Paint().apply {
         color = Color.BLACK
         textSize = TEXT_SIZE
@@ -29,9 +33,9 @@ internal class GestureOverlay : Overlay() {
 
     override fun draw(canvas: Canvas?, mapView: MapView?, shadow: Boolean) {
         super.draw(canvas, mapView, shadow)
-        if (!shadow) return
+        if (wasDrawn) return
 
-        val height = paint.fontMetrics.bottom - paint.fontMetrics.top
+        val height = paint.fontMetrics.bottom - paint.fontMetrics.top - PADDING_TEXT
         val coordinateX = TEXT_COORDINATE_X
         val coordinateY = mapView?.height?.minus(height) ?: 0f
         canvas?.drawText(TEXT_COPYRIGHT, coordinateX, coordinateY, paint)
@@ -88,9 +92,10 @@ internal class GestureOverlay : Overlay() {
     private fun actionMove(event: MotionEvent, mapView: MapView?) {
         val isDoubleTapAndHoldFinger = doubleTapped && lastPointerY != event.y
 
-        if (isDoubleTapAndHoldFinger) {
+        if (isDoubleTapAndHoldFinger && abs(lastPointerY - event.y) > MIN_DISTANCE) {
             zoomCamera(event.y, mapView)
         }
+        lastPointerY = event.y
     }
 
     private fun isSingleFingerDoubleTap(event: MotionEvent, actionTime: Long): Boolean {
