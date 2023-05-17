@@ -6,7 +6,6 @@ subprojects {
     repositories {
         mavenCentral()
         google()
-        mavenLocal()
         maven("https://s01.oss.sonatype.org/content/groups/staging/")
     }
 }
