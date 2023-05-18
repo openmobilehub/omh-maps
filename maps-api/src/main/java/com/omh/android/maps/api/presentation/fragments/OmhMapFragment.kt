@@ -65,12 +65,12 @@ class OmhMapFragment : Fragment() {
     @RequiresPermission(allOf = [ACCESS_NETWORK_STATE, INTERNET])
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        networkConnectivityChecker = context?.let { NetworkConnectivityChecker(it) }
 
         if (networkConnectivityChecker?.isNetworkAvailable() != true) {
             Log.w(logTag, NO_INTERNET_CONNECTION)
         }
 
-        networkConnectivityChecker = context?.let { NetworkConnectivityChecker(it) }
         networkConnectivityChecker?.startListeningForConnectivityChanges {
             Log.w(logTag, LOST_INTERNET_CONNECTION)
         }
