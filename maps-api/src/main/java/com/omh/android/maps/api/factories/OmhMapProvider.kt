@@ -145,7 +145,7 @@ class OmhMapProvider private constructor(
         internal var singletonInstance: OmhMapProvider? = null
 
         /**
-         *
+         * Gets the [OmhMapProvider] instance.
          *
          * @return -> An existing [OmhMapProvider].
          * @throws -> An [Error] when the [OmhMapProvider] is not initialized.
