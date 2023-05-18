@@ -5,10 +5,12 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapView
+import com.omh.android.maps.api.presentation.models.OmhMapException
+import com.omh.android.maps.api.presentation.models.OmhMapStatusCodes
 import kotlin.reflect.KClass
 
 /**
- * Object that provides the correct implementation of the map and location for GMS or non GMS builds.
+ * Provides the correct implementation of the map and location for GMS or non GMS builds.
  */
 class OmhMapProvider private constructor(
     private val gmsPath: String?,
@@ -22,10 +24,21 @@ class OmhMapProvider private constructor(
      *
      * @param context -> ideally your application context, but an activity context will also work.
      *
-     * @return an [OmhMapView] to interact with the map from the OMH Maps library.
+     * @return -> An [OmhMapView] to interact with the map from the OMH Maps library.
+     * @throws -> An [OmhMapException.ApiException] when reflection fails for any of the implementations
+     * of the [OmhMapFactory]. If this happens, look if you have configured correctly the gradle plugin
+     * or if your obfuscation method hasn't tampered with the library files.
      */
+    @Throws(OmhMapException.ApiException::class)
     fun provideOmhMapView(context: Context): OmhMapView {
-        val omhMapFactory = getOmhMapFactory(context)
+        val omhMapFactory: OmhMapFactory = try {
+            getOmhMapFactory(context)
+        } catch (exception: ClassNotFoundException) {
+            throw OmhMapException.ApiException(
+                statusCode = OmhMapStatusCodes.DEVELOPER_ERROR,
+                cause = exception
+            )
+        }
         return omhMapFactory.getOmhMapView(context)
     }
 
@@ -34,9 +47,20 @@ class OmhMapProvider private constructor(
      *
      * @param context -> ideally your application context, but an activity context will also work.
      * @return -> [OmhLocation] to interact with the location from the OMH Maps library.
+     * @throws -> [OmhMapException.ApiException] when reflection fails for any of the implementations
+     * of the [OmhMapFactory]. If this happens, look if you have configured correctly the gradle plugin
+     * or if your obfuscation method hasn't tampered with the library files.
      */
+    @Throws(OmhMapException.ApiException::class)
     fun provideOmhLocation(context: Context): OmhLocation {
-        val omhMapFactory = getOmhMapFactory(context)
+        val omhMapFactory: OmhMapFactory = try {
+            getOmhMapFactory(context)
+        } catch (exception: ClassNotFoundException) {
+            throw OmhMapException.ApiException(
+                statusCode = OmhMapStatusCodes.DEVELOPER_ERROR,
+                cause = exception
+            )
+        }
         return omhMapFactory.getOmhLocation(context)
     }
 
@@ -44,14 +68,19 @@ class OmhMapProvider private constructor(
      * This uses reflection to obtain the correct implementation for GMS or non GMS devices
      * depending on what dependency you have.
      *
-     * @return -> a [OmhMapFactory] instance that is created using reflection.
+     * @return -> A [OmhMapFactory] instance that is created using reflection.
+     * @throws -> A [ClassNotFoundException] when the reflections fails.
+     * Also can throw a [OmhMapException.ApiException] when no paths were provided.
      */
-    @Throws(Exception::class) // TODO map to OMH API exception with DEVELOPER status code
+    @Throws(ClassNotFoundException::class, OmhMapException.ApiException::class)
     private fun getOmhMapFactory(context: Context): OmhMapFactory = when {
         isSingleBuild -> reflectSingleBuild(context)
         gmsPath != null -> getFactoryImplementation(gmsPath)
         nonGmsPath != null -> getFactoryImplementation(nonGmsPath)
-        else -> error("NO PATHS PROVIDED")
+        else -> throw OmhMapException.ApiException(
+            statusCode = OmhMapStatusCodes.DEVELOPER_ERROR,
+            cause = IllegalStateException("NO PATHS PROVIDED")
+        )
     }
 
     @Throws(ClassNotFoundException::class)
@@ -69,17 +98,30 @@ class OmhMapProvider private constructor(
         return clazz.objectInstance as OmhMapFactory
     }
 
+    /**
+     * Builder class to setup and create a [OmhMapProvider] instance.
+     */
     class Builder {
 
         private var gmsPath: String? = null
         private var nonGmsPath: String? = null
 
+        /**
+         * Adds a GMS path to the [OmhMapProvider].
+         *
+         * @param gmsPath -> The path for the GMS.
+         */
         @JvmOverloads
         fun addGmsPath(gmsPath: String? = GMS_ADDRESS): Builder {
             this.gmsPath = gmsPath
             return this
         }
 
+        /**
+         * Adds a Non GMS path to the [OmhMapProvider].
+         *
+         * @param ngmsPath -> The path for teh Non GMS.
+         */
         @JvmOverloads
         fun addNonGmsPath(ngmsPath: String? = NON_GMS_ADDRESS): Builder {
             this.nonGmsPath = ngmsPath
@@ -91,6 +133,9 @@ class OmhMapProvider private constructor(
         }
     }
 
+    /**
+     * Object to hold and get the [OmhMapProvider].
+     */
     companion object {
         private const val NON_GMS_ADDRESS =
             "com.omh.android.maps.api.openstreetmap.presentation.OmhMapFactoryImpl"
@@ -99,6 +144,13 @@ class OmhMapProvider private constructor(
 
         internal var singletonInstance: OmhMapProvider? = null
 
+        /**
+         * Gets the [OmhMapProvider] instance.
+         *
+         * @return -> An existing [OmhMapProvider].
+         * @throws -> An [Error] when the [OmhMapProvider] is not initialized.
+         */
+        @JvmStatic
         fun getInstance(): OmhMapProvider {
             if (singletonInstance == null) error("SDK NOT INITIALIZED")
             return singletonInstance!!
