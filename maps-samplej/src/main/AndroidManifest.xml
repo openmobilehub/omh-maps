@@ -15,6 +15,7 @@
         android:theme="@style/Theme.Omhmaps">
         <activity
             android:name="com.omh.android.maps.sample.start.MainActivity"
+            android:launchMode="singleTask"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Omhmaps.NoActionBar">

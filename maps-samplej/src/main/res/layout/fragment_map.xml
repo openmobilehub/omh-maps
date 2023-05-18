@@ -62,7 +62,7 @@
         android:layout_marginEnd="@dimen/normal_8"
         android:layout_marginBottom="@dimen/normal_8"
         android:contentDescription="@string/button_to_share_location"
-        android:src="@drawable/ic_share"
+        android:src="@drawable/ic_confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
