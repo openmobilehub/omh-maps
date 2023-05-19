@@ -14,13 +14,25 @@ Bug reports and pull requests from users are what keep this project working.
 ## Running for development
 
 #### Step 1: Publish the plugin to mavenLocal
-
-Go to Android Studio -> Gradle tab and run the `publishToMavenLocal`
-or you can do it by terminal
+In the project's `build.gradle` file comment the stage reference and add maven local:
 
 ```
-./gradlew publishToMavenLocal
+repositories {
+    mavenCentral()
+    google()
+    gradlePluginPortal()
+    mavenLocal()
+    // maven("https://s01.oss.sonatype.org/content/groups/staging/")
+}
 ```
+
+Go to Android Studio -> Gradle tab and run the `publishToMavenLocal` 
+in the `maps-api`, `maps-api-googlemaps` and `maps-api-openstreetmap` and run `publishtoMavenLocal`
+
+![gradle-maps-api](https://github.com/openmobilehub/omh-maps/assets/124717244/7a8aeb52-fcf2-4c8c-a0e8-e249e69b3fea)
+![gradle-maps-api-gms](https://github.com/openmobilehub/omh-maps/assets/124717244/e5a370d9-1429-4234-a884-b39a23c6dadb)
+![gradle-maps-api-ngms](https://github.com/openmobilehub/omh-maps/assets/124717244/2cc52110-8faa-47e3-9298-a6cec846a348)
+
 
 #### Step 2: Verify plugin is published
 
