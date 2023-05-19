@@ -44,12 +44,121 @@ For more information about the `local.properties` file, see [Gradle properties](
    android:name="com.google.android.geo.API_KEY"
    android:value="${MAPS_API_KEY}" />
 ```
-## Include Gradle dependencies
+## Gradle dependencies
+To integrate the OMH Maps in your project is required to add some Gradle dependencies.
 
-### OMH Maps SDKs - TODO
-### OMH Core Plug-in - TODO
-* Without core plugin - Hans to review - TODO
-* With core plugin - Hans to review - TODO
+### OMH Core Plugin
+To add the core plugin dependency in a new project, follow the next steps:
+
+1. In the project's `settings.gradle` file in the `dependencyResolutionManagement`, 
+then in the `repositories` the maven reference `maven { url 'https://s01.oss.sonatype.org/content/groups/staging/' }`
+
+```
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://s01.oss.sonatype.org/content/groups/staging/' }
+    }
+}
+```
+
+2. In the project's `build.gradle` add the next script
+
+```
+buildscript {
+   repositories {
+        maven { url 'https://s01.oss.sonatype.org/content/groups/staging/' }
+   }
+   dependencies {
+        classpath 'com.openmobilehub.android:omh-core:1.0'
+   }
+}
+```
+
+3. In the app's `build.gradle` add the plugin id
+
+```
+id 'com.openmobilehub.android.omh-core'
+```
+
+4. Finally, Sync Project with Gradle Files. 
+
+### Configure the Core plugin
+To use the core plugin is required some minimum configuration, for more details [Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0)
+
+1. Go to your app's `build.gradle` file and add the next code:
+
+```
+omhConfig {
+    bundle("singleBuild") {
+        maps {
+            gmsService {
+                dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0"
+            }
+            nonGmsService {
+                dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0"
+            }
+        }
+    }
+    bundle("gms") {
+        maps {
+            gmsService {
+                dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0"
+            }
+        }
+    }
+    bundle("nongms") {
+        maps {
+            nonGmsService {
+                dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0"
+            }
+        }
+    }
+}
+```
+
+2. Now you can select in the build variants:
+
+3. Finally you need to instantiate the Provider. The recommendation is to do it in the Application
+guarantee that the provider is instantiate correctly for the app.
+For example:
+
+```kotlin
+class DemoApp : Application() {
+    
+    var omhProviderBuilder: OmhMapProvider.Builder? = null
+
+    override fun onCreate() {
+        super.onCreate()
+        
+        val omhProviderBuilder = OmhMapProvider.Builder()
+        omhProviderBuilder
+            .addGmsPath(BuildConfig.MAPS_GMS_PATH)
+            .addNonGmsPath(BuildConfig.MAPS_NON_GMS_PATH)
+        initialize(omhProviderBuilder)
+    }
+}
+```
+
+Note: if you create your of Application, remember to add in the `AndroidManifest.xml` of the app.
+
+```
+<application
+        android:name=".DemoApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.OMHMaps">
+```
+
+4. Finally in your code you can get a `OmhMapView` or `OmhLocation`, for example:
+
+```kotlin
+val omhLocation = OmhMapProvider.getInstance().provideOmhLocation(context)
+```
 
 ## Getting Started
 The main interfaces that you will be interacting with are called `OmhMap`, `OmhMapView` and `OmhLocation`.
@@ -123,13 +232,12 @@ override fun onMapReady(omhMap: OmhMap) {
 
 ## Documentation
 
-See example and check the full documentation at our Wiki.
-
-TODO - KDOCS (Github pages)
-TODO - 3P plugins/implementation (wiki)
+See example and check the full documentation and add custom implementation at our [Wiki](https://github.com/openmobilehub/omh-maps/wiki).
+Additionally for more information about the OMH Map functions, [Docs](https://openmobilehub.github.io/omh-maps).
 
 ## Contributing
 
 We'd be glad if you decide to contribute to this project.
 
 All pull request is welcome, just make sure that every work is linked to an issue on this repository so everyone can track it.
+For more information check [CONTRIBUTING](https://github.com/openmobilehub/omh-maps/blob/main/CONTRIBUTING.md)
