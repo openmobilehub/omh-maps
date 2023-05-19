@@ -4,26 +4,23 @@
 
 
 # OMH Maps SDK
-
-OMH is an open-source Android SDK to make easily swap between GMS, HMS and our custom OHM services.
+OMH is an open-source Android SDK to make easily swap between GMS and our custom OHM services.
 
 It aims at creating low coupled, extensible SDK reducing the code boilerplate of switching between GMS, HMS, or any other service, and also provides a custom full open source alternative services switching automatically according to your configuration in the Gradle plugin giving the right outputs without overloading your APK with unnecessary libraries.
-
-* [Documentation](#documentation)
-* [Contributing](#contributing)
-
 This repository allows you to display a map by using the common components for GMS and non GMS devices without worrying about the specific implementation for each type device.
 
 # Sample App
+Sample app demonstrates how to use Omh Maps SDK functionalities, [sample](/omh-maps/tree/develop/maps-sample).
 
-TODO - Add intro and a [link](/omh-maps/maps-sample) to the sample app.
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/e36d24ee-2b12-4d64-847e-884bd414611b" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/b781c592-2836-4fb7-b3b4-83136174b48c" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/c6c4e3e8-ccf6-45a5-abeb-07cdf7160664" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/0f37a011-f1ab-43e8-8e97-a99ed982f9f8" width="200" height="auto">
 
-## Include Gradle dependencies
-
-### OMH Maps SDKs - TODO
-### OMH Core Plug-in - TODO
-  * Without core plugin - Hans to review - TODO
-  * With core plugin - Hans to review - TODO
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/77d7f107-0283-4d1e-8daa-288f61db856f" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/4548376a-326c-49a5-9786-820da2ae39b6" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/5adea3da-21ef-4081-9568-85ea7c9c9495" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/03aab198-943c-4e2a-9f07-ce6104729efc" width="200" height="auto">
 
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
@@ -56,12 +53,139 @@ For more information about the `local.properties` file, see [Gradle properties](
    android:name="com.google.android.geo.API_KEY"
    android:value="${MAPS_API_KEY}" />
 ```
-## Setting Core Plugin
+## Gradle dependencies
+To integrate the OMH Maps in your project is required to add some Gradle dependencies.
+
+### OMH Core Plugin
+To add the core plugin dependency in a new project, follow the next steps:
+
+1. In the project's `settings.gradle` file in the `dependencyResolutionManagement`, 
+then in the `repositories` the maven reference `maven { url 'https://s01.oss.sonatype.org/content/groups/staging/' }`
+
+```
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://s01.oss.sonatype.org/content/groups/staging/' }
+    }
+}
+```
+
+2. In the project's `build.gradle` add the next script
+
+```
+buildscript {
+   repositories {
+        maven { url 'https://s01.oss.sonatype.org/content/groups/staging/' }
+   }
+   dependencies {
+        classpath 'com.openmobilehub.android:omh-core:1.0'
+   }
+}
+```
+
+3. In the app's `build.gradle` add the plugin id
+
+```
+id 'com.openmobilehub.android.omh-core'
+```
+
+4. Finally, Sync Project with Gradle Files.
+
+![sync-project-with-gradle-files](https://github.com/openmobilehub/omh-maps/assets/124717244/c79ccfaf-5e82-45a7-a1a1-ac75e1522f35)
+
+### Configure the Core plugin
+To use the core plugin is required some minimum configuration, for more details [Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0)
+
+1. Go to your app's `build.gradle` file and add the next code:
+
+```
+omhConfig {
+    bundle("singleBuild") {
+        maps {
+            gmsService {
+                dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0"
+            }
+            nonGmsService {
+                dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0"
+            }
+        }
+    }
+    bundle("gms") {
+        maps {
+            gmsService {
+                dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0"
+            }
+        }
+    }
+    bundle("nongms") {
+        maps {
+            nonGmsService {
+                dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0"
+            }
+        }
+    }
+}
+```
+
+2. Now you can select in the build variants:
+
+![build-variants](https://github.com/openmobilehub/omh-maps/assets/124717244/91c511dd-d8ff-42b1-9fde-2340fec3277b)
+
+3. Finally you need to instantiate the Provider. The recommendation is to do it in the Application
+guarantee that the provider is instantiate correctly for the app.
+For example:
+
+```kotlin
+class DemoApp : Application() {
+    
+    var omhProviderBuilder: OmhMapProvider.Builder? = null
+
+    override fun onCreate() {
+        super.onCreate()
+        
+        val omhProviderBuilder = OmhMapProvider.Builder()
+        omhProviderBuilder
+            .addGmsPath(BuildConfig.MAPS_GMS_PATH)
+            .addNonGmsPath(BuildConfig.MAPS_NON_GMS_PATH)
+        initialize(omhProviderBuilder)
+    }
+}
+```
+
+Note: if you create your of Application, remember to add in the `AndroidManifest.xml` of the app.
+
+```
+<application
+        android:name=".DemoApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.OMHMaps">
+```
+
+4. Finally in your code you can get a `OmhMapView` or `OmhLocation`, for example:
+
+```kotlin
+val omhLocation = OmhMapProvider.getInstance().provideOmhLocation(context)
+```
 
 ## Getting Started
 The main interfaces that you will be interacting with are called `OmhMap`, `OmhMapView` and `OmhLocation`.
 It contains all your basic maps and location functions like displaying a marker, map gestures, getting current location and more.
 Additionally a fragment `OmhMapFragment` is provided, this fragment manages the life cycle of the map.
+
+**Important:** Before use be sure to add in the app's `AndroidManifest.xml` the required permissions:
+
+```
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
 
 **Disclaimer:** This is a tool in development, it could change some implementation details in the future.
 
@@ -130,13 +254,13 @@ override fun onMapReady(omhMap: OmhMap) {
 
 ## Documentation
 
-See example and check the full documentation at our Wiki.
+See example and check the full documentation and add custom implementation at our [Wiki](https://github.com/openmobilehub/omh-maps/wiki).
 
-TODO - KDOCS (Github pages)
-TODO - 3P plugins/implementation (wiki)
+Additionally for more information about the OMH Map functions, [Docs](https://openmobilehub.github.io/omh-maps).
 
 ## Contributing
 
 We'd be glad if you decide to contribute to this project.
 
 All pull request is welcome, just make sure that every work is linked to an issue on this repository so everyone can track it.
+For more information check [CONTRIBUTING](https://github.com/openmobilehub/omh-maps/blob/main/CONTRIBUTING.md)
