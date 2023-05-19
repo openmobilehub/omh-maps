@@ -251,6 +251,7 @@ override fun onMapReady(omhMap: OmhMap) {
 ## Documentation
 
 See example and check the full documentation and add custom implementation at our [Wiki](https://github.com/openmobilehub/omh-maps/wiki).
+
 Additionally for more information about the OMH Map functions, [Docs](https://openmobilehub.github.io/omh-maps).
 
 ## Contributing
