@@ -4,26 +4,14 @@
 
 
 # OMH Maps SDK
-
-OMH is an open-source Android SDK to make easily swap between GMS, HMS and our custom OHM services.
+OMH is an open-source Android SDK to make easily swap between GMS and our custom OHM services.
 
 It aims at creating low coupled, extensible SDK reducing the code boilerplate of switching between GMS, HMS, or any other service, and also provides a custom full open source alternative services switching automatically according to your configuration in the Gradle plugin giving the right outputs without overloading your APK with unnecessary libraries.
-
-* [Documentation](#documentation)
-* [Contributing](#contributing)
-
 This repository allows you to display a map by using the common components for GMS and non GMS devices without worrying about the specific implementation for each type device.
 
 # Sample App
-
-TODO - Add intro and a [link](/omh-maps/maps-sample) to the sample app.
-
-## Include Gradle dependencies
-
-### OMH Maps SDKs - TODO
-### OMH Core Plug-in - TODO
-  * Without core plugin - Hans to review - TODO
-  * With core plugin - Hans to review - TODO
+Sample app demonstrates how to use Omh Maps SDK functionalities, [sample](/omh-maps/tree/develop/maps-sample).
+IMAGES
 
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
@@ -56,7 +44,12 @@ For more information about the `local.properties` file, see [Gradle properties](
    android:name="com.google.android.geo.API_KEY"
    android:value="${MAPS_API_KEY}" />
 ```
-## Setting Core Plugin
+## Include Gradle dependencies
+
+### OMH Maps SDKs - TODO
+### OMH Core Plug-in - TODO
+* Without core plugin - Hans to review - TODO
+* With core plugin - Hans to review - TODO
 
 ## Getting Started
 The main interfaces that you will be interacting with are called `OmhMap`, `OmhMapView` and `OmhLocation`.
