@@ -92,7 +92,9 @@ buildscript {
 id 'com.openmobilehub.android.omh-core'
 ```
 
-4. Finally, Sync Project with Gradle Files. 
+4. Finally, Sync Project with Gradle Files.
+
+![sync-project-with-gradle-files](https://github.com/openmobilehub/omh-maps/assets/124717244/c79ccfaf-5e82-45a7-a1a1-ac75e1522f35)
 
 ### Configure the Core plugin
 To use the core plugin is required some minimum configuration, for more details [Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0)
@@ -129,6 +131,8 @@ omhConfig {
 ```
 
 2. Now you can select in the build variants:
+
+![build-variants](https://github.com/openmobilehub/omh-maps/assets/124717244/91c511dd-d8ff-42b1-9fde-2340fec3277b)
 
 3. Finally you need to instantiate the Provider. The recommendation is to do it in the Application
 guarantee that the provider is instantiate correctly for the app.
