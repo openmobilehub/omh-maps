@@ -11,7 +11,16 @@ This repository allows you to display a map by using the common components for G
 
 # Sample App
 Sample app demonstrates how to use Omh Maps SDK functionalities, [sample](/omh-maps/tree/develop/maps-sample).
-IMAGES
+
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/e36d24ee-2b12-4d64-847e-884bd414611b" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/b781c592-2836-4fb7-b3b4-83136174b48c" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/c6c4e3e8-ccf6-45a5-abeb-07cdf7160664" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/0f37a011-f1ab-43e8-8e97-a99ed982f9f8" width="200" height="auto">
+
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/77d7f107-0283-4d1e-8daa-288f61db856f" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/4548376a-326c-49a5-9786-820da2ae39b6" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/5adea3da-21ef-4081-9568-85ea7c9c9495" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/03aab198-943c-4e2a-9f07-ce6104729efc" width="200" height="auto">
 
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
@@ -164,6 +173,15 @@ val omhLocation = OmhMapProvider.getInstance().provideOmhLocation(context)
 The main interfaces that you will be interacting with are called `OmhMap`, `OmhMapView` and `OmhLocation`.
 It contains all your basic maps and location functions like displaying a marker, map gestures, getting current location and more.
 Additionally a fragment `OmhMapFragment` is provided, this fragment manages the life cycle of the map.
+
+**Important:** Before use be sure to add in the app's `AndroidManifest.xml` the required permissions:
+
+```
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
 
 **Disclaimer:** This is a tool in development, it could change some implementation details in the future.
 
