@@ -96,18 +96,6 @@ id 'com.openmobilehub.android.omh-core'
 
 ![sync-project-with-gradle-files](https://github.com/openmobilehub/omh-maps/assets/124717244/c79ccfaf-5e82-45a7-a1a1-ac75e1522f35)
 
-**Note:** If you encounter the error "Missing BuildConfig.MAPS_GMS_PATH and BuildConfig.MAPS_NON_GMS_PATH in BuildConfig class". Follow the next steps:
-1. Sync Project with Gradle Files.
-   ![sync-project-with-gradle-files](https://github.com/openmobilehub/omh-maps/assets/124717244/c79ccfaf-5e82-45a7-a1a1-ac75e1522f35)
-2. Clean Project.
-
-3. Rebuild Project.
-
-4. Run the app.
-
-5. If still not working Invalidate the caches.
-
-
 ### Configure the Core plugin
 To use the core plugin is required some minimum configuration, for more details [Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0)
 

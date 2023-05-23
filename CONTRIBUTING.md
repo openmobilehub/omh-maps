@@ -35,11 +35,11 @@ Go to Android Studio -> Gradle tab and run the `publishToMavenLocal` on `maps-ap
 
 Go to `/Users/your_user/.m2` dot folder and you'll find the plugin.
 
-#### Step 3: Debug
+#### Step 2: Debug
 
 Add some prints to debug the code
 
-#### Step 4: Test it
+#### Step 3: Test it
 
 Create a sample project, add the plugin and sync the project with gradle and you'll see logs in the `Build` tab in Android Studio.
 
@@ -51,9 +51,6 @@ You can verify your code with the following tasks:
 ./gradlew assemble
 ./gradlew detekt
 ```
-
-Once you have made a change in any of the `maps-api`, `maps-api-google maps` or `maps-api-openstreetmap` modules, 
-you must `publishToMavenLocal` in that module in order to see the changes.
 
 ## Write documentation
 
