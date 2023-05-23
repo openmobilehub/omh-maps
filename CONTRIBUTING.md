@@ -68,11 +68,11 @@ publishing {
 
 Go to `/Users/your_user/.m2` dot folder and you'll find the plugin.
 
-#### Step 2: Debug
+#### Step 3: Debug
 
 Add some prints to debug the code
 
-#### Step 3: Test it
+#### Step 4: Test it
 
 Create a sample project, add the plugin and sync the project with gradle and you'll see logs in the `Build` tab in Android Studio.
 
@@ -85,17 +85,20 @@ You can verify your code with the following tasks:
 ./gradlew detekt
 ```
 
+Once you have made a change in any of the `maps-api`, `maps-api-google maps` or `maps-api-openstreetmap` modules, 
+you must `publishToMavenLocal` in that module in order to see the changes.
+
 ## Write documentation
 
 This project has documentation in a few places:
 
 ### Introduction and usage
 
-A friendly `README.md` written for many audiences.
+A friendly [README.md](https://github.com/openmobilehub/omh-maps/blob/refactor/documentation/README.md) written for many audiences.
 
 ### Examples and advanced usage
 
-The [wiki](https://github.com/openmobilehub/omh-maps/wiki).
+You can find more information in the [wiki](https://github.com/openmobilehub/omh-maps/wiki).
 
 ## Releasing a new version
 
