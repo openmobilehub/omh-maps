@@ -25,11 +25,13 @@ repositories {
 }
 ```
 
-Go to Android Studio -> Gradle tab and run the `publishToMavenLocal` on `maps-api`, `maps-api-googlemaps` and `maps-api-openstreetmap`:
+Go to Android Studio -> Gradle tab and run the `publishToMavenLocal`
+in the `maps-api`, `maps-api-googlemaps` and `maps-api-openstreetmap` and run `publishtoMavenLocal`
 
 ![gradle-maps-api](https://github.com/openmobilehub/omh-maps/assets/124717244/7a8aeb52-fcf2-4c8c-a0e8-e249e69b3fea)
 ![gradle-maps-api-gms](https://github.com/openmobilehub/omh-maps/assets/124717244/e5a370d9-1429-4234-a884-b39a23c6dadb)
 ![gradle-maps-api-ngms](https://github.com/openmobilehub/omh-maps/assets/124717244/2cc52110-8faa-47e3-9298-a6cec846a348)
+
 
 #### Step 2: Verify plugin is published
 
