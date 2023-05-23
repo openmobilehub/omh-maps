@@ -14,9 +14,9 @@ Bug reports and pull requests from users are what keep this project working.
 ## Running for development
 
 #### Step 1: Publish the plugin to mavenLocal
-In the project's `build.gradle` file comment the stage reference and add maven local:
+1. In the project's `build.gradle` file comment the stage reference and add maven local:
 
-```
+```kotlin
 repositories {
     mavenCentral()
     google()
@@ -25,8 +25,39 @@ repositories {
 }
 ```
 
-Go to Android Studio -> Gradle tab and run the `publishToMavenLocal` 
-in the `maps-api`, `maps-api-googlemaps` and `maps-api-openstreetmap` and run `publishtoMavenLocal`
+2. Edit the `android-base-lib.gradle` file in `buildSrc` and remove `id("signing"")` inside the plugins:
+
+```kotlin
+plugins {
+    id("com.android.library")
+    id("io.gitlab.arturbosch.detekt")
+    kotlin("android")
+    id("jacoco")
+    id("maven-publish")
+}
+```
+
+3. Below the plugins` add the next code:
+
+```kotlin
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            group = getPropertyOrFail("group")
+            artifactId = properties.get("artifactId").toString()
+            version = getPropertyOrFail("version")
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
+}
+```
+
+4. Below the comment `// Publishing block` remove all the code.
+
+5. Go to Android Studio -> Gradle tab and run the `publishToMavenLocal`in the `maps-api`, `maps-api-googlemaps` and `maps-api-openstreetmap`:
 
 ![gradle-maps-api](https://github.com/openmobilehub/omh-maps/assets/124717244/7a8aeb52-fcf2-4c8c-a0e8-e249e69b3fea)
 ![gradle-maps-api-gms](https://github.com/openmobilehub/omh-maps/assets/124717244/e5a370d9-1429-4234-a884-b39a23c6dadb)

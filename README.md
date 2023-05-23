@@ -4,10 +4,14 @@
 
 
 # OMH Maps SDK
-OMH is an open-source Android SDK to make easily swap between GMS and our custom OHM services.
+The solution to seamlessly integrating maps across GMS and non-GMS devices. Our open-source Android SDK tackles the problem of device compatibility, allowing developers to use the same SDK without worrying about specific device requirements.
 
-It aims at creating low coupled, extensible SDK reducing the code boilerplate of switching between GMS, HMS, or any other service, and also provides a custom full open source alternative services switching automatically according to your configuration in the Gradle plugin giving the right outputs without overloading your APK with unnecessary libraries.
-This repository allows you to display a map by using the common components for GMS and non GMS devices without worrying about the specific implementation for each type device.
+With OMH Maps SDK, you can effortlessly incorporate Google Maps and OpenStreetMap implementations into your applications, regardless of whether the device has Google Mobile Services or not. 
+Our SDK handles the complexities behind the scenes, providing a unified interface and common components for consistent map functionality.
+
+# Provider Implementations
+We also believe in the power of community collaboration. That's why OMH Maps SDK is open-source, inviting contributions and supporting plugins from other map providers. 
+Together, we can expand the capabilities of the SDK and enhance the range of supported map services.
 
 # Sample App
 Sample app demonstrates how to use Omh Maps SDK functionalities, [sample](/omh-maps/tree/develop/maps-sample).
@@ -43,16 +47,26 @@ You should not check your API key into your version control system, so it is rec
 storing it in the `local.properties` file, which is located in the root directory of your project.
 For more information about the `local.properties` file, see [Gradle properties](https://developer.android.com/studio/build#properties-files)
 [files](https://developer.android.com/studio/build#properties-files).
+
 1. Open the `local.properties` in your project level directory, and then add the following code. Replace `YOUR_API_KEY` with your API key.
 `MAPS_API_KEY=YOUR_API_KEY`
 2. Save the file.
-3. In your `AndroidManifest.xml file`, go to `com.google.android.geo.API_KEY` and update the `android:value attribute` as follows:
+3. In your `AndroidManifest.xml`file, go to `com.google.android.geo.API_KEY` and update the `android:value attribute` as follows:
 
 ```xml
 <meta-data
    android:name="com.google.android.geo.API_KEY"
    android:value="${MAPS_API_KEY}" />
 ```
+
+4. Then, to read the value from the `local.properties` and use in the `AndroidManifest.xml` file:
+
+```groovy
+def localProps = new Properties()
+localProps.load(rootProject.file("local.properties").newDataInputStream())
+manifestPlaceholders = [MAPS_API_KEY: "${localProps.getProperty('MAPS_API_KEY')}"]
+```
+
 ## Gradle dependencies
 To integrate the OMH Maps in your project is required to add some Gradle dependencies.
 
@@ -263,4 +277,4 @@ Additionally for more information about the OMH Map functions, [Docs](https://op
 We'd be glad if you decide to contribute to this project.
 
 All pull request is welcome, just make sure that every work is linked to an issue on this repository so everyone can track it.
-For more information check [CONTRIBUTING](https://github.com/openmobilehub/omh-maps/blob/main/CONTRIBUTING.md)
+For more information check [CONTRIBUTING](https://github.com/openmobilehub/omh-maps/blob/release/1.0/CONTRIBUTING.md)
