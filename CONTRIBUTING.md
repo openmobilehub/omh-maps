@@ -25,23 +25,21 @@ repositories {
 }
 ```
 
-Go to Android Studio -> Gradle tab and run the `publishToMavenLocal` 
-in the `maps-api`, `maps-api-googlemaps` and `maps-api-openstreetmap` and run `publishtoMavenLocal`
+Go to Android Studio -> Gradle tab and run the `publishToMavenLocal` on `maps-api`, `maps-api-googlemaps` and `maps-api-openstreetmap`:
 
 ![gradle-maps-api](https://github.com/openmobilehub/omh-maps/assets/124717244/7a8aeb52-fcf2-4c8c-a0e8-e249e69b3fea)
 ![gradle-maps-api-gms](https://github.com/openmobilehub/omh-maps/assets/124717244/e5a370d9-1429-4234-a884-b39a23c6dadb)
 ![gradle-maps-api-ngms](https://github.com/openmobilehub/omh-maps/assets/124717244/2cc52110-8faa-47e3-9298-a6cec846a348)
 
-
 #### Step 2: Verify plugin is published
 
 Go to `/Users/your_user/.m2` dot folder and you'll find the plugin.
 
-#### Step 2: Debug
+#### Step 3: Debug
 
 Add some prints to debug the code
 
-#### Step 3: Test it
+#### Step 4: Test it
 
 Create a sample project, add the plugin and sync the project with gradle and you'll see logs in the `Build` tab in Android Studio.
 
@@ -53,6 +51,9 @@ You can verify your code with the following tasks:
 ./gradlew assemble
 ./gradlew detekt
 ```
+
+Once you have made a change in any of the `maps-api`, `maps-api-google maps` or `maps-api-openstreetmap` modules, 
+you must `publishToMavenLocal` in that module in order to see the changes.
 
 ## Write documentation
 
