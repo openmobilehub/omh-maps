@@ -25,7 +25,7 @@ repositories {
 }
 ```
 
-Go to Android Studio -> Gradle tab and run the `publishToMavenLocal`
+Go to Android Studio -> Gradle tab and run the `publishToMavenLocal` 
 in the `maps-api`, `maps-api-googlemaps` and `maps-api-openstreetmap` and run `publishtoMavenLocal`
 
 ![gradle-maps-api](https://github.com/openmobilehub/omh-maps/assets/124717244/7a8aeb52-fcf2-4c8c-a0e8-e249e69b3fea)
