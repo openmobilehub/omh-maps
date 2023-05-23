@@ -16,15 +16,15 @@ Together, we can expand the capabilities of the SDK and enhance the range of sup
 # Sample App
 Sample app demonstrates how to use Omh Maps SDK functionalities, [sample](/omh-maps/tree/develop/maps-sample).
 
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/e36d24ee-2b12-4d64-847e-884bd414611b" width="200" height="auto">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/b781c592-2836-4fb7-b3b4-83136174b48c" width="200" height="auto">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/c6c4e3e8-ccf6-45a5-abeb-07cdf7160664" width="200" height="auto">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/0f37a011-f1ab-43e8-8e97-a99ed982f9f8" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/35b0aa31-b550-457d-af9c-d536998fb99c" width="200" height="370">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/ee0e8400-0ca4-419a-a2f6-316775111c92" width="200" height="370">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/0faae0fc-ba41-4927-a13d-51cd7e976e46" width="200" height="370">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/af321137-8304-4e09-a6e9-3aa2e5370538" width="200" height="370">
 
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/77d7f107-0283-4d1e-8daa-288f61db856f" width="200" height="auto">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/4548376a-326c-49a5-9786-820da2ae39b6" width="200" height="auto">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/5adea3da-21ef-4081-9568-85ea7c9c9495" width="200" height="auto">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/03aab198-943c-4e2a-9f07-ce6104729efc" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/6487d3cb-7913-428a-b083-22fc098d3934" width="200" height="370">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/d40f78da-a992-4f24-8c26-bd9c92407f16" width="200" height="370">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/967606b6-ce1d-43b8-9a88-f4dedb2108fd" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/e52c8331-2f35-4261-9fa4-172e5c6b6478" width="200" height="auto">
 
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
