@@ -79,7 +79,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
 
         networkConnectivityChecker = NetworkConnectivityChecker(requireContext()).apply {
             startListeningForConnectivityChanges {
-                Toast.makeText(requireContext(), R.string.lost_internet_connection, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.lost_internet_connection, Toast.LENGTH_LONG).show()
             }
         }
         binding.fabShareLocation.setOnClickListener {
@@ -105,7 +105,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     override fun onMapReady(omhMap: OmhMap) {
 
         if (networkConnectivityChecker?.isNetworkAvailable() != true) {
-            Toast.makeText(requireContext(), R.string.no_internet_connection, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.no_internet_connection, Toast.LENGTH_LONG).show()
         }
         omhMap.setZoomGesturesEnabled(true)
 
