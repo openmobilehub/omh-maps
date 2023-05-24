@@ -4,23 +4,27 @@
 
 
 # OMH Maps SDK
-OMH is an open-source Android SDK to make easily swap between GMS and our custom OHM services.
+The solution to seamlessly integrating maps across GMS and non-GMS devices. Our open-source Android SDK tackles the problem of device compatibility, allowing developers to use the same SDK without worrying about specific device requirements.
 
-It aims at creating low coupled, extensible SDK reducing the code boilerplate of switching between GMS, HMS, or any other service, and also provides a custom full open source alternative services switching automatically according to your configuration in the Gradle plugin giving the right outputs without overloading your APK with unnecessary libraries.
-This repository allows you to display a map by using the common components for GMS and non GMS devices without worrying about the specific implementation for each type device.
+With OMH Maps SDK, you can effortlessly incorporate Google Maps and OpenStreetMap implementations into your applications, regardless of whether the device has Google Mobile Services or not. 
+Our SDK handles the complexities behind the scenes, providing a unified interface and common components for consistent map functionality.
+
+# Provider Implementations
+We also believe in the power of community collaboration. That's why OMH Maps SDK is open-source, inviting contributions and supporting plugins from other map providers. 
+Together, we can expand the capabilities of the SDK and enhance the range of supported map services.
 
 # Sample App
 Sample app demonstrates how to use Omh Maps SDK functionalities, [sample](/omh-maps/tree/develop/maps-sample).
 
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/e36d24ee-2b12-4d64-847e-884bd414611b" width="200" height="auto">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/b781c592-2836-4fb7-b3b4-83136174b48c" width="200" height="auto">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/c6c4e3e8-ccf6-45a5-abeb-07cdf7160664" width="200" height="auto">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/0f37a011-f1ab-43e8-8e97-a99ed982f9f8" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/35b0aa31-b550-457d-af9c-d536998fb99c" width="200" height="370">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/ee0e8400-0ca4-419a-a2f6-316775111c92" width="200" height="370">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/0faae0fc-ba41-4927-a13d-51cd7e976e46" width="200" height="370">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/af321137-8304-4e09-a6e9-3aa2e5370538" width="200" height="370">
 
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/77d7f107-0283-4d1e-8daa-288f61db856f" width="200" height="auto">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/4548376a-326c-49a5-9786-820da2ae39b6" width="200" height="auto">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/5adea3da-21ef-4081-9568-85ea7c9c9495" width="200" height="auto">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/03aab198-943c-4e2a-9f07-ce6104729efc" width="200" height="auto">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/6487d3cb-7913-428a-b083-22fc098d3934" width="200" height="370">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/d40f78da-a992-4f24-8c26-bd9c92407f16" width="200" height="370">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/967606b6-ce1d-43b8-9a88-f4dedb2108fd" width="200" height="370">
+<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/e52c8331-2f35-4261-9fa4-172e5c6b6478" width="200" height="370">
 
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
@@ -43,16 +47,26 @@ You should not check your API key into your version control system, so it is rec
 storing it in the `local.properties` file, which is located in the root directory of your project.
 For more information about the `local.properties` file, see [Gradle properties](https://developer.android.com/studio/build#properties-files)
 [files](https://developer.android.com/studio/build#properties-files).
+
 1. Open the `local.properties` in your project level directory, and then add the following code. Replace `YOUR_API_KEY` with your API key.
 `MAPS_API_KEY=YOUR_API_KEY`
 2. Save the file.
-3. In your `AndroidManifest.xml file`, go to `com.google.android.geo.API_KEY` and update the `android:value attribute` as follows:
+3. In your `AndroidManifest.xml`file, go to `com.google.android.geo.API_KEY` and update the `android:value attribute` as follows:
 
 ```xml
 <meta-data
    android:name="com.google.android.geo.API_KEY"
    android:value="${MAPS_API_KEY}" />
 ```
+
+4. Then, to read the value from the `local.properties` and use in the `AndroidManifest.xml` file:
+
+```groovy
+def localProps = new Properties()
+localProps.load(rootProject.file("local.properties").newDataInputStream())
+manifestPlaceholders = [MAPS_API_KEY: "${localProps.getProperty('MAPS_API_KEY')}"]
+```
+
 ## Gradle dependencies
 To integrate the OMH Maps in your project is required to add some Gradle dependencies.
 
@@ -95,6 +109,27 @@ id 'com.openmobilehub.android.omh-core'
 4. Finally, Sync Project with Gradle Files.
 
 ![sync-project-with-gradle-files](https://github.com/openmobilehub/omh-maps/assets/124717244/c79ccfaf-5e82-45a7-a1a1-ac75e1522f35)
+
+**Note:** If you encounter the error "Missing BuildConfig.MAPS_GMS_PATH and BuildConfig.MAPS_NON_GMS_PATH in BuildConfig class". Follow the next steps:
+1. Sync Project with Gradle Files.
+
+![sync-project-with-gradle-files](https://github.com/openmobilehub/omh-maps/assets/124717244/c79ccfaf-5e82-45a7-a1a1-ac75e1522f35)
+   
+2. Clean Project.
+
+![clean](https://github.com/openmobilehub/omh-maps/assets/124717244/802d3e87-9f4d-4c2f-9819-6ff71eed207b)
+
+3. Rebuild Project.
+
+![rebuild](https://github.com/openmobilehub/omh-maps/assets/124717244/3fd973f6-9fad-4835-8ce9-c8b8aea438c3)
+
+4. Run the app.
+
+![run](https://github.com/openmobilehub/omh-maps/assets/124717244/50ee8984-d991-4bc0-980c-266b19275118)
+
+5. If still not working Invalidate the caches.
+
+![invalidate-caches](https://github.com/openmobilehub/omh-maps/assets/124717244/c5e1abad-2105-424b-9b42-a58cea9d7121)
 
 ### Configure the Core plugin
 To use the core plugin is required some minimum configuration, for more details [Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0)
@@ -263,4 +298,4 @@ Additionally for more information about the OMH Map functions, [Docs](https://op
 We'd be glad if you decide to contribute to this project.
 
 All pull request is welcome, just make sure that every work is linked to an issue on this repository so everyone can track it.
-For more information check [CONTRIBUTING](https://github.com/openmobilehub/omh-maps/blob/main/CONTRIBUTING.md)
+For more information check [CONTRIBUTING](https://github.com/openmobilehub/omh-maps/blob/release/1.0/CONTRIBUTING.md)
