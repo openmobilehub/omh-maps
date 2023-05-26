@@ -6,6 +6,7 @@ import android.content.Context
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.location.LocationManager.FUSED_PROVIDER
 import android.location.LocationManager.GPS_PROVIDER
 import android.location.LocationManager.NETWORK_PROVIDER
 import androidx.annotation.RequiresPermission
@@ -23,7 +24,7 @@ internal class LocationProviderClient(context: Context) {
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
     @SuppressWarnings("TooGenericExceptionCaught") // Until find out any specific error.
     fun getCurrentLocation(onSuccess: (Location?) -> Unit, onFailure: (Exception) -> Unit) {
-        val providers = listOf(GPS_PROVIDER, NETWORK_PROVIDER)
+        val providers = listOf(GPS_PROVIDER, NETWORK_PROVIDER, FUSED_PROVIDER)
         val locationListener =
             MapLocationListener { locationListener: LocationListener, location: Location? ->
                 handleOnSuccess(locationListener, onSuccess, location)

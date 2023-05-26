@@ -9,6 +9,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin") version "2.5.3" apply true
     id("com.openmobilehub.android.omh-core")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 omhConfig {
@@ -41,11 +42,6 @@ omhConfig {
 android {
     namespace = "com.omh.android.maps.sample"
 
-    defaultConfig {
-        val apiKey = "MAPS_API_KEY"
-        manifestPlaceholders[apiKey] = gradleLocalProperties(rootDir)[apiKey].toString()
-    }
-
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -67,6 +63,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 

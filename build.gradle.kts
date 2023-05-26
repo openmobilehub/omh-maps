@@ -1,12 +1,14 @@
 plugins {
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
 }
 
 subprojects {
     repositories {
         mavenCentral()
         google()
-        maven("https://s01.oss.sonatype.org/content/groups/staging/")
+        //maven("https://s01.oss.sonatype.org/content/groups/staging/")
+        mavenLocal()
     }
 }
 
