@@ -310,6 +310,8 @@ override fun onCreate(view: View, savedInstanceState: Bundle?) {
 }
 ```
 
+3. Run your app
+
 Any object obtained from the `OmhMap` is associated with the view. It's important to not hold on to objects (e.g. `Marker`) beyond the view's life. Otherwise it will cause a memory leak as the view cannot be released.
 
 ## Documentation
