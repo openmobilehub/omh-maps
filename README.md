@@ -70,7 +70,7 @@ For more information about the `local.properties` file, see [Gradle properties](
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 ```
 
-4. Add Secrets (Gradle plugin for Android)[https://github.com/google/secrets-gradle-plugin] to read the API key.
+4. Add Secrets [Gradle plugin for Android](https://github.com/google/secrets-gradle-plugin) to read the API key.
 - In your top-level settings.gradle file, include the Gradle plugin portal, Google Maven repository, and Maven central repository under the pluginManagement block. 
 The pluginManagement block must appear before any other statements in the script.
 
