@@ -336,4 +336,4 @@ We'd be glad if you decide to contribute to this project.
 All pull request is welcome, just make sure that every work is linked to an issue on this repository so everyone can track it.
 For more information check [CONTRIBUTING](https://github.com/openmobilehub/omh-maps/blob/release/1.0/CONTRIBUTING.md).
 
-**Disclaimer:** This is a tool in development, it could change some implementation details in the future.
+**Disclaimer:** This client library is currently undergoing development, and there may be future modifications to specific implementation details.
