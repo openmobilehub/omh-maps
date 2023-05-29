@@ -266,24 +266,25 @@ class MapsMarkerActivity : AppCompatActivity(), OmhOnMapReadyCallback {
     // ...
 
     override fun onMapReady(omhMap: OmhMap) {
-        if (hasPermissions()) {
-            val onSuccessListener = OmhSuccessListener { omhCoordinate ->
-                omhMap.moveCamera(omhCoordinate, 15f)
-                val omhMarkerOptions = OmhMarkerOptions().apply {
-                    title = "My Current Location"
-                    position = omhCoordinate
-                }
-                omhMap.addMarker(omhMarkerOptions)
-            }
-            val onFailureListener = OmhFailureListener { exception ->
-                Log.e("location error", exception.localizedMessage, exception)
-            }
-            // Safe use of 'noinspection MissingPermission' since it is checking permissions in the if condition
-            // noinspection MissingPermission
-            OmhMapProvider.getInstance().provideOmhLocation(this).getCurrentLocation(onSuccessListener, onFailureListener)
-        } else {
+        if (!hasPermissions()) {
             Log.e("permission error", "Not required permissions to get current location")
+            return
         }
+        
+        val onSuccessListener = OmhSuccessListener { omhCoordinate ->
+            omhMap.moveCamera(omhCoordinate, 15f)
+            val omhMarkerOptions = OmhMarkerOptions().apply {
+               title = "My Current Location"
+               position = omhCoordinate
+            }
+            omhMap.addMarker(omhMarkerOptions)
+        }
+        val onFailureListener = OmhFailureListener { exception ->
+            Log.e("location error", exception.localizedMessage, exception)
+        }
+        // Safe use of 'noinspection MissingPermission' since it is checking permissions in the if condition
+        // noinspection MissingPermission
+        OmhMapProvider.getInstance().provideOmhLocation(this).getCurrentLocation(onSuccessListener, onFailureListener)
     }
     
     private fun hasPermissions() = arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION).all {
