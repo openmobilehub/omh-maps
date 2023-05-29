@@ -30,7 +30,7 @@ Sample app demonstrates how to use Omh Maps SDK functionalities, [sample](/omh-m
 
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
-2. Ensure that you are using the [Android Gradle plugin](https://developer.android.com/studio/releases/gradle-plugin) version 7.0 or later in Android Studio.
+2. Ensure that you are using the [Android Gradle plugin](https://developer.android.com/studio/releases/gradle-plugin) version 7.0 or later in Android Studio).
 
 ## Set up your Google Cloud project for applications with Google Services(Google Maps)
 Complete the required Cloud Console setup steps by clicking through the following tabs:
@@ -149,7 +149,7 @@ id 'com.openmobilehub.android.omh-core'
 5. If still not working, Invalidate the caches.
 
 ### Configure the OMH Core plugin
-To use the core plugin is required some minimum configuration, for more details see [OMH Core Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0)
+To use the core plugin is required some minimum configuration, for more details see [OMH Core Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0).
 1. Go to your app's `build.gradle` file and inside `buildFeatures` add `buildConfig = true`:
 
 ```
@@ -160,7 +160,7 @@ android {
 }
 ```
 
-2. In the same file in the app's `build.gradle`, add the following code to set the build variants with the [OMH Core](https://github.com/openmobilehub/omh-core/tree/release/1.0)
+2. In the same file in the app's `build.gradle`, add the following code to set the build variants with the [OMH Core](https://github.com/openmobilehub/omh-core/tree/release/1.0).
 
 ```
 omhConfig {
@@ -192,6 +192,7 @@ omhConfig {
 ```
 
 3. You can now select from Android Studio build variants.
+**Note:** The "omhConfig" definition is used to extend the existing Android Studio variants in the core plugin. It's important to observe how a single build encompasses both GMS (Google Mobile Services) and Non-GMS configurations.
 4. Create an instance of the provider. The recommendation is to do it in the Application to ensure that the provider is instantiated correctly for the application.
 You can choose whatever name you want for the class, it is not mandatory to use `DemoApp`.
 
@@ -267,11 +268,7 @@ class MapsMarkerActivity : AppCompatActivity(), OmhOnMapReadyCallback {
     // ...
 
     override fun onMapReady(omhMap: OmhMap) {
-        val omhLocation = OmhMapProvider.getInstance().provideOmhLocation(this)
-        val hasPermissions = arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION).all {
-            ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
-        }
-        if (hasPermissions) {
+        if (hasPermissions()) {
             val onSuccessListener = OmhSuccessListener { omhCoordinate ->
                 omhMap.moveCamera(omhCoordinate, 15f)
                 val omhMarkerOptions = OmhMarkerOptions().apply {
@@ -285,10 +282,14 @@ class MapsMarkerActivity : AppCompatActivity(), OmhOnMapReadyCallback {
             }
             // Safe use of 'noinspection MissingPermission' since it is checking permissions in the if condition
             // noinspection MissingPermission
-            omhLocation.getCurrentLocation(onSuccessListener, onFailureListener)
+            OmhMapProvider.getInstance().provideOmhLocation(this).getCurrentLocation(onSuccessListener, onFailureListener)
         } else {
             Log.e("permission error", "Not required permissions to get current location")
         }
+    }
+    
+    private fun getHasPermissions() = arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION).all {
+        ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
     }
 }
 ```
@@ -306,13 +307,23 @@ override fun onCreate(view: View, savedInstanceState: Bundle?) {
         // Obtain the OmhMapFragment and get notified when the map is ready to be used.
         val omhMapFragment = supportFragmentManager.findFragmentById(R.id.fragment_map_container) as? OmhMapFragment
         omhMapFragment?.getMapAsync(this)
-    }.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION))
+    }.launch(arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION))
 }
 ```
 
-3. Run your app
+3. Run your app.
 
-Any object obtained from the `OmhMap` is associated with the view. It's important to not hold on to objects (e.g. `Marker`) beyond the view's life. Otherwise it will cause a memory leak as the view cannot be released.
+**Note:** Any object obtained from the `OmhMap` is associated with the view. It's important to not hold on to objects (e.g. `OmhMarker`) beyond the view's life. Otherwise it will cause a memory leak as the view cannot be released.
+
+4. Explore Advanced Features
+
+   Congratulations on completing the getting started guide! Now, it's time to level up your mapping skills by diving into our advanced features. 
+
+   Discover how to handle camera events, add markers, manage location data, work with gestures, utilize network utilities, and create custom Maps SDK implementations/plugins. These advanced capabilities    will elevate your mapping application to new heights.
+
+   Visit our [Advanced Features wiki page](https://github.com/openmobilehub/omh-maps/wiki#ohm-map-sdk---advanced-features) to access detailed information, examples, and guides for each feature. Unleash    the full power of our mapping SDK and create exceptional mapping experiences.
+
+   Take the next step and explore our Advanced Features now!
 
 ## Documentation
 
@@ -325,4 +336,4 @@ Additionally for more information about the OMH Map functions, [Docs](https://op
 We'd be glad if you decide to contribute to this project.
 
 All pull request is welcome, just make sure that every work is linked to an issue on this repository so everyone can track it.
-For more information check [CONTRIBUTING](https://github.com/openmobilehub/omh-maps/blob/release/1.0/CONTRIBUTING.md)
+For more information check [CONTRIBUTING](https://github.com/openmobilehub/omh-maps/blob/release/1.0/CONTRIBUTING.md).
