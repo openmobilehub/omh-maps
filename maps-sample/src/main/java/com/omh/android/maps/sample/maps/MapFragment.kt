@@ -10,9 +10,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.omh.android.maps.api.factories.OmhMapProvider
 import com.omh.android.maps.api.presentation.fragments.OmhMapFragment
 import com.omh.android.maps.api.presentation.interfaces.location.OmhFailureListener
-import com.omh.android.maps.api.presentation.interfaces.location.OmhLocation
 import com.omh.android.maps.api.presentation.interfaces.location.OmhSuccessListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
@@ -23,7 +23,6 @@ import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
 import com.omh.android.maps.api.utils.NetworkConnectivityChecker
 import com.omh.android.maps.sample.R
 import com.omh.android.maps.sample.databinding.FragmentMapBinding
-import com.omh.android.maps.sample.utils.BundleUtils.getOmhCoordinate
 import com.omh.android.maps.sample.utils.Constants.ANIMATION_DURATION
 import com.omh.android.maps.sample.utils.Constants.DEFAULT_ZOOM_LEVEL
 import com.omh.android.maps.sample.utils.Constants.FINAL_TRANSLATION
@@ -35,14 +34,9 @@ import com.omh.android.maps.sample.utils.Constants.PERMISSIONS
 import com.omh.android.maps.sample.utils.Constants.PRIME_MERIDIAN
 import com.omh.android.maps.sample.utils.Constants.ZOOM_LEVEL_5
 import com.omh.android.maps.sample.utils.PermissionsUtils
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import com.omh.android.maps.sample.utils.getOmhCoordinate
 
-@AndroidEntryPoint
 class MapFragment : Fragment(), OmhOnMapReadyCallback {
-
-    @Inject
-    lateinit var omhLocation: OmhLocation
 
     private var currentLocation: OmhCoordinate = PRIME_MERIDIAN
     private var _binding: FragmentMapBinding? = null
@@ -54,7 +48,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         displayOnlyCoordinate = savedInstanceState?.getBoolean(ONLY_DISPLAY_KEY, false) ?: false
-        val coordinate = getOmhCoordinate(savedInstanceState, LOCATION_KEY)
+        val coordinate = savedInstanceState?.getOmhCoordinate(LOCATION_KEY)
         coordinate?.let {
             currentLocation = coordinate
         }
@@ -141,7 +135,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
 
         omhMap.setOnCameraIdleListener(omhOnCameraIdleListener)
         enableMyLocation(omhMap)
-        moveToCurrentLocation(omhMap)
+        getCurrentLocation(omhMap)
     }
 
     private fun displaySharedLocation(omhMap: OmhMap) {
@@ -172,7 +166,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
         }
     }
 
-    private fun moveToCurrentLocation(omhMap: OmhMap) {
+    private fun getCurrentLocation(omhMap: OmhMap) {
         if (PermissionsUtils.grantedRequiredPermissions(requireContext())) {
             val onSuccessListener = OmhSuccessListener { omhCoordinate ->
                 currentLocation = omhCoordinate
@@ -184,7 +178,8 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
             }
             // Safe use of 'noinspection MissingPermission' since it is checking permissions in the if condition
             // noinspection MissingPermission
-            omhLocation.getCurrentLocation(onSuccessListener, onFailureListener)
+            OmhMapProvider.getInstance().provideOmhLocation(requireContext())
+                .getCurrentLocation(onSuccessListener, onFailureListener)
         } else {
             moveToCurrentLocation(omhMap, ZOOM_LEVEL_5)
         }

@@ -15,9 +15,7 @@ import com.omh.android.maps.sample.R
 import com.omh.android.maps.sample.databinding.ActivityMainBinding
 import com.omh.android.maps.sample.utils.Constants.LAT_PARAM
 import com.omh.android.maps.sample.utils.Constants.LNG_PARAM
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val binding: ActivityMainBinding by lazy {

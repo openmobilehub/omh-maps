@@ -88,7 +88,9 @@ internal class OmhMapImpl(
             myLocationIconOverlay = MyLocationIconOverlay(mapView.context).apply {
                 setCenterLocation { setMyLocationEnabled(true) }
             }
-            myLocationNewOverlay = MyLocationNewOverlay(mapView).apply { enableMyLocation() }
+            myLocationNewOverlay = MyLocationNewOverlay(mapView).apply {
+                enableMyLocation()
+            }
             mapView.overlayManager.add(myLocationNewOverlay)
             mapView.overlayManager.add(myLocationIconOverlay)
         }
