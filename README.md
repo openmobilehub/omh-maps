@@ -47,8 +47,7 @@ Complete the required Cloud Console setup steps by clicking through the followin
 ## Add the API key to your app
 You should not check your API key into your version control system, so it is recommended
 storing it in the `local.properties` file, which is located in the root directory of your project.
-For more information about the `local.properties` file, see [Gradle properties](https://developer.android.com/studio/build#properties-files)
-[files](https://developer.android.com/studio/build#properties-files).
+For more information about the `local.properties` file, see [Gradle properties files](https://developer.android.com/studio/build#properties-files).
 
 1. Open the `local.properties` in your project level directory, and then add the following code. Replace `YOUR_API_KEY` with your API key.
 `MAPS_API_KEY=YOUR_API_KEY`
