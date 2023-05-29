@@ -288,7 +288,7 @@ class MapsMarkerActivity : AppCompatActivity(), OmhOnMapReadyCallback {
         }
     }
     
-    private fun getHasPermissions() = arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION).all {
+    private fun hasPermissions() = arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION).all {
         ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
     }
 }
