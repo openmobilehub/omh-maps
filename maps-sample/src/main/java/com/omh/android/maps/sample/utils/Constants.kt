@@ -33,5 +33,5 @@ object Constants {
     const val ONLY_DISPLAY_KEY = "only display"
 
     //
-    const val SHOW_MESSAGE = 5000L
+    const val SHOW_MESSAGE_TIME = 5000L
 }

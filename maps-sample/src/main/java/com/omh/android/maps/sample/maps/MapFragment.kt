@@ -34,7 +34,7 @@ import com.omh.android.maps.sample.utils.Constants.ONLY_DISPLAY_KEY
 import com.omh.android.maps.sample.utils.Constants.OVERSHOOT_INTERPOLATOR
 import com.omh.android.maps.sample.utils.Constants.PERMISSIONS
 import com.omh.android.maps.sample.utils.Constants.PRIME_MERIDIAN
-import com.omh.android.maps.sample.utils.Constants.SHOW_MESSAGE
+import com.omh.android.maps.sample.utils.Constants.SHOW_MESSAGE_TIME
 import com.omh.android.maps.sample.utils.Constants.ZOOM_LEVEL_5
 import com.omh.android.maps.sample.utils.PermissionsUtils
 import com.omh.android.maps.sample.utils.getOmhCoordinate
@@ -173,7 +173,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     private fun getCurrentLocation(omhMap: OmhMap) {
         if (PermissionsUtils.grantedRequiredPermissions(requireContext())) {
             initializeRunnable()
-            runnable?.let { handler?.postDelayed(it, 5000) }
+            runnable?.let { handler?.postDelayed(it, SHOW_MESSAGE_TIME) }
             val onSuccessListener = OmhSuccessListener { omhCoordinate ->
                 currentLocation = omhCoordinate
                 handleAfterGetLocation(omhMap)
@@ -198,7 +198,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
         runnable = object : Runnable {
             override fun run() {
                 Toast.makeText(requireContext(), R.string.move_message, Toast.LENGTH_LONG).show()
-                handler?.postDelayed(this, SHOW_MESSAGE)
+                handler?.postDelayed(this, SHOW_MESSAGE_TIME)
             }
         }
     }
@@ -222,7 +222,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
 
     override fun onResume() {
         super.onResume()
-        runnable?.let { handler?.postDelayed(it, 5000) }
+        runnable?.let { handler?.postDelayed(it, SHOW_MESSAGE_TIME) }
     }
 
     override fun onPause() {
