@@ -29,7 +29,6 @@ class OmhMapProvider private constructor(
      * of the [OmhMapFactory]. If this happens, look if you have configured correctly the gradle plugin
      * or if your obfuscation method hasn't tampered with the library files.
      */
-    @Throws(OmhMapException.ApiException::class)
     fun provideOmhMapView(context: Context): OmhMapView {
         val omhMapFactory: OmhMapFactory = try {
             getOmhMapFactory(context)
@@ -51,7 +50,6 @@ class OmhMapProvider private constructor(
      * of the [OmhMapFactory]. If this happens, look if you have configured correctly the gradle plugin
      * or if your obfuscation method hasn't tampered with the library files.
      */
-    @Throws(OmhMapException.ApiException::class)
     fun provideOmhLocation(context: Context): OmhLocation {
         val omhMapFactory: OmhMapFactory = try {
             getOmhMapFactory(context)
@@ -72,7 +70,6 @@ class OmhMapProvider private constructor(
      * @throws [ClassNotFoundException] when the reflections fails.
      * Also can throw a [OmhMapException.ApiException] when no paths were provided.
      */
-    @Throws(ClassNotFoundException::class, OmhMapException.ApiException::class)
     private fun getOmhMapFactory(context: Context): OmhMapFactory = when {
         isSingleBuild -> reflectSingleBuild(context)
         gmsPath != null -> getFactoryImplementation(gmsPath)
@@ -83,7 +80,6 @@ class OmhMapProvider private constructor(
         )
     }
 
-    @Throws(ClassNotFoundException::class)
     private fun reflectSingleBuild(context: Context): OmhMapFactory {
         val googleApiAvailability = GoogleApiAvailability.getInstance()
         return when (googleApiAvailability.isGooglePlayServicesAvailable(context)) {
@@ -92,7 +88,6 @@ class OmhMapProvider private constructor(
         }
     }
 
-    @Throws(ClassNotFoundException::class)
     private fun getFactoryImplementation(path: String): OmhMapFactory {
         val clazz: KClass<out Any> = Class.forName(path).kotlin
         return clazz.objectInstance as OmhMapFactory
