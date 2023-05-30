@@ -4,8 +4,6 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
     `android-application`
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android") version "2.44" apply true
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin") version "2.5.3" apply true
     id("com.openmobilehub.android.omh-core")
@@ -61,12 +59,9 @@ android {
         jvmTarget = "1.8"
     }
 
-    kapt {
-        correctErrorTypes = true
-    }
-
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -79,10 +74,6 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
-
-    // Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-compiler:2.44")
 
     // Test
     testImplementation(Libs.junit)

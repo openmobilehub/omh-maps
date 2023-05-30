@@ -4,10 +4,7 @@ internal object Constants {
 
     // Location
     const val MIN_TIME_EXECUTION_MS = 0L
-    const val MIN_TIME_MS = 0L
     const val MIN_DISTANCE_M = 0f
-    const val MIN_TIMES_EXECUTION = 1
-    const val TIME_OUT_MS = 2000L
 
     // My Location
     const val PADDING_MY_LOCATION_ICON = 16

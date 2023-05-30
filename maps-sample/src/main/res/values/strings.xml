@@ -6,7 +6,7 @@
     <string name="button_to_share_location">Button to share location</string>
     <string name="example_coordinate">Lat: 16.6612333 \nLng: 66.11323123</string>
     <string name="share_location">Share Location</string>
-    <string name="center_message">Center location</string>
+    <string name="center_message">Centering location</string>
     <string name="share_link">"Share link"</string>
     <string name="latitude_longitude_text">Lat: %1$s \nLng: %2$s</string>
     <string name="initial_fragment_text">Initial Fragment</string>
