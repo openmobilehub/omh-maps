@@ -8,7 +8,7 @@ fun interface OmhOnCameraMoveStartedListener {
     /**
      * Called when the camera starts moving after it has been idle or when the reason for camera motion has changed.
      *
-     * @param reason -> The reason for the camera change. Possible values:
+     * @param reason the reason for the camera change. Possible values:
      * REASON_GESTURE: User gestures on the map.
      * REASON_API_ANIMATION: Default animations resulting from user interaction.
      * REASON_DEVELOPER_ANIMATION: Developer animations.
@@ -16,9 +16,9 @@ fun interface OmhOnCameraMoveStartedListener {
     fun onCameraMoveStarted(reason: Int)
 
     /**
-     * int	REASON_API_ANIMATION -> Non-gesture animation initiated in response to user actions.
-     * int	REASON_DEVELOPER_ANIMATION ->	Developer initiated animation.
-     * int	REASON_GESTURE	-> Camera motion initiated in response to user gestures on the map.
+     * int	[REASON_API_ANIMATION] Non-gesture animation initiated in response to user actions.
+     * int	[REASON_DEVELOPER_ANIMATION] Developer initiated animation.
+     * int	[REASON_GESTURE] Camera motion initiated in response to user gestures on the map.
      */
     companion object {
         const val REASON_GESTURE = 1

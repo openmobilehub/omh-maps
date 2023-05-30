@@ -9,7 +9,7 @@ fun interface OmhSuccessListener {
     /**
      * Completed successfully
      *
-     * @param omhCoordinate -> the coordinate obtained after success.
+     * @param omhCoordinate the coordinate obtained after success.
      */
     fun onSuccess(omhCoordinate: OmhCoordinate)
 }

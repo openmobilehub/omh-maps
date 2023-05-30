@@ -1,6 +1,6 @@
 package com.omh.android.maps.api.utils
 
-object Constants {
+internal object Constants {
     // Network
     const val NO_INTERNET_CONNECTION = "No internet connection"
     const val LOST_INTERNET_CONNECTION = "Lost internet connection"

@@ -5,7 +5,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Test
 
-class ClassTest {
+internal class ClassTest {
 
     class ShortClassName
     class ThisIsALongClassNameThatIsGreaterThan23Characters

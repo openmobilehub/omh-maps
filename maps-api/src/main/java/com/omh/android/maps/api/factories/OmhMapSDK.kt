@@ -8,7 +8,7 @@ object OmhMapSDK {
     /**
      * Initializes the [OmhMapProvider].
      *
-     * @param builder -> [OmhMapProvider.Builder] Initializes the [OmhMapProvider].
+     * @param builder [OmhMapProvider.Builder] Initializes the [OmhMapProvider].
      */
     @JvmStatic
     fun initialize(builder: OmhMapProvider.Builder) {

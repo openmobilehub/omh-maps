@@ -11,28 +11,28 @@ interface OmhMarker {
     /**
      * The [OmhCoordinate] value for the marker's position on the map.
      *
-     * @return -> A [OmhCoordinate] object specifying the marker's current position.
+     * @return [OmhCoordinate] object specifying the marker's current position.
      */
     fun getPosition(): OmhCoordinate
 
     /**
      * Sets the location of the marker.
      *
-     * @param omhCoordinate -> Sets the location.
+     * @param omhCoordinate sets the location.
      */
     fun setPosition(omhCoordinate: OmhCoordinate)
 
     /**
      * A text string that's displayed in an info window when the user taps the marker.
      *
-     * @return -> A string containing the marker's title.
+     * @return a string containing the marker's title.
      */
     fun getTitle(): String?
 
     /**
      * Sets the title of the marker.
      *
-     * @param title -> Sets the title. If null, the title is cleared.
+     * @param title sets the title. If null, the title is cleared.
      */
     fun setTitle(title: String?)
 }

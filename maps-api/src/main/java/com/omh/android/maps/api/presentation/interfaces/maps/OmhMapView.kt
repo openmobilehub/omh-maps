@@ -27,14 +27,14 @@ interface OmhMapView {
      * This method must be called from the main thread.
      * The callback will be executed in the main thread.
      *
-     * @param omhOnMapReadyCallback -> the callback object that will be triggered when the map is ready to be used.
+     * @param omhOnMapReadyCallback the callback object that will be triggered when the map is ready to be used.
      */
     fun getMapAsync(omhOnMapReadyCallback: OmhOnMapReadyCallback)
 
     /**
      * You must call this method from the parent Activity/Fragment's corresponding method.
      *
-     * @param savedInstanceState -> Stores a small amount of data needed to easily reload UI state
+     * @param savedInstanceState Stores a small amount of data needed to easily reload UI state
      * if the system stops and then recreates the UI
      */
     fun onCreate(savedInstanceState: Bundle?)

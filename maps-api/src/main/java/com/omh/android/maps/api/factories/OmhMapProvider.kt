@@ -22,10 +22,10 @@ class OmhMapProvider private constructor(
     /**
      * Provides [OmhMapView] interface to interact with the map from the OMH Maps library.
      *
-     * @param context -> ideally your application context, but an activity context will also work.
+     * @param context ideally your application context, but an activity context will also work.
      *
-     * @return -> An [OmhMapView] to interact with the map from the OMH Maps library.
-     * @throws -> An [OmhMapException.ApiException] when reflection fails for any of the implementations
+     * @return An [OmhMapView] to interact with the map from the OMH Maps library.
+     * @throws [OmhMapException.ApiException] when reflection fails for any of the implementations
      * of the [OmhMapFactory]. If this happens, look if you have configured correctly the gradle plugin
      * or if your obfuscation method hasn't tampered with the library files.
      */
@@ -45,9 +45,9 @@ class OmhMapProvider private constructor(
     /**
      * Provides [OmhLocation] interface to interact with the location from the OMH Maps library.
      *
-     * @param context -> ideally your application context, but an activity context will also work.
-     * @return -> [OmhLocation] to interact with the location from the OMH Maps library.
-     * @throws -> [OmhMapException.ApiException] when reflection fails for any of the implementations
+     * @param context ideally your application context, but an activity context will also work.
+     * @return [OmhLocation] to interact with the location from the OMH Maps library.
+     * @throws [OmhMapException.ApiException] when reflection fails for any of the implementations
      * of the [OmhMapFactory]. If this happens, look if you have configured correctly the gradle plugin
      * or if your obfuscation method hasn't tampered with the library files.
      */
@@ -68,8 +68,8 @@ class OmhMapProvider private constructor(
      * This uses reflection to obtain the correct implementation for GMS or non GMS devices
      * depending on what dependency you have.
      *
-     * @return -> A [OmhMapFactory] instance that is created using reflection.
-     * @throws -> A [ClassNotFoundException] when the reflections fails.
+     * @return A [OmhMapFactory] instance that is created using reflection.
+     * @throws [ClassNotFoundException] when the reflections fails.
      * Also can throw a [OmhMapException.ApiException] when no paths were provided.
      */
     @Throws(ClassNotFoundException::class, OmhMapException.ApiException::class)
@@ -109,7 +109,7 @@ class OmhMapProvider private constructor(
         /**
          * Adds a GMS path to the [OmhMapProvider].
          *
-         * @param gmsPath -> The path for the GMS.
+         * @param gmsPath The path for the GMS.
          */
         @JvmOverloads
         fun addGmsPath(gmsPath: String? = GMS_ADDRESS): Builder {
@@ -120,7 +120,7 @@ class OmhMapProvider private constructor(
         /**
          * Adds a Non GMS path to the [OmhMapProvider].
          *
-         * @param ngmsPath -> The path for teh Non GMS.
+         * @param ngmsPath The path for teh Non GMS.
          */
         @JvmOverloads
         fun addNonGmsPath(ngmsPath: String? = NON_GMS_ADDRESS): Builder {
@@ -147,8 +147,8 @@ class OmhMapProvider private constructor(
         /**
          * Gets the [OmhMapProvider] instance.
          *
-         * @return -> An existing [OmhMapProvider].
-         * @throws -> An [Error] when the [OmhMapProvider] is not initialized.
+         * @return An existing [OmhMapProvider].
+         * @throws [Error] when the [OmhMapProvider] is not initialized.
          */
         @JvmStatic
         fun getInstance(): OmhMapProvider {
