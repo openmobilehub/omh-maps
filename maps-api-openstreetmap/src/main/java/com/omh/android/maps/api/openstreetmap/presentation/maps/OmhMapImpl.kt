@@ -2,6 +2,7 @@ package com.omh.android.maps.api.openstreetmap.presentation.maps
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.location.LocationManager.FUSED_PROVIDER
 import androidx.annotation.RequiresPermission
 import com.omh.android.maps.api.openstreetmap.extensions.toGeoPoint
 import com.omh.android.maps.api.openstreetmap.extensions.toOmhCoordinate
@@ -19,6 +20,7 @@ import org.osmdroid.api.IGeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 internal class OmhMapImpl(
@@ -88,7 +90,10 @@ internal class OmhMapImpl(
             myLocationIconOverlay = MyLocationIconOverlay(mapView.context).apply {
                 setCenterLocation { setMyLocationEnabled(true) }
             }
-            myLocationNewOverlay = MyLocationNewOverlay(mapView).apply { enableMyLocation() }
+            val gpsMyLocationProvider = GpsMyLocationProvider(mapView.context).apply {
+                addLocationSource(FUSED_PROVIDER)
+            }
+            myLocationNewOverlay = MyLocationNewOverlay(gpsMyLocationProvider, mapView).apply { enableMyLocation() }
             mapView.overlayManager.add(myLocationNewOverlay)
             mapView.overlayManager.add(myLocationIconOverlay)
         }

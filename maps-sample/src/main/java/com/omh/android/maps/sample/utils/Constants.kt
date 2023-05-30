@@ -31,4 +31,7 @@ object Constants {
     // Bundle keys
     const val LOCATION_KEY = "location"
     const val ONLY_DISPLAY_KEY = "only display"
+
+    //
+    const val SHOW_MESSAGE = 5000L
 }

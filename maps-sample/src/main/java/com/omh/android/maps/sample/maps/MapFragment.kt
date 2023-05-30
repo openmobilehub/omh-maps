@@ -1,6 +1,8 @@
 package com.omh.android.maps.sample.maps
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +34,7 @@ import com.omh.android.maps.sample.utils.Constants.ONLY_DISPLAY_KEY
 import com.omh.android.maps.sample.utils.Constants.OVERSHOOT_INTERPOLATOR
 import com.omh.android.maps.sample.utils.Constants.PERMISSIONS
 import com.omh.android.maps.sample.utils.Constants.PRIME_MERIDIAN
+import com.omh.android.maps.sample.utils.Constants.SHOW_MESSAGE
 import com.omh.android.maps.sample.utils.Constants.ZOOM_LEVEL_5
 import com.omh.android.maps.sample.utils.PermissionsUtils
 import com.omh.android.maps.sample.utils.getOmhCoordinate
@@ -44,6 +47,8 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     private var displayOnlyCoordinate = false
     private val args: MapFragmentArgs by navArgs()
     private var networkConnectivityChecker: NetworkConnectivityChecker? = null
+    private var handler: Handler? = null
+    private var runnable : Runnable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -134,7 +139,6 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
         }
 
         omhMap.setOnCameraIdleListener(omhOnCameraIdleListener)
-        enableMyLocation(omhMap)
         getCurrentLocation(omhMap)
     }
 
@@ -168,21 +172,42 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
 
     private fun getCurrentLocation(omhMap: OmhMap) {
         if (PermissionsUtils.grantedRequiredPermissions(requireContext())) {
+            initializeRunnable()
+            runnable?.let { handler?.postDelayed(it, 5000) }
             val onSuccessListener = OmhSuccessListener { omhCoordinate ->
                 currentLocation = omhCoordinate
-                moveToCurrentLocation(omhMap, DEFAULT_ZOOM_LEVEL)
+                handleAfterGetLocation(omhMap)
             }
             val onFailureListener = OmhFailureListener {
                 currentLocation = PRIME_MERIDIAN
-                moveToCurrentLocation(omhMap, DEFAULT_ZOOM_LEVEL)
+                handleAfterGetLocation(omhMap)
             }
+            binding.progressIndicatorIcon.visibility = View.VISIBLE
             // Safe use of 'noinspection MissingPermission' since it is checking permissions in the if condition
             // noinspection MissingPermission
             OmhMapProvider.getInstance().provideOmhLocation(requireContext())
                 .getCurrentLocation(onSuccessListener, onFailureListener)
         } else {
             moveToCurrentLocation(omhMap, ZOOM_LEVEL_5)
+            enableMyLocation(omhMap)
         }
+    }
+
+    private fun initializeRunnable() {
+        handler = Handler(Looper.getMainLooper())
+        runnable = object : Runnable {
+            override fun run() {
+                Toast.makeText(requireContext(), R.string.move_message, Toast.LENGTH_LONG).show()
+                handler?.postDelayed(this, SHOW_MESSAGE)
+            }
+        }
+    }
+
+    private fun handleAfterGetLocation(omhMap: OmhMap) {
+        handler?.removeCallbacksAndMessages(null)
+        binding.progressIndicatorIcon.visibility = View.GONE
+        moveToCurrentLocation(omhMap, DEFAULT_ZOOM_LEVEL)
+        enableMyLocation(omhMap)
     }
 
     private fun moveToCurrentLocation(omhMap: OmhMap, zoomLevel: Float) {
@@ -193,6 +218,16 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
         super.onSaveInstanceState(outState)
         outState.putParcelable(LOCATION_KEY, currentLocation)
         outState.putBoolean(ONLY_DISPLAY_KEY, displayOnlyCoordinate)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        runnable?.let { handler?.postDelayed(it, 5000) }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler?.removeCallbacksAndMessages(null)
     }
 
     override fun onDestroyView() {
