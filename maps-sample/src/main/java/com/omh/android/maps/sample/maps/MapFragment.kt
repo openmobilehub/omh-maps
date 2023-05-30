@@ -222,7 +222,9 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
 
     override fun onResume() {
         super.onResume()
-        runnable?.let { handler?.postDelayed(it, SHOW_MESSAGE_TIME) }
+        runnable?.let { validRunnable ->
+            handler?.postDelayed(validRunnable, SHOW_MESSAGE_TIME)
+        }
     }
 
     override fun onPause() {

@@ -93,7 +93,9 @@ internal class OmhMapImpl(
             val gpsMyLocationProvider = GpsMyLocationProvider(mapView.context).apply {
                 addLocationSource(FUSED_PROVIDER)
             }
-            myLocationNewOverlay = MyLocationNewOverlay(gpsMyLocationProvider, mapView).apply { enableMyLocation() }
+            myLocationNewOverlay = MyLocationNewOverlay(gpsMyLocationProvider, mapView).apply {
+                enableMyLocation()
+            }
             mapView.overlayManager.add(myLocationNewOverlay)
             mapView.overlayManager.add(myLocationIconOverlay)
         }
