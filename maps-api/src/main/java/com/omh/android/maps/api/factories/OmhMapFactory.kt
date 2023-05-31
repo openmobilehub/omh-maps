@@ -13,16 +13,16 @@ interface OmhMapFactory {
     /**
      * Provides the [OmhMapView] that is the main entry point with the OMH Maps module.
      *
-     * @param context -> ideally your application context, but an activity context will also work.
-     * @return An [OmhMapView] instance object.
+     * @param context ideally your application context, but an activity context will also work.
+     * @return [OmhMapView] instance object.
      */
     fun getOmhMapView(context: Context): OmhMapView
 
     /**
      * Provides the [OmhLocation] that is the entry point for Locations.
      *
-     * @param context -> ideally your application context, but an activity context will also work.
-     * @return -> A [OmhLocation] instance object.
+     * @param context ideally your application context, but an activity context will also work.
+     * @return [OmhLocation] instance object.
      */
     fun getOmhLocation(context: Context): OmhLocation
 }

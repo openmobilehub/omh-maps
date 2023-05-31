@@ -16,7 +16,7 @@ import com.omh.android.maps.api.presentation.models.OmhMapStatusCodes
 /**
  * Helper class to check the network connectivity.
  *
- * @param context -> To get the a system-level service class [ConnectivityManager].
+ * @param context to get the a system-level service class [ConnectivityManager].
  *
  * Note: System services obtained via this API may be closely associated with the Context
  * in which they are obtained from.
@@ -32,7 +32,7 @@ class NetworkConnectivityChecker(context: Context) {
         /**
          * Called when a network disconnects or otherwise no longer satisfies this request or callback.
          *
-         * @param network -> The Network lost. This value cannot be null.
+         * @param network the network is lost. This value cannot be null.
          */
         fun onLost(network: Network)
     }
@@ -54,7 +54,7 @@ class NetworkConnectivityChecker(context: Context) {
     /**
      * Register callbacks to receive notifications when different network states change.
      *
-     * @param onLostConnection -> callback called when a network disconnects or
+     * @param onLostConnection callback called when a network disconnects or
      * otherwise no longer satisfies this request or callback.
      */
     @RequiresPermission(anyOf = [ACCESS_NETWORK_STATE])
@@ -84,7 +84,7 @@ class NetworkConnectivityChecker(context: Context) {
     /**
      * Checks if there is internet connection.
      *
-     * @return -> returns true if there is internet connection otherwise returns false.
+     * @return true if there is internet connection otherwise returns false.
      */
     @RequiresPermission(anyOf = [ACCESS_NETWORK_STATE])
     @SuppressWarnings("TooGenericExceptionCaught")

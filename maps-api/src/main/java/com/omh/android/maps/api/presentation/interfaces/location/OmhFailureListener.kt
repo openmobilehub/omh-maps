@@ -7,7 +7,7 @@ fun interface OmhFailureListener {
     /**
      * Failed with an exception
      *
-     * @param exception -> the exception that was thrown.
+     * @param exception the exception that was thrown.
      */
     fun onFailure(exception: Exception)
 }

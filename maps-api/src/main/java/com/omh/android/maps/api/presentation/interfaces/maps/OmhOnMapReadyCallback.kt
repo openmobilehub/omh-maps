@@ -7,7 +7,7 @@ fun interface OmhOnMapReadyCallback {
     /**
      * Called when the map is ready to be used.
      *
-     * @param omhMap -> A instance of a OmhMap associated with the OmhMapView that defines the callback.
+     * @param omhMap a instance of a OmhMap associated with the OmhMapView that defines the callback.
      */
     fun onMapReady(omhMap: OmhMap)
 }

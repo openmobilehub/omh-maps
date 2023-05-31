@@ -30,7 +30,7 @@ class OmhCoordinate() : Parcelable {
     /**
      * Constructs a omhCoordinate with the given Parcel.
      *
-     * @param parcel -> Container for the latitude and longitude.
+     * @param parcel Container for the latitude and longitude.
      */
     constructor(parcel: Parcel) : this() {
         latitude = parcel.readDouble()
@@ -40,8 +40,8 @@ class OmhCoordinate() : Parcelable {
     /**
      * Constructs a OmhCoordinate with the given latitude and longitude.
      *
-     * @param latitude -> The point's latitude.
-     * @param longitude -> The point's longitude.
+     * @param latitude the point's latitude.
+     * @param longitude the point's longitude.
      */
     constructor(latitude: Double, longitude: Double) : this() {
         this.latitude = latitude
@@ -52,7 +52,7 @@ class OmhCoordinate() : Parcelable {
      * Describe the kinds of special objects contained in this Parcelable instance's marshaled representation.
      * Value is either 0 or CONTENTS_FILE_DESCRIPTOR
      *
-     * @return -> A bitmask indicating the set of special object types marshaled by this Parcelable object instance.
+     * @return a bitmask indicating the set of special object types marshaled by this Parcelable object instance.
      */
     override fun describeContents(): Int {
         return 0
@@ -61,8 +61,8 @@ class OmhCoordinate() : Parcelable {
     /**
      * Flatten this object in to a Parcel.
      *
-     * @param parcel -> The Parcel in which the object should be written. This value cannot be null.
-     * @param flags -> Additional flags about how the object should be written.
+     * @param parcel the Parcel in which the object should be written. This value cannot be null.
+     * @param flags additional flags about how the object should be written.
      */
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeDouble(latitude)
@@ -72,7 +72,7 @@ class OmhCoordinate() : Parcelable {
     /**
      * Returns a string representation of the object.
      *
-     * @return -> Returns a default string representing the latitude and longitude.
+     * @return a default string representing the latitude and longitude.
      */
     override fun toString(): String {
         return "lat/lng: ($latitude,$longitude)"
@@ -81,8 +81,8 @@ class OmhCoordinate() : Parcelable {
     /**
      * Compares if this OmhCoordinate is equal to another.
      *
-     * @param other ->
-     * @return -> True if and only if their latitudes are bitwise equal and their longitudes are bitwise equal.
+     * @param other is the object to compare with.
+     * @return true if and only if their latitudes are bitwise equal and their longitudes are bitwise equal.
      * Otherwise false.
      */
     override fun equals(other: Any?): Boolean {
@@ -96,7 +96,7 @@ class OmhCoordinate() : Parcelable {
     /**
      * Returns hash code for the object.
      *
-     * @return -> Returns an integer representing the current instance of the class.
+     * @return an integer representing the current instance of the class.
      */
     override fun hashCode(): Int {
         return HASH_MULTIPLIER * latitude.hashCode() + longitude.hashCode()
@@ -110,8 +110,8 @@ class OmhCoordinate() : Parcelable {
          * Create a new instance of the Parcelable class,
          * instantiating it from the given Parcel whose data had previously been written by Parcelable.writeToParcel().
          *
-         * @param parcel -> The Parcel to read the object's data from.
-         * @return -> Returns a new instance of the Parcelable class.
+         * @param parcel The Parcel to read the object's data from.
+         * @return a new instance of the Parcelable class.
          */
         override fun createFromParcel(parcel: Parcel): OmhCoordinate {
             return OmhCoordinate(parcel)
@@ -120,8 +120,8 @@ class OmhCoordinate() : Parcelable {
         /**
          * Create a new array of the Parcelable class.
          *
-         * @param size -> Size of the array.
-         * @return -> Returns an array of the Parcelable class, with every entry initialized to null.
+         * @param size Size of the array.
+         * @return an array of the Parcelable class, with every entry initialized to null.
          */
         override fun newArray(size: Int): Array<OmhCoordinate?> {
             return arrayOfNulls(size)

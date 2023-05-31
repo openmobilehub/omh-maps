@@ -82,7 +82,7 @@ class OmhMapFragment : Fragment() {
      * This method must be called from the main thread.
      * The callback will be executed in the main thread.
      *
-     * @param omhOnMapReadyCallback -> the callback object that will be triggered when the map is ready to be used.
+     * @param omhOnMapReadyCallback the callback object that will be triggered when the map is ready to be used.
      */
     fun getMapAsync(omhOnMapReadyCallback: OmhOnMapReadyCallback) {
         omhMapView?.getMapAsync(omhOnMapReadyCallback)
@@ -141,7 +141,7 @@ class OmhMapFragment : Fragment() {
          * Creates a map fragment, using default options.
          * Use this factory method to create a new instance of this fragment.
          *
-         * @return A new instance of fragment OmhMapFragment.
+         * @return A new instance of fragment [OmhMapFragment].
          */
         @JvmStatic
         fun newInstance() = OmhMapFragment()
