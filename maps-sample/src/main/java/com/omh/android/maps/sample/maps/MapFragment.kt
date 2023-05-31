@@ -195,10 +195,10 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
 
     private fun initializeRunnable() {
         handler = Handler(Looper.getMainLooper())
-        runnable = object : Runnable {
-            override fun run() {
-                Toast.makeText(requireContext(), R.string.move_message, Toast.LENGTH_LONG).show()
-                handler?.postDelayed(this, SHOW_MESSAGE_TIME)
+        runnable = Runnable {
+            Toast.makeText(requireContext(), R.string.move_message, Toast.LENGTH_LONG).show()
+            runnable?.let { validRunnable ->
+                handler?.postDelayed(validRunnable, SHOW_MESSAGE_TIME)
             }
         }
     }
