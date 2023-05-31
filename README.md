@@ -27,8 +27,7 @@ Sample app demonstrates how to use Omh Maps SDK functionalities, [sample](/omh-m
 <img src="https://github.com/openmobilehub/omh-maps/assets/124717244/e52c8331-2f35-4261-9fa4-172e5c6b6478" width="200" height="370">
 
 # Getting started
-Create an Android app that displays a map by using the Google Maps template for Android Studio. 
-If you have an existing Android Studio project that you'd like to set up, see [Project Configuration](https://developers.google.com/maps/documentation/android-sdk/config).
+Create an Android app that displays a map by using an empty Activity for Android Studio.
 
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
@@ -41,11 +40,10 @@ If you have an existing Android Studio project that you'd like to set up, see [P
    - Set **Language** to Java or Kotlin. Both languages are fully supported by the Maps SDK for Android. To learn more about Kotlin.
 
    - Set **Minimum SDK** to an SDK version compatible with your test device. You must select a version greater than the minimum version required by the OMH Maps SDK for Android , which is currently Android API Level 21 (Android 5.0, Lollipop) or higher.
-4. Click **Finish**
-   Android Studio starts Gradle and builds the project. This may take some time.
+4. Click **Finish**. Android Studio starts Gradle and builds the project. This may take some time.
 
 ## Set up your Google Cloud project for applications with Google Services(Google Maps)
-Complete the required Cloud Console setup steps by clicking through the following tabs:
+Complete the required Cloud Console setup following the next steps, for more information see [Documentation](https://developers.google.com/maps/documentation/android-sdk/cloud-setup)
 
 ### Steps
 
@@ -63,7 +61,10 @@ Complete the required Cloud Console setup steps by clicking through the followin
 4. On the **Credentials** page, click **Create credentials > API key**. The **API key created** dialog displays your newly created API key.
 5. Click **Close**. The new API key is listed on the **Credentials** page under **API keys**. (Remember to [restrict the API](https://developers.google.com/maps/api-security-best-practices#restricting-api-keys) key before using it in production.)
 
+**Note:** To continue it is necessary to complete the creation of an API key. If you had problems please visit [Set up your Google Cloud project](https://developers.google.com/maps/documentation/android-sdk/cloud-setup)
+
 ## Add the API key to your app
+
 You should not check your API key into your version control system, so it is recommended
 storing it in the `local.properties` file, which is located in the root directory of your project.
 For more information about the `local.properties` file, see [Gradle properties files](https://developer.android.com/studio/build#properties-files).
@@ -71,52 +72,52 @@ For more information about the `local.properties` file, see [Gradle properties f
 1. Open the `local.properties` in your project level directory, and then add the following code. Replace `YOUR_API_KEY` with your API key.
 `MAPS_API_KEY=YOUR_API_KEY`
 2. Save the file.
-3. In your `AndroidManifest.xml`file, go to `com.google.android.geo.API_KEY` and update the `android:value attribute` as follows:
-
-```xml
-<meta-data
-   android:name="com.google.android.geo.API_KEY"
-   android:value="${MAPS_API_KEY}" />
-```
-
-**Important:** Before use be sure to add in the app's `AndroidManifest.xml` the required permissions:
+3. In your `AndroidManifest.xml`file, under the application tag add the meta-data tag as follows:
 
 ```
+<manifest ...>
+   <application ...>
+      ...
+      
+      <meta-data
+         android:name="com.google.android.geo.API_KEY"
+         android:value="${MAPS_API_KEY}" />
+   </application>
+</manifest>
+```
+
+**Important:** Before use be sure to add in the app's `AndroidManifest.xml` the required permissions, for more information, see [Doc](https://developer.android.com/training/permissions/declaring)
+
+```
+<manifest ...>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <application ...>
+        ...
+    </application>
+</manifest>
 ```
 
-4. Add Secrets [Gradle plugin for Android](https://github.com/google/secrets-gradle-plugin) to read the API key.
-- In your top-level settings.gradle file, include the Gradle plugin portal, Google Maven repository, and Maven central repository under the pluginManagement block. 
-The pluginManagement block must appear before any other statements in the script.
+4. To read the value from the `local.properties` you ca use [Secrets Gradle plugin for Android](https://github.com/google/secrets-gradle-plugin).To install the plugin and store your API key:
 
-```
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-} 
-```
-- In Android Studio, open your project-level build.gradle file and add the following code to the dependencies element under buildscript.
+   - In Android Studio, open your project-level `build.gradle` file and add the following code to the `dependencies` element under `buildscript`.
+   
+   ```
+      plugins {
+          // ...
+          id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin' version '2.0.1' apply false
+      }
+   ```
+   
+   - Next, open your module-level `build.gradle` file and add the following code to the plugins element.
 
-```
-plugins {
-    // ...
-    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin' version '2.0.1' apply false
-}
-```
+   ```
+   id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+   ```
 
-- Open your module-level build.gradle file and add the following code to the plugins element.
-
-```
-id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
-```
-
-- Save the file and sync your project with Gradle.
+   - Save the file and sync your project with Gradle.
 
 ## Gradle configuration
 To integrate the OMH Maps in your project is required to add some Gradle dependencies.
@@ -124,21 +125,19 @@ To integrate the OMH Maps in your project is required to add some Gradle depende
 ### Add OMH Core plugin
 To add the core plugin dependency in a new project, follow the next steps:
 
-1. In the project's `settings.gradle` file in the `dependencyResolutionManagement`, 
-then in the `repositories` the maven reference `maven { url 'https://s01.oss.sonatype.org/content/groups/staging/' }`
+1. In Android Studio, open your project-level `settings.gradle` file and add the following code to the `repositiories` element under `dependencyResolutionManagement`
 
 ```
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    ...
     repositories {
-        google()
-        mavenCentral()
+        ...
         maven { url 'https://s01.oss.sonatype.org/content/groups/staging/' }
     }
 }
 ```
 
-2. In the project's `build.gradle` add the next script
+2. In the module-level `build.gradle` file add the next script:
 
 ```
 buildscript {
