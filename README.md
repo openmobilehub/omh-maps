@@ -27,22 +27,41 @@ Sample app demonstrates how to use Omh Maps SDK functionalities, [sample](/omh-m
 <img src="https://github.com/openmobilehub/omh-maps/assets/124717244/e52c8331-2f35-4261-9fa4-172e5c6b6478" width="200" height="370">
 
 # Getting started
+Create an Android app that displays a map by using the Google Maps template for Android Studio. 
+If you have an existing Android Studio project that you'd like to set up, see [Project Configuration](https://developers.google.com/maps/documentation/android-sdk/config).
 
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
 2. Ensure that you are using the [Android Gradle plugin](https://developer.android.com/studio/releases/gradle-plugin) version 7.0 or later in Android Studio).
 
+## Create a new project in Android Studio
+1. Open Android Studio, and click Create New Project in the Welcome to Android Studio window.
+2. In the New Project window, under the Phone and Tablet category, select Empty Activity, and then click Next.
+3. Complete the Google Maps Activity form:
+   - Set **Language** to Java or Kotlin. Both languages are fully supported by the Maps SDK for Android. To learn more about Kotlin.
+
+   - Set **Minimum SDK** to an SDK version compatible with your test device. You must select a version greater than the minimum version required by the OMH Maps SDK for Android , which is currently Android API Level 21 (Android 5.0, Lollipop) or higher.
+4. Click **Finish**
+   Android Studio starts Gradle and builds the project. This may take some time.
+
 ## Set up your Google Cloud project for applications with Google Services(Google Maps)
 Complete the required Cloud Console setup steps by clicking through the following tabs:
 
 ### Steps
+
+#### Set up your project
 1. In the Google Maps Cloud Console, on the project selector page, click **Create Project** to begin creating a new Cloud project, [Go to the project selector page](https://console.cloud.google.com/projectselector2/home/dashboard?utm_source=Docs_ProjectSelector&_gl=1*1ylhfe0*_ga*MTUwMDIzODY1Ni4xNjc1OTYyMDgw*_ga_NRWSTWS78N*MTY4MjA4ODIyNS44NS4xLjE2ODIwODgyMzcuMC4wLjA.). 
 2. Make sure that billing is enabled for your Cloud project, [Confirm that billing is enabled for your project](https://console.cloud.google.com/project/_/billing?_gl=1*msea12*_ga*MTUwMDIzODY1Ni4xNjc1OTYyMDgw*_ga_NRWSTWS78N*MTY4MjA4ODIyNS44NS4xLjE2ODIwODgyMzcuMC4wLjA.). 
-3. To use Google Maps Platform, you must enable the APIs or SDKs you plan to use with your project, [Enable the Maps SDK for Android](https://console.cloud.google.com/apis/library/maps-android-backend.googleapis.com?utm_source=Docs_EnableSpecificAPI&_gl=1*t8hu9m*_ga*MTUwMDIzODY1Ni4xNjc1OTYyMDgw*_ga_NRWSTWS78N*MTY4MjA4ODIyNS44NS4xLjE2ODIwODgyMzcuMC4wLjA.).
-4. The below steps only go through the API Key creation process.
-5. Go to the **Google Maps Platform > Credentials** page, [Go to the Credentials page](https://console.cloud.google.com/project/_/google/maps-apis/credentials?utm_source=Docs_Credentials&_gl=1*9zgq7y*_ga*MTUwMDIzODY1Ni4xNjc1OTYyMDgw*_ga_NRWSTWS78N*MTY4MjA4ODIyNS44NS4xLjE2ODIwODgyMzcuMC4wLjA.).
-6. On the **Credentials** page, click **Create credentials > API key**. The **API key created** dialog displays your newly created API key.
-7. Click **Close**. The new API key is listed on the **Credentials** page under **API keys**. (Remember to [restrict the API](https://developers.google.com/maps/api-security-best-practices#restricting-api-keys) key before using it in production.)
+
+#### Enable APIs
+1. To use Google Maps Platform, you must enable the APIs or SDKs you plan to use with your project, [Enable the Maps SDK for Android](https://console.cloud.google.com/apis/library/maps-android-backend.googleapis.com?utm_source=Docs_EnableSpecificAPI&_gl=1*t8hu9m*_ga*MTUwMDIzODY1Ni4xNjc1OTYyMDgw*_ga_NRWSTWS78N*MTY4MjA4ODIyNS44NS4xLjE2ODIwODgyMzcuMC4wLjA.).
+
+#### Get an API Key
+1. This step only goes through the API Key creation process. If you use your API Key in production, we strongly recommend that you restrict your API key. You can find more information in the product-specific Using API Keys page.
+2. The API key is a unique identifier that authenticates requests associated with your project for usage and billing purposes. You must have at least one API key associated with your project.
+3. Go to the **Google Maps Platform > Credentials** page, [Go to the Credentials page](https://console.cloud.google.com/project/_/google/maps-apis/credentials?utm_source=Docs_Credentials&_gl=1*9zgq7y*_ga*MTUwMDIzODY1Ni4xNjc1OTYyMDgw*_ga_NRWSTWS78N*MTY4MjA4ODIyNS44NS4xLjE2ODIwODgyMzcuMC4wLjA.).
+4. On the **Credentials** page, click **Create credentials > API key**. The **API key created** dialog displays your newly created API key.
+5. Click **Close**. The new API key is listed on the **Credentials** page under **API keys**. (Remember to [restrict the API](https://developers.google.com/maps/api-security-best-practices#restricting-api-keys) key before using it in production.)
 
 ## Add the API key to your app
 You should not check your API key into your version control system, so it is recommended
