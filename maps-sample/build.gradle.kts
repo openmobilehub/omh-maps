@@ -58,9 +58,9 @@ android {
         buildConfig = true
     }
 
-    secrets {
+    /*secrets {
         defaultPropertiesFileName = "local.defaults.properties"
-    }
+    }*/
 }
 
 dependencies {
