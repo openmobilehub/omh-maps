@@ -88,6 +88,3 @@ lint/tmp/
 
 # MacOs
 .DS_Store
-
-# Local default configuration file (Maps API key)
-local.defaults.properties
