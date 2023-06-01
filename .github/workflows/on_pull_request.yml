@@ -23,7 +23,7 @@ jobs:
         run: bash ./gradlew assembleDebug
 
       - name: Update local properties for secrets
-          run: echo MAPS_API_KEY="MAPS_API_KEY" > ./local.properties
+        run: echo MAPS_API_KEY="MAPS_API_KEY" > ./local.properties
 
   code_quality_analysis:
     name: Check code quality
