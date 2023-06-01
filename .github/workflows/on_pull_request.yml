@@ -20,7 +20,7 @@ jobs:
           cache: gradle
 
       - name: Update local properties for secrets
-        run: echo MAPS_API_KEY="MAPS_API_KEY" > ./local.properties
+        run: bash echo MAPS_API_KEY="MAPS_API_KEY" > ./local.properties
 
       - name: Assemble app debug APK
         run: bash ./gradlew assembleDebug
