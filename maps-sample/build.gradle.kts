@@ -57,6 +57,10 @@ android {
         viewBinding = true
         buildConfig = true
     }
+
+    secrets {
+        defaultPropertiesFileName = "local.defaults.properties"
+    }
 }
 
 dependencies {
