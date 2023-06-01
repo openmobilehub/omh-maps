@@ -22,10 +22,8 @@ jobs:
       - name: Assemble app debug APK
         run: bash ./gradlew assembleDebug
 
-      - name: Update Username from Secrets
-          env:
-            MAPS_API_KEY: ${{ "TEST" }}
-          run: echo MAPS_API_KEY="$MAPS_API_KEY" > ./local.properties
+      - name: Update local properties for secrets
+          run: echo MAPS_API_KEY="MAPS_API_KEY" > ./local.properties
 
   code_quality_analysis:
     name: Check code quality
