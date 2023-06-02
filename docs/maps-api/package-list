@@ -1,7 +1,5 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
-$dokka.location:com.omh.android.maps.api.extensions////PointingToDeclaration/maps-api/com.omh.android.maps.api.extensions/index.html
-$dokka.location:com.omh.android.maps.api.extensions//tag/java.lang.Class[*]#/PointingToDeclaration/maps-api/com.omh.android.maps.api.extensions/tag.html
 $dokka.location:com.omh.android.maps.api.factories////PointingToDeclaration/maps-api/com.omh.android.maps.api.factories/index.html
 $dokka.location:com.omh.android.maps.api.factories/OmhMapFactory///PointingToDeclaration/maps-api/com.omh.android.maps.api.factories/-omh-map-factory/index.html
 $dokka.location:com.omh.android.maps.api.factories/OmhMapFactory/getOmhLocation/#android.content.Context/PointingToDeclaration/maps-api/com.omh.android.maps.api.factories/-omh-map-factory/get-omh-location.html
@@ -132,11 +130,6 @@ $dokka.location:com.omh.android.maps.api.presentation.models/OmhMarkerOptions/po
 $dokka.location:com.omh.android.maps.api.presentation.models/OmhMarkerOptions/title/#/PointingToDeclaration/maps-api/com.omh.android.maps.api.presentation.models/-omh-marker-options/title.html
 $dokka.location:com.omh.android.maps.api.presentation.models/OmhMarkerOptions/writeToParcel/#android.os.Parcel#kotlin.Int/PointingToDeclaration/maps-api/com.omh.android.maps.api.presentation.models/-omh-marker-options/write-to-parcel.html
 $dokka.location:com.omh.android.maps.api.utils////PointingToDeclaration/maps-api/com.omh.android.maps.api.utils/index.html
-$dokka.location:com.omh.android.maps.api.utils/Constants///PointingToDeclaration/maps-api/com.omh.android.maps.api.utils/-constants/index.html
-$dokka.location:com.omh.android.maps.api.utils/Constants/LOST_INTERNET_CONNECTION/#/PointingToDeclaration/maps-api/com.omh.android.maps.api.utils/-constants/-l-o-s-t_-i-n-t-e-r-n-e-t_-c-o-n-n-e-c-t-i-o-n.html
-$dokka.location:com.omh.android.maps.api.utils/Constants/MAX_NAME_LENGTH/#/PointingToDeclaration/maps-api/com.omh.android.maps.api.utils/-constants/-m-a-x_-n-a-m-e_-l-e-n-g-t-h.html
-$dokka.location:com.omh.android.maps.api.utils/Constants/MIN_NAME_LENGTH/#/PointingToDeclaration/maps-api/com.omh.android.maps.api.utils/-constants/-m-i-n_-n-a-m-e_-l-e-n-g-t-h.html
-$dokka.location:com.omh.android.maps.api.utils/Constants/NO_INTERNET_CONNECTION/#/PointingToDeclaration/maps-api/com.omh.android.maps.api.utils/-constants/-n-o_-i-n-t-e-r-n-e-t_-c-o-n-n-e-c-t-i-o-n.html
 $dokka.location:com.omh.android.maps.api.utils/NetworkConnectivityChecker.OmhOnLostConnection///PointingToDeclaration/maps-api/com.omh.android.maps.api.utils/-network-connectivity-checker/-omh-on-lost-connection/index.html
 $dokka.location:com.omh.android.maps.api.utils/NetworkConnectivityChecker.OmhOnLostConnection/onLost/#android.net.Network/PointingToDeclaration/maps-api/com.omh.android.maps.api.utils/-network-connectivity-checker/-omh-on-lost-connection/on-lost.html
 $dokka.location:com.omh.android.maps.api.utils/NetworkConnectivityChecker///PointingToDeclaration/maps-api/com.omh.android.maps.api.utils/-network-connectivity-checker/index.html
@@ -144,7 +137,6 @@ $dokka.location:com.omh.android.maps.api.utils/NetworkConnectivityChecker/Networ
 $dokka.location:com.omh.android.maps.api.utils/NetworkConnectivityChecker/isNetworkAvailable/#/PointingToDeclaration/maps-api/com.omh.android.maps.api.utils/-network-connectivity-checker/is-network-available.html
 $dokka.location:com.omh.android.maps.api.utils/NetworkConnectivityChecker/startListeningForConnectivityChanges/#com.omh.android.maps.api.utils.NetworkConnectivityChecker.OmhOnLostConnection/PointingToDeclaration/maps-api/com.omh.android.maps.api.utils/-network-connectivity-checker/start-listening-for-connectivity-changes.html
 $dokka.location:com.omh.android.maps.api.utils/NetworkConnectivityChecker/stopListeningForConnectivity/#/PointingToDeclaration/maps-api/com.omh.android.maps.api.utils/-network-connectivity-checker/stop-listening-for-connectivity.html
-com.omh.android.maps.api.extensions
 com.omh.android.maps.api.factories
 com.omh.android.maps.api.presentation.fragments
 com.omh.android.maps.api.presentation.interfaces.location
