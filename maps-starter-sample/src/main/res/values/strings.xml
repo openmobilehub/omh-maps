@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Maps Starter Sample</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="map_fragment_label">Map Fragment</string>
+</resources>
