@@ -384,7 +384,9 @@ Example to get `OmhMap` using the `OmhMapFragment`.
     import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
 
     class MainActivity : AppCompatActivity(), OmhOnMapReadyCallback {
-
+   
+        // ...
+   
         override fun onMapReady(omhMap: OmhMap) {
             if (!hasPermissions()) {
                 Log.e("permission error", "Not required permissions to get current location")
@@ -419,7 +421,7 @@ Then use `getMapAsync()` to register for the map callback:
    ```kotlin
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setContentView(R.layout.activity_maps)
+        setContentView(R.layout.MainActivity)
     
         // Request permissions, this can be done in another way, see https://developer.android.com/training/permissions/requesting
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
