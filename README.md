@@ -73,7 +73,7 @@ MAPS_API_KEY=YOUR_API_KEY
 ```
 
 2. Save the file.
-3. In your `AndroidManifest.xml`file, under the `application` tag add the `meta-data` tag as follows:
+3. In your `AndroidManifest.xml`file, under the `application` element add the `meta-data` element as follows:
 
 ```
 <manifest ...>
@@ -101,7 +101,7 @@ MAPS_API_KEY=YOUR_API_KEY
 </manifest>
 ```
 
-4. To read the value from the `local.properties` you ca use [Secrets Gradle plugin for Android](https://github.com/google/secrets-gradle-plugin).To install the plugin and store your API key:
+4. To read the value from the `local.properties` you can use [Secrets Gradle plugin for Android](https://github.com/google/secrets-gradle-plugin). To install the plugin and store your API key:
 
    - In Android Studio, open your project-level `build.gradle` file and add the following code to the `dependencies` element under `buildscript`.
    
@@ -138,15 +138,15 @@ dependencyResolutionManagement {
 }
 ```
 
-2. In the module-level `build.gradle` file at the top, add the following code:
+2. In the project-level `build.gradle` file at the top, add the following code:
 
 ```
 buildscript {
    repositories {
-        maven { url 'https://s01.oss.sonatype.org/content/groups/staging/' }
+      maven { url 'https://s01.oss.sonatype.org/content/groups/staging/' }
    }
    dependencies {
-        classpath 'com.openmobilehub.android:omh-core:1.0'
+      classpath 'com.openmobilehub.android:omh-core:1.0'
    }
 }
 ...
@@ -169,6 +169,8 @@ To use the core plugin is required some minimum configuration, for more details 
 1. In the module-level `build.gradle` file under the `buildFeatures` element add `buildConfig = true`. For more information see [BuildFeatures](https://developer.android.com/reference/tools/gradle-api/7.0/com/android/build/api/dsl/BuildFeatures)
 If there is no `buildFeatures` element, add that too, see [No buildFeatures](#No buildFeatures).
 
+#### With buildFeatures
+
 ```
 android {
    ...
@@ -179,7 +181,7 @@ android {
 }
 ```
 
-###### No buildFeatures
+#### Without buildFeatures
 
 ```
 android {
@@ -197,13 +199,13 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
 #### Basic configuration
 Define the `Bundle` that represents the build variants names. In this example are `singleBuild`, `gms` and `nongms`.
 
-###### Variant singleBuild
+##### Variant singleBuild
 - Define the `Service`. In this example is maps.
 - Define the `ServiceDetails`. In this example are `gmsService` and `nonGmsService`.
 - Define the dependency and the path. In this example are `com.openmobilehub.android:maps-api-googlemaps:1.0"` and `com.openmobilehub.android:maps-api-openstreetmap:1.0`.
 **Note:** It's important to observe how a single build encompasses both GMS (Google Mobile Services) and Non-GMS configurations.
 
-###### Variant gms
+##### Variant gms
 - Define the `Service`. In this example is maps.
 - Define the `ServiceDetails` . In this example is `gmsService`.
 - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-googlemaps:1.0"`.
@@ -264,6 +266,7 @@ omhConfig {
 6. Create an instance of the provider. The recommendation is to create a custom `Application` class to ensure that the provider is instantiated correctly.
 To create an `Application` class do the following:
 - In the module-level in the same package as the `Activity` right click and select "New" > "Kotlin Class/File".
+- Select "class".
 - Write any name for the class. In this example is `MainApplication`.
 - Press Enter.
 
