@@ -49,6 +49,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     private var networkConnectivityChecker: NetworkConnectivityChecker? = null
     private var handler: Handler? = null
     private var runnable : Runnable? = null
+    private var handledCurrentLocation = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -204,6 +205,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
     }
 
     private fun handleAfterGetLocation(omhMap: OmhMap) {
+        handledCurrentLocation = true
         handler?.removeCallbacksAndMessages(null)
         binding.progressIndicatorIcon.visibility = View.GONE
         moveToCurrentLocation(omhMap, DEFAULT_ZOOM_LEVEL)
@@ -222,6 +224,7 @@ class MapFragment : Fragment(), OmhOnMapReadyCallback {
 
     override fun onResume() {
         super.onResume()
+        if (handledCurrentLocation) { return }
         runnable?.let { validRunnable ->
             handler?.postDelayed(validRunnable, SHOW_MESSAGE_TIME)
         }
