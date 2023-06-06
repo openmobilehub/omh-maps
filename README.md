@@ -137,8 +137,6 @@ To use the core plugin is required some minimum configuration, for more details 
 
 1. In your "maps-starter-sample" module-level `build.gradle` file under the `buildFeatures` element add `buildConfig = true`. For more information see [BuildFeatures](https://developer.android.com/reference/tools/gradle-api/7.0/com/android/build/api/dsl/BuildFeatures)
 
-   #### With buildFeatures
-
    ```
    android {
       ...
@@ -220,8 +218,7 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
    - "gms" variant  builds for devices that has GMS (Google Mobile Services).
    - "nongms" variant builds for devices that doesn't have GMS (Google Mobile Services).
 
-6. Create an instance of the provider. The recommendation is to create a custom `Application` class to ensure that the provider is instantiated correctly.
-   Open "maps-starter-sample" module-level `MainApplication` class and add the required imports below the package name:
+6. Open "maps-starter-sample" module-level `MainApplication` class and add the required imports below the package name:
 
    ```kotlin
    import android.app.Application
@@ -400,7 +397,7 @@ Then use `getMapAsync()` to register for the map callback:
    Visit our [Advanced Features wiki page](https://github.com/openmobilehub/omh-maps/wiki#ohm-map-sdk---advanced-features) to access detailed information, examples, and guides for each feature. Unleash the full power of our mapping SDK and create exceptional mapping experiences.
    Take the next step and explore our Advanced Features now!
 
-#### Sample App
+### Sample App
 Advanced Sample app demonstrates how to use Omh Maps SDK functionalities, [sample](/omh-maps/tree/develop/maps-sample).
 
 ## Documentation
