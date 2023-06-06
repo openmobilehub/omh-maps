@@ -113,7 +113,7 @@ For more information about the `local.properties` file, see [Gradle properties f
    }
    ```
 
-      - Save the file and [sync your project with Gradle](https://developer.android.com/studio/build#sync-files).
+   - Save the file and [sync your project with Gradle](https://developer.android.com/studio/build#sync-files).
 
 ## Gradle configuration
 To integrate the OMH Maps in your project is required to add some Gradle dependencies.
@@ -213,20 +213,19 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
    - Select "View" > "Tool Windows" > "Build Variants" in the menu.
    - Click the "Build Variants" tab on the tool window bar.
 
-5. You can select any of the 3 variants:
-   - "singleBuild" variant builds for GMS (Google Mobile Services) and Non-GMS devices without changes to the code.
+5. You can select any of the 3 variants for the `:Maps-starter-sample`:
+   - "singleBuild" variant builds for GMS (Google Mobile Services) and Non-GMS devices without changes to the code.(Recommended)
    - "gms" variant  builds for devices that has GMS (Google Mobile Services).
    - "nongms" variant builds for devices that doesn't have GMS (Google Mobile Services).
 
 6. Open "maps-starter-sample" module-level `MainApplication` class and add the required imports below the package name:
 
    ```kotlin
-   import android.app.Application
    import com.omh.android.maps.api.factories.OmhMapProvider
    import com.omh.android.maps.api.factories.OmhMapSDK
    ```
 
-   Then the class needs to extend `android.app.Application` and initialize the `OmhMapsSDK` as follows:
+   Then initialize the `OmhMapsSDK` as follows:
 
    ```kotlin
     class MainApplication : Application() {
@@ -247,23 +246,14 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
    - [Sync Project with Gradle Files](https://developer.android.com/studio/build#sync-files). 
    - Select "Build" from the menu at the top in Android Studio. 
    - Click on "Clean Project" and await. 
-   - Click on "Rebuild Project" and await. 
-   - Select "Run" from the top navigation menu in Android Studio. 
-   - Click the first item "Run". 
+   - Click on "Rebuild Project" and await.
+   - Click on "Rebuild Project" and await.
+   - Await a few seconds after rebuild if still not recognize them.
+   - If still not working,Select "Run" for the `maps-starter-sample` from the top navigation menu in Android Studio.
    - If still not working, select "File" from the menu at the top in Android Studio. 
    - Click "Invalidate Caches...". 
    - Click "Invalidate and Restart". If you click "Just restart", cache won't be deleted and the selected optional actions won't be applied. 
    - Await until Android Studio restarts.
-
-7. In your "maps-starter-sample" module-level `AndroidManifest.xml` file, specify the `android:name` property with the created class `MainApplication`.
-
-   ```
-   ...
-      <application
-      ...
-      android:name=".MainApplication">
-   ...
-   ```
 
 ## Add the map into your app
 The main interfaces that you will be interacting with are called `OmhMap`, `OmhMapView` and `OmhLocation`.
@@ -313,7 +303,7 @@ And the complete fragment's layout should look similar to this example:
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-Now just click the "Run" menu option (or the play button icon) to run your app and see the map.
+Now just click the "Run" for the `maps-starter-sample` menu option (or the play button icon) to run your app and see the map.
 
 ### Display your current location
 An `OmhMap` must be acquired using `getMapAsync(OmhOnMapReadyCallback)`. This class automatically initializes the maps system and the view.
@@ -339,6 +329,7 @@ An `OmhMap` must be acquired using `getMapAsync(OmhOnMapReadyCallback)`. This cl
     import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
     import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMapReadyCallback
     import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
+    import com.omh.android.maps.starter_sample.databinding.FragmentMapBinding
 
     class MapFragment : Fragment(), OmhOnMapReadyCallback {
    
@@ -388,7 +379,7 @@ Then use `getMapAsync()` to register for the map callback:
     }
    ```
 
-3. Click "Run" menu option (or the play button icon) to run your app and see the map with the device's location.
+3. Click "Run" for the `maps-starter-sample` menu option (or the play button icon) to run your app and see the map with the device's location.
    **Important:** For a better experience and accuracy try a phone with a SIM card.
 
 4. Explore Advanced Features
