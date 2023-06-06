@@ -25,8 +25,7 @@ Together, we can expand the capabilities of the SDK and enhance the range of sup
 <img src="https://github.com/openmobilehub/omh-maps/assets/124717244/e52c8331-2f35-4261-9fa4-172e5c6b6478" width="200" height="370">
 
 # Getting started
-Create an Android app that displays a map by using an empty Activity for Android Studio.
-This section describes how to setup an Android Studio project to use the OMH Maps SDK for Android using an existing base code.
+This section describes how to setup an Android Studio project to use the OMH Maps SDK for Android. For greater ease, a base code will be used within the repository.
 
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
