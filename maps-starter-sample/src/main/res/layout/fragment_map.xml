@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".MapFragment">
 
-    <!-- TODO: Before running your app, add the fragment tag and set the class name of the OmhMapFragment. -->
+    <!--
+        Add OmhMapFragment:
+        TODO: Before running your app, add the fragment tag and set the class name of the OmhMapFragment.
+    -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

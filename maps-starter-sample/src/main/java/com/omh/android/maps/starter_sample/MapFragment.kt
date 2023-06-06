@@ -6,13 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.omh.android.maps.starter_sample.databinding.FragmentMapBinding
-/**
- * TODO: Before you run your application import the required permissions.
- */
+// Add imports: TODO: Before you run your application add the required imports.
 
-/**
- * TODO: Before you run your application extend `OmhOnMapReadyCallback`.
- */
+
+// MapFragment extends: TODO: Before you run your application extend `OmhOnMapReadyCallback`.
+
 class MapFragment : Fragment() {
 
     private var _binding: FragmentMapBinding? = null
@@ -31,10 +29,8 @@ class MapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /**
-         * TODO: Before you run your application check the required permissions `ACCESS_FINE_LOCATION`, `ACCESS_COARSE_LOCATION`.
-         * TODO: Then get the `OmhMapFragment` and call the method `getMapAsync`.
-         */
+         // TODO: Before you run your application check the required permissions `ACCESS_FINE_LOCATION`, `ACCESS_COARSE_LOCATION`.
+         // TODO: Then get the `OmhMapFragment` and call the method `getMapAsync`.
     }
 
     override fun onDestroyView() {
@@ -42,11 +38,8 @@ class MapFragment : Fragment() {
         _binding = null
     }
 
-    /**
-     * TODO: Before you run your application override `onMapReady` method of `OmhOnMapReadyCallback`.
-     */
 
-    /**
-     * TODO: Before you run your application create the method `hasPermissions`
-     */
+    // Override onMapReady: TODO: Before you run your application override `onMapReady` method of `OmhOnMapReadyCallback`.
+
+    // Add method to check Permissions: TODO: Before you run your application create the method `hasPermissions`
 }

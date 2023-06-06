@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- TODO: Before you run your application add the required permissions. -->
+    <!--
+        Add permissions
+        TODO: Before you run your application add the required permissions.
+    -->
     <application
         android:name=".MainApplication"
         android:icon="@mipmap/ic_launcher"
@@ -19,10 +22,11 @@
             </intent-filter>
         </activity>
         <!--
-             TODO: Before you run your application with Google Services, you need a Google Maps API key.
-             To get one, follow the directions here: https://developers.google.com/maps/documentation/android-sdk/get-api-key
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...).
+            Add meta-data
+            TODO: Before you run your application with Google Services, you need a Google Maps API key.
+            To get one, follow the directions here: https://developers.google.com/maps/documentation/android-sdk/get-api-key
+            Once you have your API key (it starts with "AIza"), define a new property in your
+            project's local.properties file (e.g. MAPS_API_KEY=Aiza...).
         -->
     </application>
 

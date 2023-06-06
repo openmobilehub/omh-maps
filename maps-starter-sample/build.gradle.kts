@@ -3,8 +3,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    // TODO: Before you run your application add the secrets gradle plugin id.
-    // TODO: Before you run your application add the OMH core plugin id.
+    // Add Secrets Gradle plugin: TODO: Before you run your application add the secrets gradle plugin id.
+    // Add OMH core plugin: TODO: Before you run your application add the OMH core plugin id.
 }
 
 android {
@@ -37,7 +37,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        // TODO: Before you run your application enable the buildConfig.
+        // Enable build config: TODO: Before you run your application enable the buildConfig.
     }
 }
 
@@ -51,6 +51,5 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
 }
 
-/**
- * TODO: Before you run your application configure the new build variants using the OMH core plugin.
- */
+
+ // Configure OMH core plugin: TODO: Before you run your application configure the new build variants using the OMH core plugin.
