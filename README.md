@@ -421,7 +421,7 @@ Then use `getMapAsync()` to register for the map callback:
    ```kotlin
     override fun onCreate(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setContentView(R.layout.MainActivity)
+        setContentView(R.layout.activity_main)
     
         // Request permissions, this can be done in another way, see https://developer.android.com/training/permissions/requesting
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
