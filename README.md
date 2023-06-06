@@ -29,7 +29,7 @@ Create an Android app that displays a map by using an empty Activity for Android
 
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
-2. Ensure that you are using the [Android Gradle plugin](https://developer.android.com/studio/releases/gradle-plugin) version 7.0 or later in Android Studio).
+2. Ensure that you are using the [Android Gradle plugin](https://developer.android.com/studio/releases/gradle-plugin) version 7.0 or later in Android Studio.
 
 ## Create a new project in Android Studio
 1. Open Android Studio, and click Create New Project in the Welcome to Android Studio window.
@@ -167,7 +167,7 @@ To add the core plugin dependency in a new project, follow the next steps:
 To use the core plugin is required some minimum configuration, for more details see [OMH Core Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0).
 
 1. In the module-level `build.gradle` file under the `buildFeatures` element add `buildConfig = true`. For more information see [BuildFeatures](https://developer.android.com/reference/tools/gradle-api/7.0/com/android/build/api/dsl/BuildFeatures)
-If there is no `buildFeatures` element, create it, see [No buildFeatures](#Without buildFeatures).
+If there is no `buildFeatures` element, create it, see [Without buildFeatures](#without-buildFeatures).
 
    #### With buildFeatures
 
