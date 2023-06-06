@@ -221,7 +221,7 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
    - "nongms" variant builds for devices that doesn't have GMS (Google Mobile Services).
 
 6. Create an instance of the provider. The recommendation is to create a custom `Application` class to ensure that the provider is instantiated correctly.
-   Open "maps-starter-sample" module-level and add the required imports below the package name:
+   Open "maps-starter-sample" module-level `MainApplication` class and add the required imports below the package name:
 
    ```kotlin
    import android.app.Application
@@ -229,7 +229,7 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
    import com.omh.android.maps.api.factories.OmhMapSDK
    ```
 
-   Then he class needs to extend `android.app.Application` as follows:
+   Then the class needs to extend `android.app.Application` and initialize the `OmhMapsSDK` as follows:
 
    ```kotlin
     class MainApplication : Application() {
