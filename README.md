@@ -218,7 +218,7 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
    - "gms" variant  builds for devices that has GMS (Google Mobile Services).
    - "nongms" variant builds for devices that doesn't have GMS (Google Mobile Services).
 
-6. Open "maps-starter-sample" module-level `MainApplication` class and add the required imports below the package name. The file is in the same level as the MainActivity`:
+6. Open "maps-starter-sample" module-level `MainApplication` class and add the required imports below the package name. The file is in the same level as the `MainActivity`:
 
    ```kotlin
    import com.omh.android.maps.api.factories.OmhMapProvider
