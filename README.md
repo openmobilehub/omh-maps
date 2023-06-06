@@ -109,7 +109,7 @@ For more information about the `local.properties` file, see [Gradle properties f
    ```
    plugins {
       ...
-      id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+      id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
    }
    ```
 
@@ -126,7 +126,7 @@ To add the core plugin dependency in a new project, follow the next steps:
    ```
    plugins {
       ...
-      id 'com.openmobilehub.android.omh-core'
+      id("com.openmobilehub.android.omh-core")
    }
    ```
 
