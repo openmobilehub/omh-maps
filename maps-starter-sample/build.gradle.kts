@@ -51,5 +51,4 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
 }
 
-
  // Configure OMH core plugin: TODO: Before you run your application configure the new build variants using the OMH core plugin.
