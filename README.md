@@ -1,7 +1,6 @@
-[![GitHub license](https://img.shields.io/github/license/openmobilehub/omh-maps)](https://github.com/openmobilehub/omh-maps/blob/main/LICENSE)
 [![Discord](https://img.shields.io/discord/1115727214827278446)](https://discord.gg/X8QB9DJXX6)
+![Apache-2.0](https://img.shields.io/badge/license-Apache-blue)
 ![GitHub contributors](https://img.shields.io/github/contributors/openmobilehub/omh-maps)
-[![API](https://img.shields.io/badge/API-21%2B-green.svg?style=flat)](https://developer.android.com/studio/releases/platforms#5.0)
 
 
 # OMH Maps SDK overview
