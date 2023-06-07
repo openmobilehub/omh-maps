@@ -1,4 +1,5 @@
 [![GitHub license](https://img.shields.io/github/license/openmobilehub/omh-maps)](https://github.com/openmobilehub/omh-maps/blob/main/LICENSE)
+[![Discord](https://img.shields.io/discord/1115727214827278446)](https://discord.gg/VamAdbQ6)
 ![GitHub contributors](https://img.shields.io/github/contributors/openmobilehub/omh-maps)
 [![API](https://img.shields.io/badge/API-21%2B-green.svg?style=flat)](https://developer.android.com/studio/releases/platforms#5.0)
 
