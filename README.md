@@ -120,7 +120,7 @@ To integrate the OMH Maps in your project is required to add some Gradle depende
 ### Add OMH Core plugin
 To add the core plugin dependency in a new project, follow the next steps:
 
-1. In your "maps-starter-sample" module-level `build.gradle` under the `plugins` element add the plugin id.
+1. In your `maps-starter-sample" module-level `build.gradle` under the `plugins` element add the plugin id.
 
    ```
    plugins {
@@ -134,7 +134,7 @@ To add the core plugin dependency in a new project, follow the next steps:
 ### Configure the OMH Core plugin
 To use the core plugin is required some minimum configuration, for more details see [OMH Core Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0).
 
-1. In your "maps-starter-sample" module-level `build.gradle` file under the `buildFeatures` element add `buildConfig = true`. For more information see [BuildFeatures](https://developer.android.com/reference/tools/gradle-api/7.0/com/android/build/api/dsl/BuildFeatures)
+1. In your `maps-starter-sample` module-level `build.gradle` file under the `buildFeatures` element add `buildConfig = true`. For more information see [BuildFeatures](https://developer.android.com/reference/tools/gradle-api/7.0/com/android/build/api/dsl/BuildFeatures)
 
    ```
    android {
@@ -146,7 +146,7 @@ To use the core plugin is required some minimum configuration, for more details 
    }
    ```
 
-2. In your "maps-starter-sample" module-level `build.gradle` file is required to configure the `omhConfig`. The `omhConfig` definition is used to extend the existing Android Studio variants in the core plugin. 
+2. In your `maps-starter-sample` module-level `build.gradle` file is required to configure the `omhConfig`. The `omhConfig` definition is used to extend the existing Android Studio variants in the core plugin. 
 For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh-core/tree/release/1.0).
 
    #### Basic configuration
@@ -170,9 +170,9 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
    - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-openstreetmap:1.0`.
    **Note:** nonGms build covers only Non-GMS configurations.
 
-   In your "maps-starter-sample" module-level `build.gradle` file add the following code at the end of the file.
+   In your `maps-starter-sample` module-level `build.gradle` file add the following code at the end of the file.
 
-   ```
+   ```kotlin
    ...
    dependencies {
       ...
@@ -208,16 +208,16 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
    
 3. Save and [sync Project with Gradle Files](https://developer.android.com/studio/build#sync-files). 
 4. Now you can select a build variant. To change the build variant Android Studio uses, do one of the following:
-   - Select "Build" > "Select Build Variant..." in the menu.
-   - Select "View" > "Tool Windows" > "Build Variants" in the menu.
-   - Click the "Build Variants" tab on the tool window bar.
+   - Select `Build` > `Select Build Variant...` in the menu.
+   - Select `View` > `Tool Windows` > `Build Variants` in the menu.
+   - Click the `Build Variants` tab on the tool window bar.
 
 5. You can select any of the 3 variants for the `:Maps-starter-sample`:
-   - "singleBuild" variant builds for GMS (Google Mobile Services) and Non-GMS devices without changes to the code.(Recommended)
-   - "gms" variant  builds for devices that has GMS (Google Mobile Services).
-   - "nongms" variant builds for devices that doesn't have GMS (Google Mobile Services).
+   - `singleBuild` variant builds for GMS (Google Mobile Services) and Non-GMS devices without changes to the code.(Recommended)
+   - `gms` variant  builds for devices that has GMS (Google Mobile Services).
+   - `nonGms` variant builds for devices that doesn't have GMS (Google Mobile Services).
 
-6. Open "maps-starter-sample" module-level `MainApplication` class and add the required imports below the package name. The file is in the same level as the `MainActivity`:
+6. Open `maps-starter-sample` module-level `MainApplication` class and add the required imports below the package name. The file is in the same level as the `MainActivity`:
 
    ```kotlin
    import com.omh.android.maps.api.factories.OmhMapProvider
@@ -243,15 +243,13 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
 
    **Important:** If you encounter the error "Missing BuildConfig.MAPS_GMS_PATH and BuildConfig.MAPS_NON_GMS_PATH in BuildConfig class". Follow the next steps:
    - [Sync Project with Gradle Files](https://developer.android.com/studio/build#sync-files). 
-   - Select "Build" from the menu at the top in Android Studio. 
-   - Click on "Clean Project" and await. 
-   - Click on "Rebuild Project" and await.
-   - Await a few seconds after "Rebuild" if still not recognize them.
-   - If still not working,Select "Run" for the `maps-starter-sample` from the top navigation menu in Android Studio.
-   - If still not working, select "File" from the menu at the top in Android Studio. 
-   - Click "Invalidate Caches...". 
-   - Click "Invalidate and Restart". If you click "Just restart", cache won't be deleted and the selected optional actions won't be applied. 
-   - Await until Android Studio restarts.
+   - Select `Build` from the menu at the top in Android Studio. 
+   - Click on `Clean Project` and await. 
+   - Click on `Rebuild Project` and await.
+   - Await a few seconds after `Rebuild` if still not recognize them.
+   - If still not working,Select `Run` for the `maps-starter-sample` from the top navigation menu in Android Studio.
+   - If still not working, select `File` from the menu at the top in Android Studio. 
+   - Click `Invalidate Caches...`. 
 
 ## Add the map into your app
 The main interfaces that you will be interacting with are called `OmhMap`, `OmhMapView` and `OmhLocation`.
@@ -301,7 +299,7 @@ And the complete fragment's layout should look similar to this example:
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-Now just click the "Run" for the `maps-starter-sample` menu option (or the play button icon) to run your app and see the map.
+Now just click the `Run` for the `maps-starter-sample` menu option (or the play button icon) to run your app and see the map.
 
 ### Display your current location
 An `OmhMap` must be acquired using `getMapAsync(OmhOnMapReadyCallback)`. This class automatically initializes the maps system and the view.
@@ -377,7 +375,7 @@ Then use `getMapAsync()` to register for the map callback:
     }
    ```
 
-3. Click "Run" for the `maps-starter-sample` menu option (or the play button icon) to run your app and see the map with the device's location.
+3. Click `Run` for the `maps-starter-sample` menu option (or the play button icon) to run your app and see the map with the device's location.
    **Important:** For a better experience and accuracy try a phone with a SIM card.
 
 4. Explore Advanced Features
