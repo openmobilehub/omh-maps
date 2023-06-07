@@ -150,7 +150,7 @@ To use the core plugin is required some minimum configuration, for more details 
 For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh-core/tree/release/1.0).
 
    #### Basic configuration
-   Define the `Bundle` that represents the build variants names. In this example are `singleBuild`, `gms` and `nongms`.
+   Define the `Bundle` that represents the build variants names. In this example are `singleBuild`, `gms` and `nonGms`.
 
    ##### Variant singleBuild
    - Define the `Service`. In this example is maps.
@@ -164,11 +164,11 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
    - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-googlemaps:1.0"`.
    **Note:** gms build covers only GMS (Google Mobile Services).
 
-   ##### Variant nongms
+   ##### Variant nonGms
    - Define the `Service`. In this example is maps.
    - Define the `ServiceDetails` . In this example is `nonGmsService`.
    - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-openstreetmap:1.0`.
-   **Note:** nongms build covers only Non-GMS configurations.
+   **Note:** nonGms build covers only Non-GMS configurations.
 
    In your "maps-starter-sample" module-level `build.gradle` file add the following code at the end of the file.
 
