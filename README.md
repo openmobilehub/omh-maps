@@ -75,7 +75,7 @@ For more information about the `local.properties` file, see [Gradle properties f
    ```
 
 2. Save the file.
-3. In your "maps-starter-sample" module level `AndroidManifest.xml`file, under the `application` element add the `meta-data` element as follows:
+3. In your `maps-starter-sample` module level `AndroidManifest.xml`file, under the `application` element add the `meta-data` element as follows:
 
    ```
    <manifest ...>
