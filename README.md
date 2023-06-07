@@ -196,7 +196,7 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
             }
          }
       }
-      bundle("nongms") {
+      bundle("nonGms") {
          maps {
             nonGmsService {
                dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0"
