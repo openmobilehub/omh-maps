@@ -10,17 +10,18 @@
 [![Publish Maps API OpenStreetMap Implementation](https://github.com/openmobilehub/omh-maps/actions/workflows/publish_maps_api_ngms.yml/badge.svg)](https://github.com/openmobilehub/omh-maps/actions/workflows/publish_maps_api_ngms.yml)
 
 
-# OMH Maps SDK overview
+# OMH Maps Client Library Overview
 The solution to seamlessly integrating maps across GMS (Google Mobile Services) and non-GMS devices.
 With OMH Maps SDK, you can effortlessly incorporate Google Maps and OpenStreetMap implementations into your applications, 
 regardless of whether the device has Google Mobile Services or not. 
 Our SDK handles the complexities behind the scenes, providing a unified interface and common components for consistent map functionality.
 
-# Provider Implementations
-We also believe in the power of community collaboration. That's why OMH Maps SDK is open-source, inviting contributions and supporting plugins from other map providers. 
-Together, we can expand the capabilities of the SDK and enhance the range of supported map services.
+# Sample App
+This repository includes a [maps-sample](/maps-sample) that demonstrates the functionality of the OMH Maps Client Library. By cloning the repo and executing the app, you can explore the various features offered by the library. However, if you prefer a step-by-step approach to learn the SDK from scratch, we recommend following the detailed Getting Started guide provided in this repository. The guide will walk you through the implementation process and help you integrate the OMH Maps Client Library into your projects effectively.
 
-# OMH Maps SDK quickstart
+# Getting started
+This section describes how to setup an Android Studio project to use the OMH Maps SDK for Android. For greater ease, a base code will be used within the repository.
+
 <img src="https://github.com/openmobilehub/omh-maps/assets/124717244/35b0aa31-b550-457d-af9c-d536998fb99c" width="200" height="370">
 <img src="https://github.com/openmobilehub/omh-maps/assets/124717244/ee0e8400-0ca4-419a-a2f6-316775111c92" width="200" height="370">
 <img src="https://github.com/openmobilehub/omh-maps/assets/124717244/0faae0fc-ba41-4927-a13d-51cd7e976e46" width="200" height="370">
@@ -30,9 +31,6 @@ Together, we can expand the capabilities of the SDK and enhance the range of sup
 <img src="https://github.com/openmobilehub/omh-maps/assets/124717244/d40f78da-a992-4f24-8c26-bd9c92407f16" width="200" height="370">
 <img src="https://github.com/openmobilehub/omh-maps/assets/124717244/967606b6-ce1d-43b8-9a88-f4dedb2108fd" width="200" height="370">
 <img src="https://github.com/openmobilehub/omh-maps/assets/124717244/e52c8331-2f35-4261-9fa4-172e5c6b6478" width="200" height="370">
-
-# Getting started
-This section describes how to setup an Android Studio project to use the OMH Maps SDK for Android. For greater ease, a base code will be used within the repository.
 
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
@@ -389,12 +387,13 @@ Then use `getMapAsync()` to register for the map callback:
    Visit our [Advanced Features wiki page](https://github.com/openmobilehub/omh-maps/wiki#ohm-map-sdk---advanced-features) to access detailed information, examples, and guides for each feature. Unleash the full power of our mapping SDK and create exceptional mapping experiences.
    Take the next step and explore our Advanced Features now!
 
-### Sample App
-Advanced Sample app demonstrates how to use Omh Maps SDK functionalities, [sample](/omh-maps/tree/develop/maps-sample).
-
 ## Documentation
 See example and check the full documentation and add custom implementation at our [Wiki](https://github.com/openmobilehub/omh-maps/wiki).
 Additionally for more information about the OMH Map functions, [Docs](https://openmobilehub.github.io/omh-maps).
+
+# Provider Implementations
+We also believe in the power of community collaboration. That's why OMH Maps SDK is open-source, inviting contributions and supporting plugins from other map providers. 
+Together, we can expand the capabilities of the SDK and enhance the range of supported map services.
 
 ## Contributing
 We'd be glad if you decide to contribute to this project.
