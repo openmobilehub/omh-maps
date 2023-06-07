@@ -391,7 +391,7 @@ Then use `getMapAsync()` to register for the map callback:
 See example and check the full documentation and add custom implementation at our [Wiki](https://github.com/openmobilehub/omh-maps/wiki).
 Additionally for more information about the OMH Map functions, [Docs](https://openmobilehub.github.io/omh-maps).
 
-# Provider Implementations
+# Provider Implementations / Plugins
 We also believe in the power of community collaboration. That's why OMH Maps SDK is open-source, inviting contributions and supporting plugins from other map providers. 
 Together, we can expand the capabilities of the SDK and enhance the range of supported map services.
 
