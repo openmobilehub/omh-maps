@@ -39,7 +39,7 @@ This section describes how to setup an Android Studio project to use the OMH Map
 2. Ensure that you are using the [Android Gradle plugin](https://developer.android.com/studio/releases/gradle-plugin) version 7.0 or later in Android Studio.
 
 ## Clone the repository
-To clone the repository and checkout the "starter-code" branch, use the following command in your Terminal:
+To clone the repository and checkout the `starter-code` branch, use the following command in your Terminal:
 
    ```
    git clone --branch starter-code https://github.com/openmobilehub/omh-maps.git
