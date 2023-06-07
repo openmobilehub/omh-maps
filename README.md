@@ -247,7 +247,7 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
    - Click on `Clean Project` and await. 
    - Click on `Rebuild Project` and await.
    - Await a few seconds after `Rebuild` if still not recognize them.
-   - If still not working,Select `Run` for the `maps-starter-sample` from the top navigation menu in Android Studio.
+   - If still not working, select `Run` for the `maps-starter-sample` from the top navigation menu in Android Studio.
    - If still not working, select `File` from the menu at the top in Android Studio. 
    - Click `Invalidate Caches...`. 
 
