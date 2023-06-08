@@ -21,16 +21,14 @@ This section describes how to setup an Android Studio project to use the OMH Map
 
 **Note: To quickly run a full-featured app with all OMH Maps functionality, refer to the [`Sample App`](#sample-app) section and follow the provided steps.**
 
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/35b0aa31-b550-457d-af9c-d536998fb99c" width="200" height="370">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/ee0e8400-0ca4-419a-a2f6-316775111c92" width="200" height="370">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/0faae0fc-ba41-4927-a13d-51cd7e976e46" width="200" height="370">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/af321137-8304-4e09-a6e9-3aa2e5370538" width="200" height="370">
+<div align="center">
 
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/6487d3cb-7913-428a-b083-22fc098d3934" width="200" height="370">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/d40f78da-a992-4f24-8c26-bd9c92407f16" width="200" height="370">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/967606b6-ce1d-43b8-9a88-f4dedb2108fd" width="200" height="370">
-<img src="https://github.com/openmobilehub/omh-maps/assets/124717244/e52c8331-2f35-4261-9fa4-172e5c6b6478" width="200" height="370">
+| Non-GMS Device (Huawei)     | GMS Device (Pixel 6a) |
+| --------------------- | ----------- |
+| <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/35357dc0-bde4-48d6-b8f8-979740cffca1"> |   <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/4ba15244-3f16-4e5f-bbb7-ce109484ef16">     |
 
+</div>
+   
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
 2. Ensure that you are using the [Android Gradle plugin](https://developer.android.com/studio/releases/gradle-plugin) version 7.0 or later in Android Studio.
@@ -77,7 +75,7 @@ For more information about the `local.properties` file, see [Gradle properties f
 2. Save the file.
 3. In your `maps-starter-sample` module level `AndroidManifest.xml`file, under the `application` element add the `meta-data` element as follows:
 
-   ```
+   ```xml
    <manifest ...>
       <application ...>
          ...
@@ -90,7 +88,7 @@ For more information about the `local.properties` file, see [Gradle properties f
 
 4. In your "maps-starter-sample" module-level `AndroidManifest.xml` add the required permissions, for more information see [permissions](https://developer.android.com/training/permissions/declaring).
 
-   ```
+   ```xml
    <manifest ...>
       <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
       <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -105,7 +103,7 @@ For more information about the `local.properties` file, see [Gradle properties f
 5. To read the value from the `local.properties` you can use [Secrets Gradle plugin for Android](https://github.com/google/secrets-gradle-plugin). To install the plugin and store your API key:
    - Open your "maps-starter-sample" module-level `build.gradle` file and add the following code to the `plugins` element.
 
-   ```
+   ```kotlin
    plugins {
       ...
       id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
@@ -122,7 +120,7 @@ To add the core plugin dependency in a new project, follow the next steps:
 
 1. In your `maps-starter-sample" module-level `build.gradle` under the `plugins` element add the plugin id.
 
-   ```
+   ```kotlin
    plugins {
       ...
       id("com.openmobilehub.android.omh-core")
@@ -136,7 +134,7 @@ To use the core plugin is required some minimum configuration, for more details 
 
 1. In your `maps-starter-sample` module-level `build.gradle` file under the `buildFeatures` element add `buildConfig = true`. For more information see [BuildFeatures](https://developer.android.com/reference/tools/gradle-api/7.0/com/android/build/api/dsl/BuildFeatures)
 
-   ```
+   ```kotlin
    android {
       ...
       buildFeatures {
@@ -261,7 +259,7 @@ Additionally a fragment `OmhMapFragment` is provided, this fragment manages the 
 Fragment has to declare `android:name` that sets the class name of the fragment to `OmhMapFragment`, which is the fragment type used in the maps activity file.
 Being a fragment, this component can be added to an fragment's layout file simply with the following XML layout
 
-```
+```xml
 ...
     <fragment
         android:id="@+id/fragment_map_container"
