@@ -377,7 +377,7 @@ Then use `getMapAsync()` to register for the map callback:
 
 3. Click `Run` for the `maps-starter-sample` menu option (or the play button icon) to run your app and see the map with the device's location.
 
-**Important: For a better experience and accuracy try a phone with a SIM card.**
+   **Important: For a better experience and accuracy try a phone with a SIM card.**
 
 4. Explore Advanced Features
    Congratulations on completing the getting started guide! Now, it's time to level up your mapping skills by diving into our advanced features.
