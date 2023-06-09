@@ -43,3 +43,30 @@ jobs:
         run: bash ./gradlew detekt --stacktrace --continue
       - name: Run unit tests and check coverage
         run: bash ./gradlew jacocoCoverageVerification --stacktrace --continue
+
+  publish_to_staging:
+    name: Publish to staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: adopt
+          java-version: 11
+
+        # Builds the release artifacts of the library
+      - name: Release build
+        run: ./gradlew :maps-api-openstreetmap:assembleRelease
+      # Runs upload to the staging repository
+      - name: Publish to Staging area
+        if: ${{ vars.RELEASE_FLAG != 'true' }}
+        run: ./gradlew :maps-api-openstreetmap:publishReleasePublicationToSonatypeRepository --max-workers 1
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
