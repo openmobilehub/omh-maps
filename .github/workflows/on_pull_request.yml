@@ -60,6 +60,8 @@ jobs:
         # Builds the release artifacts of the library
       - name: Release build
         run: ./gradlew :maps-api-openstreetmap:assembleRelease
+      - name: Source jar and dokka
+        run: ./gradlew androidSourcesJar
       # Runs upload to the staging repository
       - name: Publish to Staging area
         if: ${{ vars.RELEASE_FLAG != 'true' }}
