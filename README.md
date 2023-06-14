@@ -116,7 +116,7 @@ For more information about the `local.properties` file, see [Gradle properties f
 To integrate the OMH Maps into your project, it is necessary to add a few Gradle dependencies.
 
 ### Add OMH Core plugin
-To add the core plugin dependency in a new project, follow the next steps:
+To incorporate OMH Maps into your project, you have two options: utilize the OMH Core Plugin or directly include the OMH Client libraries dependencies. The subsequent instructions will outline the necessary steps for including the OMH Core Plugin as a Gradle dependency.
 
 1. In your `maps-starter-sample" module-level `build.gradle` under the `plugins` element add the plugin id.
 
@@ -130,7 +130,7 @@ To add the core plugin dependency in a new project, follow the next steps:
 2. Save the file and [sync Project with Gradle Files](https://developer.android.com/studio/build#sync-files).
 
 ### Configure the OMH Core plugin
-To use the core plugin is required some minimum configuration, for more details see [OMH Core Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0).
+To use the core plugin, certain minimum configurations are required. For more details, please refer to [OMH Core Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0).
 
 1. In your `maps-starter-sample` module-level `build.gradle` file under the `buildFeatures` element add `buildConfig = true`. For more information see [BuildFeatures](https://developer.android.com/reference/tools/gradle-api/7.0/com/android/build/api/dsl/BuildFeatures)
 
