@@ -23,11 +23,15 @@ This section describes how to setup an Android Studio project to use the OMH Map
 
 <div align="center">
 
-| Non-GMS Device (Huawei)     | GMS Device (Pixel 6a) |
-| --------------------- | ----------- |
-| <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/35357dc0-bde4-48d6-b8f8-979740cffca1"> |   <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/4ba15244-3f16-4e5f-bbb7-ce109484ef16">     |
+| Non-GMS Device - Kindle Fire HD 10 Kids | Non-GMS Device - Huawei P60     | GMS Device - Pixel 6a |
+| ----------------------- | --------------------- | ----------- |
+| <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/c0aac701-018f-4b4b-bcba-4724ebd847a2">  | <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/35357dc0-bde4-48d6-b8f8-979740cffca1"> |   <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/4ba15244-3f16-4e5f-bbb7-ce109484ef16">     |
 
 </div>
+
+
+
+
    
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
