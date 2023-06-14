@@ -23,9 +23,9 @@ This section describes how to setup an Android Studio project to use the OMH Map
 
 <div align="center">
 
-| Non-GMS Device - Kindle Fire HD 10 Kids | Non-GMS Device - Huawei P60     | GMS Device - Pixel 6a |
-| ----------------------- | --------------------- | ----------- |
-| <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/3e6a2ba5-cc02-46d1-afae-80eb2120055f">  | <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/35357dc0-bde4-48d6-b8f8-979740cffca1"> |   <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/4ba15244-3f16-4e5f-bbb7-ce109484ef16">     |
+| Non-GMS</br>Kindle Fire HD 10 Kids | Non-GMS</br>Pixel 6 Pro | Non-GMS Device</br>Huawei P60     | GMS</br>Pixel 6a |
+| ----------------------- | --------------------- | ----------- | ------------ |
+| <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/3e6a2ba5-cc02-46d1-afae-80eb2120055f">  | <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/83d99377-6d80-4565-a1c1-c5a142128186"> | <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/35357dc0-bde4-48d6-b8f8-979740cffca1"> |   <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/4ba15244-3f16-4e5f-bbb7-ce109484ef16">     |
 
 </div>
    
