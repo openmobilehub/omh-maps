@@ -113,7 +113,7 @@ For more information about the `local.properties` file, see [Gradle properties f
    - Save the file and [sync your project with Gradle](https://developer.android.com/studio/build#sync-files).
 
 ## Gradle configuration
-To integrate the OMH Maps in your project is required to add some Gradle dependencies.
+To integrate the OMH Maps into your project, it is necessary to add a few Gradle dependencies.
 
 ### Add OMH Core plugin
 To add the core plugin dependency in a new project, follow the next steps:
