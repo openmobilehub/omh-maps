@@ -11,16 +11,12 @@
 
 
 # OMH Maps Client Library Overview
-The solution to seamlessly integrating maps across GMS (Google Mobile Services) and non-GMS devices.
-With OMH Maps SDK, you can effortlessly incorporate Google Maps and OpenStreetMap implementations into your applications, 
-regardless of whether the device has Google Mobile Services or not. 
-Our SDK handles the complexities behind the scenes, providing a unified interface and common components for consistent map functionality.
+OMH Maps is an Android client library that makes it easy to integrate maps on both Google Mobile Services (GMS) and non-GMS devices. It eliminates the need for separate codebases for different Android builds.
 
-# Getting started
-This section describes how to setup an Android Studio project to use the OMH Maps SDK for Android. For greater ease, a base code will be used within the repository. 
+With the OMH Maps Client Library, you can easily add Google Maps, OpenStreetMap, and other third-party maps to your applications, regardless of whether the device has GMS or not. The library takes care of the technical details, providing a unified interface and components for a consistent map experience.
 
-**Note: To quickly run a full-featured app with all OMH Maps functionality, refer to the [`Sample App`](#sample-app) section and follow the provided steps.**
-
+## A single codebase, running seamlessly on any device
+For instance, the following screenshots showcase multiple devices with Android, both with GMS and Non-GMS. The same app works without changing a single line of code, supporting multiple map provider implementations (Google Maps and OpenStreetMap).
 <div align="center">
 
 | Non-GMS</br>Kindle Fire HD 10 Kids | Non-GMS</br>Pixel 6 Pro | Non-GMS Device</br>Huawei P60     | GMS</br>Pixel 6a |
@@ -28,6 +24,11 @@ This section describes how to setup an Android Studio project to use the OMH Map
 | <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/3e6a2ba5-cc02-46d1-afae-80eb2120055f">  | <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/83d99377-6d80-4565-a1c1-c5a142128186"> | <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/35357dc0-bde4-48d6-b8f8-979740cffca1"> |   <img src="https://github.com/openmobilehub/omh-maps/assets/1755383/4ba15244-3f16-4e5f-bbb7-ce109484ef16">     |
 
 </div>
+
+# Getting started
+This section describes how to setup an Android Studio project to use the OMH Maps SDK for Android. For greater ease, a base code will be used within the repository. 
+
+**Note: To quickly run a full-featured app with all OMH Maps functionality, refer to the [`Sample App`](#sample-app) section and follow the provided steps.**
    
 ## Set up the development environment
 1. Android Studio is required. If you haven't already done so, [download](https://developer.android.com/studio/index.html) and [install](https://developer.android.com/studio/install.html?pkg=studio) it.
@@ -148,26 +149,11 @@ To use the core plugin, certain minimum configurations are required. For more de
 For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh-core/tree/release/1.0).
 
    #### Basic configuration
-   Define the `Bundle` that represents the build variants names. In this example are `singleBuild`, `gms` and `nonGms`.
+   In this step, you will define the OMH Core Plugin bundles to generate multiple build variants with specific suffixes as their names. For example, if your project has `release` and `debug` variants with `singleBuild`, `gms`, and `nonGms` OMH bundles, the following build variants will be generated:
 
-   ##### Variant singleBuild
-   - Define the `Service`. In this example is maps.
-   - Define the `ServiceDetails`. In this example are `gmsService` and `nonGmsService`.
-   - Define the dependency and the path. In this example are `com.openmobilehub.android:maps-api-googlemaps:1.0"` and `com.openmobilehub.android:maps-api-openstreetmap:1.0`.
-   **Note:** It's important to observe how a single build encompasses both GMS (Google Mobile Services) and Non-GMS configurations.
-
-   ##### Variant gms
-   - Define the `Service`. In this example is maps.
-   - Define the `ServiceDetails` . In this example is `gmsService`.
-   - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-googlemaps:1.0"`.
-   **Note:** gms build covers only GMS (Google Mobile Services).
-
-   ##### Variant nonGms
-   - Define the `Service`. In this example is maps.
-   - Define the `ServiceDetails` . In this example is `nonGmsService`.
-   - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-openstreetmap:1.0`.
-   **Note:** nonGms build covers only Non-GMS configurations.
-
+   - `releaseSingleBuild`, `releaseGms`, and `releaseNonGms`
+   - `debugSingleBuild`, `debugGms`, and `debugNonGms`
+   
    In your `maps-starter-sample` module-level `build.gradle` file add the following code at the end of the file.
 
    ```kotlin
@@ -203,6 +189,25 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
       }
    }
    ```
+   
+   ##### Variant singleBuild
+   - Define the `Service`. In this example is maps.
+   - Define the `ServiceDetails`. In this example are `gmsService` and `nonGmsService`.
+   - Define the dependency and the path. In this example are `com.openmobilehub.android:maps-api-googlemaps:1.0"` and `com.openmobilehub.android:maps-api-openstreetmap:1.0`.
+   
+   **Note: It's important to observe how a single build encompasses both GMS and Non-GMS configurations.**
+
+   ##### Variant gms
+   - Define the `Service`. In this example is maps.
+   - Define the `ServiceDetails` . In this example is `gmsService`.
+   - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-googlemaps:1.0"`.
+   **Note:** gms build covers only GMS (Google Mobile Services).
+
+   ##### Variant nonGms
+   - Define the `Service`. In this example is maps.
+   - Define the `ServiceDetails` . In this example is `nonGmsService`.
+   - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-openstreetmap:1.0`.
+   **Note:** nonGms build covers only Non-GMS configurations.
    
 3. Save and [sync Project with Gradle Files](https://developer.android.com/studio/build#sync-files). 
 4. Now you can select a build variant. To change the build variant Android Studio uses, do one of the following:
