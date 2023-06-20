@@ -383,33 +383,29 @@ Then use `getMapAsync()` to register for the map callback:
    **Important: For a better experience and accuracy try a phone with a SIM card.**
 
 4. Explore Advanced Features
-   Congratulations on completing the getting started guide! Now, it's time to level up your mapping skills by diving into our advanced features.
-   Discover how to handle camera events, add markers, manage location data, work with gestures, utilize network utilities, and create custom Maps SDK implementations/plugins. These advanced capabilities will elevate your mapping application to new heights.
-   Visit our [Advanced Features wiki page](https://github.com/openmobilehub/omh-maps/wiki#ohm-map-sdk---advanced-features) to access detailed information, examples, and guides for each feature. Unleash the full power of our mapping SDK and create exceptional mapping experiences.
-   Take the next step and explore our Advanced Features now!
-
-## Documentation
-See example and check the full documentation and add custom implementation at our [Wiki](https://github.com/openmobilehub/omh-maps/wiki).
-Additionally for more information about the OMH Map functions, [Docs](https://openmobilehub.github.io/omh-maps).
+   
+   Complete the guide and access advanced mapping features: camera events, markers, location management, gestures, network utilities, and custom implementations/plugins. Visit [Advanced Features](https://github.com/openmobilehub/omh-maps/wiki#ohm-map-sdk---advanced-features) for details, examples, and        guides. Enhance your mapping experiences. Explore now!
 
 # Sample App
 This repository includes a [maps-sample](/maps-sample) that demonstrates the functionality of the OMH Maps Client Library. By cloning the repo and executing the app, you can explore the various features offered by the library. However, if you prefer a step-by-step approach to learn the SDK from scratch, we recommend following the detailed Getting Started guide provided in this repository. The guide will walk you through the implementation process and help you integrate the OMH Maps Client Library into your projects effectively.
+
+# Documentation
+* Find complete documentation on the [Wiki](https://github.com/openmobilehub/omh-maps/wiki).
+* Check out the [API Reference Docs](https://openmobilehub.github.io/omh-maps).
 
 # Provider Implementations / Plugins
 We also believe in the power of community collaboration. That's why OMH Maps SDK is open-source, inviting contributions and supporting plugins from other map providers. 
 Together, we can expand the capabilities of the SDK and enhance the range of supported map services.
 
 ## Contributing
-We'd be glad if you decide to contribute to this project.
-All pull request is welcome, just make sure that every work is linked to an issue on this repository so everyone can track it.
-For more information check [CONTRIBUTING](https://github.com/openmobilehub/omh-maps/blob/release/1.0/CONTRIBUTING.md).
-
-**Disclaimer:** This client library is currently undergoing development, and there may be future modifications to specific implementation details.
+Please contribute! We will gladly review any pull requests. Make sure to read the [Contributing](https://github.com/openmobilehub/omh-maps/blob/release/1.0/CONTRIBUTING.md) page first though.
 
 ## License
+```
 Copyright 2023 Futurewei, Inc.
 Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. 
 See the NOTICE file distributed with this work for additional information regarding copyright ownership. 
 The ASF licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
 You may obtain a copy of the License at
 https://www.apache.org/licenses/LICENSE-2.0
+```
