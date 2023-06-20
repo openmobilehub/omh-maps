@@ -394,13 +394,12 @@ This repository includes a [maps-sample](/maps-sample) that demonstrates the fun
 * Check out the [API Reference Docs](https://openmobilehub.github.io/omh-maps).
 
 # Provider Implementations / Plugins
-We also believe in the power of community collaboration. That's why OMH Maps SDK is open-source, inviting contributions and supporting plugins from other map providers. 
-Together, we can expand the capabilities of the SDK and enhance the range of supported map services.
+OMH Maps SDK is open-source, promoting community collaboration and plugin support from other map providers to enhance capabilities and expand supported map services. More details can be found at https://github.com/openmobilehub/omh-maps/wiki.
 
-## Contributing
+# Contributing
 Please contribute! We will gladly review any pull requests. Make sure to read the [Contributing](https://github.com/openmobilehub/omh-maps/blob/release/1.0/CONTRIBUTING.md) page first though.
 
-## License
+# License
 ```
 Copyright 2023 Futurewei, Inc.
 Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. 
