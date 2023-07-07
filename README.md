@@ -224,10 +224,9 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
 
    ```kotlin
    import com.omh.android.maps.api.factories.OmhMapProvider
-   import com.omh.android.maps.api.factories.OmhMapSDK
    ```
 
-   Then initialize the `OmhMapsSDK` as follows:
+   Then initialize the `OmhMapProvider` as follows:
 
    ```kotlin
     class MainApplication : Application() {
@@ -235,11 +234,10 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
         override fun onCreate() {
             super.onCreate()
             
-            val omhProviderBuilder = OmhMapProvider.Builder()
-            omhProviderBuilder
-                .addGmsPath(BuildConfig.MAPS_GMS_PATH)
-                .addNonGmsPath(BuildConfig.MAPS_NON_GMS_PATH)
-            OmhMapSDK.initialize(omhProviderBuilder)
+        OmhMapProvider.Initiator()
+            .addGmsPath(BuildConfig.MAPS_GMS_PATH)
+            .addNonGmsPath(BuildConfig.MAPS_NON_GMS_PATH)
+            .initialize()
         }
     }
    ```
