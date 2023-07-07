@@ -14,7 +14,7 @@ $dokka.location:com.omh.android.maps.api.factories/OmhMapProvider///PointingToDe
 $dokka.location:com.omh.android.maps.api.factories/OmhMapProvider/provideOmhLocation/#android.content.Context/PointingToDeclaration/maps-api/com.omh.android.maps.api.factories/-omh-map-provider/provide-omh-location.html
 $dokka.location:com.omh.android.maps.api.factories/OmhMapProvider/provideOmhMapView/#android.content.Context/PointingToDeclaration/maps-api/com.omh.android.maps.api.factories/-omh-map-provider/provide-omh-map-view.html
 $dokka.location:com.omh.android.maps.api.factories/OmhMapSDK///PointingToDeclaration/maps-api/com.omh.android.maps.api.factories/-omh-map-s-d-k/index.html
-$dokka.location:com.omh.android.maps.api.factories/OmhMapSDK/initialize/#com.omh.android.maps.api.factories.OmhMapProvider.Initializator/PointingToDeclaration/maps-api/com.omh.android.maps.api.factories/-omh-map-s-d-k/initialize.html
+$dokka.location:com.omh.android.maps.api.factories/OmhMapSDK/initialize/#com.omh.android.maps.api.factories.OmhMapProvider.Builder/PointingToDeclaration/maps-api/com.omh.android.maps.api.factories/-omh-map-s-d-k/initialize.html
 $dokka.location:com.omh.android.maps.api.presentation.fragments////PointingToDeclaration/maps-api/com.omh.android.maps.api.presentation.fragments/index.html
 $dokka.location:com.omh.android.maps.api.presentation.fragments/OmhMapFragment.Companion///PointingToDeclaration/maps-api/com.omh.android.maps.api.presentation.fragments/-omh-map-fragment/-companion/index.html
 $dokka.location:com.omh.android.maps.api.presentation.fragments/OmhMapFragment.Companion/newInstance/#/PointingToDeclaration/maps-api/com.omh.android.maps.api.presentation.fragments/-omh-map-fragment/-companion/new-instance.html
