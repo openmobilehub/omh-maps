@@ -94,9 +94,9 @@ class OmhMapProvider private constructor(
     }
 
     /**
-     * Builder class to setup and create a [OmhMapProvider] instance.
+     * Initializator class to setup and create a [OmhMapProvider] instance.
      */
-    class Builder {
+    class Initiator {
 
         private var gmsPath: String? = null
         private var nonGmsPath: String? = null
@@ -107,7 +107,7 @@ class OmhMapProvider private constructor(
          * @param gmsPath The path for the GMS.
          */
         @JvmOverloads
-        fun addGmsPath(gmsPath: String? = GMS_ADDRESS): Builder {
+        fun addGmsPath(gmsPath: String? = GMS_ADDRESS): Initiator {
             this.gmsPath = gmsPath
             return this
         }
@@ -118,12 +118,12 @@ class OmhMapProvider private constructor(
          * @param ngmsPath The path for teh Non GMS.
          */
         @JvmOverloads
-        fun addNonGmsPath(ngmsPath: String? = NON_GMS_ADDRESS): Builder {
+        fun addNonGmsPath(ngmsPath: String? = NON_GMS_ADDRESS): Initiator {
             this.nonGmsPath = ngmsPath
             return this
         }
 
-        internal fun build() {
+        fun initialize() {
             singletonInstance = OmhMapProvider(gmsPath, nonGmsPath)
         }
     }
