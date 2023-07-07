@@ -9,8 +9,7 @@ subprojects {
     repositories {
         mavenCentral()
         google()
-//        maven("https://s01.oss.sonatype.org/content/groups/staging/")
-        mavenLocal()
+        maven("https://s01.oss.sonatype.org/content/groups/staging/")
     }
 }
 
