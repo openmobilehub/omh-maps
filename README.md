@@ -10,7 +10,9 @@
 [![Publish Maps API OpenStreetMap Implementation](https://github.com/openmobilehub/omh-maps/actions/workflows/publish_maps_api_ngms.yml/badge.svg)](https://github.com/openmobilehub/omh-maps/actions/workflows/publish_maps_api_ngms.yml)
 
 
-# OMH Maps Client Library Overview
+# OMH Maps Client Library
+
+## Overview
 OMH Maps is an Android client library that makes it easy to integrate maps on both Google Mobile Services (GMS) and non-GMS devices. It eliminates the need for separate codebases for different Android builds.
 
 With the OMH Maps Client Library, you can easily add Google Maps, OpenStreetMap, and other third-party maps to your applications, regardless of whether the device has GMS or not. The library takes care of the technical details, providing a unified interface and components for a consistent map experience.
