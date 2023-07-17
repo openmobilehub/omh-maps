@@ -3,7 +3,14 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 plugins {
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
+    id("com.github.hierynomus.license") version "0.16.1"
 }
+
+downloadLicenses {
+    includeProjectDependencies = true
+    dependencyConfiguration = "debugRuntimeClasspath"
+}
+
 
 subprojects {
     repositories {
@@ -12,6 +19,7 @@ subprojects {
         maven("https://s01.oss.sonatype.org/content/groups/staging/")
     }
 }
+
 
 tasks.register("installPrePushHook", Copy::class) {
     from("tools/scripts/pre-push")
