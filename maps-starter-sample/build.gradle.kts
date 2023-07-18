@@ -3,7 +3,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    // Add Secrets Gradle plugin: TODO: Before you run your application add the secrets gradle plugin id.
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     // Add OMH core plugin: TODO: Before you run your application add the OMH core plugin id.
 }
 
@@ -37,7 +37,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        // Enable build config: TODO: Before you run your application enable the buildConfig.
+        buildConfig = true
     }
 }
 
