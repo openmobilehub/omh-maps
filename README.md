@@ -103,18 +103,6 @@ For more information about the `local.properties` file, see [Gradle properties f
    </manifest>
    ```
 
-5. To read the value from the `local.properties` you can use [Secrets Gradle plugin for Android](https://github.com/google/secrets-gradle-plugin). To install the plugin and store your API key:
-   - Open your "maps-starter-sample" module-level `build.gradle` file and add the following code to the `plugins` element.
-
-   ```kotlin
-   plugins {
-      ...
-      id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
-   }
-   ```
-
-   - Save the file and [sync your project with Gradle](https://developer.android.com/studio/build#sync-files).
-
 ## Gradle configuration
 To integrate the OMH Maps into your project, it is necessary to add a few Gradle dependencies.
 
@@ -133,30 +121,11 @@ To incorporate OMH Maps into your project, you have two options: utilize the OMH
 2. Save the file and [sync Project with Gradle Files](https://developer.android.com/studio/build#sync-files).
 
 ### Configure the OMH Core plugin
-To use the core plugin, certain minimum configurations are required. For more details, please refer to [OMH Core Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0).
-
-1. In your `maps-starter-sample` module-level `build.gradle` file under the `buildFeatures` element add `buildConfig = true`. For more information see [BuildFeatures](https://developer.android.com/reference/tools/gradle-api/7.0/com/android/build/api/dsl/BuildFeatures)
-
-   ```kotlin
-   android {
-      ...
-      buildFeatures {
-         ...
-         buildConfig = true
-      }
-   }
-   ```
-
-2. In your `maps-starter-sample` module-level `build.gradle` file is required to configure the `omhConfig`. The `omhConfig` definition is used to extend the existing Android Studio variants in the core plugin. 
-For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh-core/tree/release/1.0).
+In this sample app, we utilize the `omhConfig` definition to expand the capabilities of the existing Android Studio variants. For more details, refer to the [OMH Core Plugin Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0).
 
    #### Basic configuration
-   In this step, you will define the OMH Core Plugin bundles to generate multiple build variants with specific suffixes as their names. For example, if your project has `release` and `debug` variants with `singleBuild`, `gms`, and `nonGms` OMH bundles, the following build variants will be generated:
-
-   - `releaseSingleBuild`, `releaseGms`, and `releaseNonGms`
-   - `debugSingleBuild`, `debugGms`, and `debugNonGms`
    
-   In your `maps-starter-sample` module-level `build.gradle` file add the following code at the end of the file.
+   1. In your `maps-starter-sample` module-level `build.gradle` file add the following code at the end of the file.
 
    ```kotlin
    ...
@@ -191,6 +160,11 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
       }
    }
    ```
+
+   In this step, you defined the OMH Core Plugin bundles to generate multiple build variants with specific suffixes as their names. For example, if your project has `release` and `debug` variants with `singleBuild`, `gms`, and `nonGms` OMH bundles, the following build variants will be generated:
+
+   - `releaseSingleBuild`, `releaseGms`, and `releaseNonGms`
+   - `debugSingleBuild`, `debugGms`, and `debugNonGms`
    
    ##### Variant singleBuild
    - Define the `Service`. In this example is maps.
@@ -211,18 +185,18 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
    - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-openstreetmap:1.0`.
    **Note:** nonGms build covers only Non-GMS configurations.
    
-3. Save and [sync Project with Gradle Files](https://developer.android.com/studio/build#sync-files). 
-4. Now you can select a build variant. To change the build variant Android Studio uses, do one of the following:
+2. Save and [sync Project with Gradle Files](https://developer.android.com/studio/build#sync-files). 
+3. Now you can select a build variant. To change the build variant Android Studio uses, do one of the following:
    - Select `Build` > `Select Build Variant...` in the menu.
    - Select `View` > `Tool Windows` > `Build Variants` in the menu.
    - Click the `Build Variants` tab on the tool window bar.
 
-5. You can select any of the 3 variants for the `:Maps-starter-sample`:
+4. You can select any of the 3 variants for the `:Maps-starter-sample`:
    - `singleBuild` variant builds for GMS (Google Mobile Services) and Non-GMS devices without changes to the code.(Recommended)
    - `gms` variant  builds for devices that has GMS (Google Mobile Services).
    - `nonGms` variant builds for devices that doesn't have GMS (Google Mobile Services).
 
-6. Open `maps-starter-sample` module-level `MainApplication` class and add the required imports below the package name. The file is in the same level as the `MainActivity`:
+5. Open `maps-starter-sample` module-level `MainApplication` class and add the required imports below the package name. The file is in the same level as the `MainActivity`:
 
    ```kotlin
    import com.omh.android.maps.api.factories.OmhMapProvider
@@ -249,20 +223,17 @@ For more details `omhConfig` see [OMH Core](https://github.com/openmobilehub/omh
    - Select `Build` from the menu at the top in Android Studio. 
    - Click on `Clean Project` and await. 
    - Click on `Rebuild Project` and await.
-   - Await a few seconds after `Rebuild` if still not recognize them.
-   - If still not working, select `Run` for the `maps-starter-sample` from the top navigation menu in Android Studio.
-   - If still not working, select `File` from the menu at the top in Android Studio. 
-   - Click `Invalidate Caches...`. 
 
 ## Add the map into your app
 The main interfaces that you will be interacting with are called `OmhMap`, `OmhMapView` and `OmhLocation`.
 It contains all your basic maps and location functions like displaying a marker, map gestures, getting current location and more.
 Additionally a fragment `OmhMapFragment` is provided, this fragment manages the life cycle of the map.
 
-### Map fragment
+### Add a Map fragment
 `OmhMapFragment` is the simplest way to place a map in an application.
-Fragment has to declare `android:name` that sets the class name of the fragment to `OmhMapFragment`, which is the fragment type used in the maps activity file.
-Being a fragment, this component can be added to an fragment's layout file simply with the following XML layout
+Fragment has to declare `android:name` that sets the class name of the fragment to `OmhMapFragment`, which is the fragment type used in the maps fragment file.
+
+1. Insert the XML fragment snippet into the `fragment_map.xml`.
 
 ```xml
 ...
@@ -302,7 +273,8 @@ And the complete fragment's layout should look similar to this example:
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-Now just click the `Run` for the `maps-starter-sample` menu option (or the play button icon) to run your app and see the map.
+2. Change the variant to `debugSingleBuild``.
+3. Click `Run` for the `maps-starter-sample`.
 
 ### Display your current location
 An `OmhMap` must be acquired using `getMapAsync(OmhOnMapReadyCallback)`. This class automatically initializes the maps system and the view.
