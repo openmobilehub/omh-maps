@@ -171,19 +171,21 @@ In this sample app, we utilize the `omhConfig` definition to expand the capabili
    - Define the `ServiceDetails`. In this example are `gmsService` and `nonGmsService`.
    - Define the dependency and the path. In this example are `com.openmobilehub.android:maps-api-googlemaps:1.0"` and `com.openmobilehub.android:maps-api-openstreetmap:1.0`.
    
-   **Note: It's important to observe how a single build encompasses both GMS and Non-GMS configurations.**
+      **Note: It's important to observe how a single build encompasses both GMS and Non-GMS configurations.**
 
    ##### Variant gms
    - Define the `Service`. In this example is maps.
    - Define the `ServiceDetails` . In this example is `gmsService`.
    - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-googlemaps:1.0"`.
-   **Note:** gms build covers only GMS (Google Mobile Services).
+   
+      **Note:** gms build covers only GMS (Google Mobile Services).
 
    ##### Variant nonGms
    - Define the `Service`. In this example is maps.
    - Define the `ServiceDetails` . In this example is `nonGmsService`.
    - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-openstreetmap:1.0`.
-   **Note:** nonGms build covers only Non-GMS configurations.
+   
+      **Note:** nonGms build covers only Non-GMS configurations.
    
 2. Save and [sync Project with Gradle Files](https://developer.android.com/studio/build#sync-files). 
 3. Now you can select a build variant. To change the build variant Android Studio uses, do one of the following:
@@ -195,6 +197,8 @@ In this sample app, we utilize the `omhConfig` definition to expand the capabili
    - `singleBuild` variant builds for GMS (Google Mobile Services) and Non-GMS devices without changes to the code.(Recommended)
    - `gms` variant  builds for devices that has GMS (Google Mobile Services).
    - `nonGms` variant builds for devices that doesn't have GMS (Google Mobile Services).
+
+   **Note:** In the rest of this guide, we will use the `debugSingleBuild` variant to demonstrate the same build running on GMS and Non-GMS devices.
 
 5. Open `maps-starter-sample` module-level `MainApplication` class and add the required imports below the package name. The file is in the same level as the `MainActivity`:
 
