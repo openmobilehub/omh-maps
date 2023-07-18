@@ -11,25 +11,6 @@ subprojects {
     }
 }
 
-tasks.register("installPrePushHook", Copy::class) {
-    from("tools/scripts/pre-push")
-    into(".git/hooks")
-    fileMode = 0b000_111_111_111
-}
-
-tasks.register("installPreCommitHook", Copy::class) {
-    from("tools/scripts/pre-commit")
-    into(".git/hooks")
-    fileMode = 0b000_111_111_111
-}
-
-tasks {
-    val installPrePushHook by existing
-    val installPreCommitHook by existing
-    getByName("prepareKotlinBuildScriptModel").dependsOn(installPrePushHook)
-    getByName("prepareKotlinBuildScriptModel").dependsOn(installPreCommitHook)
-}
-
 val ossrhUsername by extra(getValueFromEnvOrProperties("ossrhUsername"))
 val ossrhPassword by extra(getValueFromEnvOrProperties("ossrhPassword"))
 val mStagingProfileId by extra(getValueFromEnvOrProperties("stagingProfileId"))
