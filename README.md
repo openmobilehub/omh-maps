@@ -277,7 +277,7 @@ And the complete fragment's layout should look similar to this example:
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-2. Change the variant to `debugSingleBuild``.
+2. Change the variant to `debugSingleBuild`.
 3. Click `Run` for the `maps-starter-sample`.
 
 ### Display your current location
