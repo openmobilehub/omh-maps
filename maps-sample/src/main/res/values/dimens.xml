@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="small_4">4dp</dimen>
+    <dimen name="normal_8">8dp</dimen>
+    <dimen name="normal_16">16dp</dimen>
+    <dimen name="map_marker_height">48dp</dimen>
+    <dimen name="fab_margin">48dp</dimen>
+</resources>

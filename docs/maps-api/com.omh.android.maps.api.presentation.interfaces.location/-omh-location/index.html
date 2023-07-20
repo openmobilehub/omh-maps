@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>OmhLocation</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../../index.html">
+                    <span>maps-api</span>
+            </a>
+    </div>
+    <div>
+1.0    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageIds="maps-api::com.omh.android.maps.api.presentation.interfaces.location/OmhLocation///PointingToDeclaration//2003735574">
+  <div class="breadcrumbs"><a href="../../../index.html">maps-api</a><span class="delimiter">/</span><a href="../index.html">com.omh.android.maps.api.presentation.interfaces.location</a><span class="delimiter">/</span><span class="current">OmhLocation</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Omh</span><wbr></wbr><span><span>Location</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps-api:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">OmhLocation</a></div><p class="paragraph">Abstraction to provide access to Location Provider</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Functions">Functions</button></div>
+    <div class="tabs-section-body">
+      <h2 class="">Types</h2>
+      <div class="table" data-togglable="Types"><a data-name="702214308%2FClasslikes%2F2003735574" anchor-label="Builder" id="702214308%2FClasslikes%2F2003735574" data-filterable-set=":maps-api:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":maps-api:dokkaHtml/release" data-filterable-set=":maps-api:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-builder/index.html"><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="702214308%2FClasslikes%2F2003735574"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps-api:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-builder/index.html">Builder</a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Functions</h2>
+      <div class="table" data-togglable="Functions"><a data-name="1280291010%2FFunctions%2F2003735574" anchor-label="getCurrentLocation" id="1280291010%2FFunctions%2F2003735574" data-filterable-set=":maps-api:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":maps-api:dokkaHtml/release" data-filterable-set=":maps-api:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="get-current-location.html"><span>get</span><wbr></wbr><span>Current</span><wbr></wbr><span><span>Location</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1280291010%2FFunctions%2F2003735574"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps-api:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.annotation/RequiresPermission///PointingToDeclaration/"><span class="token annotation builtin">RequiresPermission</span></span><span class="token punctuation">(</span><span>anyOf<span class="token operator"> = </span><span class="token punctuation">[</span><span><span class="breakable-word"><span class="token string">&quot;android.permission.ACCESS_COARSE_LOCATION&quot;</span></span><span class="token punctuation">, </span></span><wbr></wbr><span><span class="breakable-word"><span class="token string">&quot;android.permission.ACCESS_FINE_LOCATION&quot;</span></span></span><wbr></wbr><span class="token punctuation">]</span></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-current-location.html"><span class="token function">getCurrentLocation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">omhOnSuccessListener<span class="token operator">: </span><a href="../-omh-success-listener/index.html">OmhSuccessListener</a><span class="token punctuation">, </span></span><span class="parameter ">omhOnFailureListener<span class="token operator">: </span><a href="../-omh-failure-listener/index.html">OmhFailureListener</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Returns a single location fix representing the best estimate of the current location of the device.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1625623667%2FFunctions%2F2003735574" anchor-label="getLastLocation" id="-1625623667%2FFunctions%2F2003735574" data-filterable-set=":maps-api:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":maps-api:dokkaHtml/release" data-filterable-set=":maps-api:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="get-last-location.html"><span>get</span><wbr></wbr><span>Last</span><wbr></wbr><span><span>Location</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1625623667%2FFunctions%2F2003735574"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps-api:dokkaHtml/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="androidx.annotation/RequiresPermission///PointingToDeclaration/"><span class="token annotation builtin">RequiresPermission</span></span><span class="token punctuation">(</span><span>anyOf<span class="token operator"> = </span><span class="token punctuation">[</span><span><span class="breakable-word"><span class="token string">&quot;android.permission.ACCESS_COARSE_LOCATION&quot;</span></span><span class="token punctuation">, </span></span><wbr></wbr><span><span class="breakable-word"><span class="token string">&quot;android.permission.ACCESS_FINE_LOCATION&quot;</span></span></span><wbr></wbr><span class="token punctuation">]</span></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-last-location.html"><span class="token function">getLastLocation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">omhOnSuccessListener<span class="token operator">: </span><a href="../-omh-success-listener/index.html">OmhSuccessListener</a><span class="token punctuation">, </span></span><span class="parameter ">omhOnFailureListener<span class="token operator">: </span><a href="../-omh-failure-listener/index.html">OmhFailureListener</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Returns the most recent historical location currently available. Will return null if no historical location is available. The historical location may be of an arbitrary age, so clients should check how old the location is to see if it suits their purposes.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+</body>
+</html>
