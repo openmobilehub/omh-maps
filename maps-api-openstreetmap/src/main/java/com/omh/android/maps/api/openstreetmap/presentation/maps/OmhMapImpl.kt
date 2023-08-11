@@ -26,6 +26,7 @@ import com.omh.android.maps.api.openstreetmap.utils.Constants.DEFAULT_ZOOM_LEVEL
 import com.omh.android.maps.api.openstreetmap.utils.MapListenerController
 import com.omh.android.maps.api.openstreetmap.utils.MapTouchListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
+import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapLoadedCallback
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMarker
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
@@ -39,6 +40,7 @@ import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
+@SuppressWarnings("TooManyFunctions")
 internal class OmhMapImpl(
     private val mapView: MapView,
     private val mapListenerController: MapListenerController
@@ -138,6 +140,10 @@ internal class OmhMapImpl(
 
     override fun setOnCameraMoveStartedListener(listener: OmhOnCameraMoveStartedListener) {
         mapListenerController.setOnStartListener(listener)
+    }
+
+    override fun setOnMapLoadedCallback(callback: OmhMapLoadedCallback?) {
+        callback?.onMapLoaded()
     }
 
     override fun setOnCameraIdleListener(listener: OmhOnCameraIdleListener) {

@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.Marker
 import com.omh.android.maps.api.googlemaps.extensions.toMarkerOptions
 import com.omh.android.maps.api.googlemaps.utils.ConverterUtils
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
+import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapLoadedCallback
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMarker
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
@@ -76,6 +77,12 @@ internal class OmhMapImpl(private var googleMap: GoogleMap) : OmhMap {
     override fun setOnCameraIdleListener(listener: OmhOnCameraIdleListener) {
         googleMap.setOnCameraIdleListener {
             listener.onCameraIdle()
+        }
+    }
+
+    override fun setOnMapLoadedCallback(callback: OmhMapLoadedCallback?) {
+        googleMap.setOnMapLoadedCallback {
+            callback?.onMapLoaded()
         }
     }
 
