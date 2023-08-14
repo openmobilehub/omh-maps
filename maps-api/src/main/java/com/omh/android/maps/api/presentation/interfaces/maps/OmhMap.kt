@@ -96,4 +96,14 @@ interface OmhMap {
      * @param listener Callback interface for when camera movement has ended.
      */
     fun setOnCameraIdleListener(listener: OmhOnCameraIdleListener)
+
+    /**
+     * Sets a callback that's invoked when this map has finished rendering. The callback will only be invoked once.
+     * If this method is called when the map is fully rendered, the callback will be invoked immediately.
+     * This event will not fire if the map never loads due to connectivity issues, or if the map is continuously
+     * changing and never completes loading due to the user constantly interacting with the map.
+     *
+     * @param callback The callback invoked when the map has finished rendering. To unset the callback, use null.
+     */
+    fun setOnMapLoadedCallback(callback: OmhMapLoadedCallback?)
 }
