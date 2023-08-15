@@ -28,6 +28,7 @@ import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
  * You cannot instantiate a GoogleMap object directly, rather,
  * you must obtain one from the getMapAsync() method on a OmhMapView that you have added to your application.
  */
+@SuppressWarnings("TooManyFunctions")
 interface OmhMap {
 
     /**
@@ -106,4 +107,15 @@ interface OmhMap {
      * @param callback The callback invoked when the map has finished rendering. To unset the callback, use null.
      */
     fun setOnMapLoadedCallback(callback: OmhMapLoadedCallback?)
+
+    /**
+     * Takes a snapshot of the map.
+     *
+     * You can use snapshots within your application when an interactive map would be difficult, or impossible,
+     * to use. For example, images produced with the snapshot() method can be used to display a thumbnail of
+     * the map in your app, or a snapshot in the notification center.
+     *
+     * @param omhSnapshotReadyCallback Callback method invoked when the snapshot is taken.
+     */
+    fun snapshot(omhSnapshotReadyCallback: OmhSnapshotReadyCallback)
 }
