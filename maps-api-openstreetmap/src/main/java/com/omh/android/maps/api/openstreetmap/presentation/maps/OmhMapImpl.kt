@@ -18,18 +18,25 @@ package com.omh.android.maps.api.openstreetmap.presentation.maps
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.location.LocationManager.FUSED_PROVIDER
 import androidx.annotation.RequiresPermission
+import androidx.core.content.ContextCompat
+import com.omh.android.maps.api.openstreetmap.R
 import com.omh.android.maps.api.openstreetmap.extensions.toGeoPoint
 import com.omh.android.maps.api.openstreetmap.extensions.toOmhCoordinate
 import com.omh.android.maps.api.openstreetmap.utils.Constants.DEFAULT_ZOOM_LEVEL
 import com.omh.android.maps.api.openstreetmap.utils.MapListenerController
 import com.omh.android.maps.api.openstreetmap.utils.MapTouchListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
+import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapLoadedCallback
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMarker
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMyLocationButtonClickListener
+import com.omh.android.maps.api.presentation.interfaces.maps.OmhSnapshotReadyCallback
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
 import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
 import org.osmdroid.api.IGeoPoint
@@ -39,6 +46,7 @@ import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
+@SuppressWarnings("TooManyFunctions")
 internal class OmhMapImpl(
     private val mapView: MapView,
     private val mapListenerController: MapListenerController
@@ -87,6 +95,23 @@ internal class OmhMapImpl(
         if (!enableZoomGestures) {
             mapView.zoomController.setVisibility(CustomZoomButtonsController.Visibility.NEVER)
         }
+    }
+
+    override fun snapshot(omhSnapshotReadyCallback: OmhSnapshotReadyCallback) {
+        val drawable: Drawable? = ContextCompat.getDrawable(mapView.context, R.drawable.img_map_placeholder)
+        if (drawable == null) {
+            omhSnapshotReadyCallback.onSnapshotReady(null)
+            return
+        }
+        val bitmap: Bitmap = Bitmap.createBitmap(
+            drawable.intrinsicWidth,
+            drawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        omhSnapshotReadyCallback.onSnapshotReady(bitmap)
     }
 
     @RequiresPermission(anyOf = [ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION])
@@ -138,6 +163,10 @@ internal class OmhMapImpl(
 
     override fun setOnCameraMoveStartedListener(listener: OmhOnCameraMoveStartedListener) {
         mapListenerController.setOnStartListener(listener)
+    }
+
+    override fun setOnMapLoadedCallback(callback: OmhMapLoadedCallback?) {
+        callback?.onMapLoaded()
     }
 
     override fun setOnCameraIdleListener(listener: OmhOnCameraIdleListener) {

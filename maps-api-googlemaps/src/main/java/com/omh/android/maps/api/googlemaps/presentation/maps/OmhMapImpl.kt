@@ -18,6 +18,7 @@ package com.omh.android.maps.api.googlemaps.presentation.maps
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.graphics.Bitmap
 import androidx.annotation.RequiresPermission
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -26,13 +27,16 @@ import com.google.android.gms.maps.model.Marker
 import com.omh.android.maps.api.googlemaps.extensions.toMarkerOptions
 import com.omh.android.maps.api.googlemaps.utils.ConverterUtils
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMap
+import com.omh.android.maps.api.presentation.interfaces.maps.OmhMapLoadedCallback
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhMarker
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraIdleListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnCameraMoveStartedListener
 import com.omh.android.maps.api.presentation.interfaces.maps.OmhOnMyLocationButtonClickListener
+import com.omh.android.maps.api.presentation.interfaces.maps.OmhSnapshotReadyCallback
 import com.omh.android.maps.api.presentation.models.OmhCoordinate
 import com.omh.android.maps.api.presentation.models.OmhMarkerOptions
 
+@SuppressWarnings("TooManyFunctions")
 internal class OmhMapImpl(private var googleMap: GoogleMap) : OmhMap {
     override fun addMarker(options: OmhMarkerOptions): OmhMarker? {
         val googleOptions = options.toMarkerOptions()
@@ -76,6 +80,18 @@ internal class OmhMapImpl(private var googleMap: GoogleMap) : OmhMap {
     override fun setOnCameraIdleListener(listener: OmhOnCameraIdleListener) {
         googleMap.setOnCameraIdleListener {
             listener.onCameraIdle()
+        }
+    }
+
+    override fun setOnMapLoadedCallback(callback: OmhMapLoadedCallback?) {
+        googleMap.setOnMapLoadedCallback {
+            callback?.onMapLoaded()
+        }
+    }
+
+    override fun snapshot(omhSnapshotReadyCallback: OmhSnapshotReadyCallback) {
+        googleMap.snapshot { bitmap: Bitmap? ->
+            omhSnapshotReadyCallback.onSnapshotReady(bitmap)
         }
     }
 
