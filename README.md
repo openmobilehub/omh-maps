@@ -19,7 +19,7 @@ OMH Maps Client Library is an Android SDK that simplifies the integration of map
 For instance, the following screenshots showcase multiple devices with Android, both with GMS and Non-GMS. The same app works without changing a single line of code, supporting multiple map provider implementations (Google Maps and OpenStreetMap).
 <div align="center">
 
-| Non-GMS</br>Kindle Fire HD 10 Kids | Non-GMS</br>Pixel 6 Pro | Non-GMS Device</br>Huawei P60     | GMS</br>Pixel 6a |
+| Non-GMS Device</br>Kindle Fire HD 10 Kids | Non-GMS Android Emulator Image</br>Pixel 6 Pro | Non-GMS Device</br>Huawei P60     | GMS Device</br>Pixel 6a |
 | ----------------------- | --------------------- | ----------- | ------------ |
 | <img src="images/omh-maps-non-gms-kindle.gif">  | <img src="images/omh-maps-non-gms-pixel-6.gif"> | <img src="images/omh-maps-non-gms-huawei-p60.gif"> |   <img src="images/omh-maps-gms-pixel-6a.gif">     |
 
