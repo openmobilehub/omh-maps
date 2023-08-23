@@ -167,7 +167,7 @@ In this sample app, we utilize the `omhConfig` definition to expand the capabili
    ##### Variant singleBuild
    - Define the `Service`. In this example is maps.
    - Define the `ServiceDetails`. In this example are `gmsService` and `nonGmsService`.
-   - Define the dependency and the path. In this example are `com.openmobilehub.android:maps-api-googlemaps:.2-beta"` and `com.openmobilehub.android:maps-api-openstreetmap:1.0.2-beta`.
+   - Define the dependency and the path. In this example are `com.openmobilehub.android:maps-api-googlemaps:.1.0.2-beta"` and `com.openmobilehub.android:maps-api-openstreetmap:1.0.2-beta`.
    
       **Note: It's important to observe how a single build encompasses both GMS and Non-GMS configurations.**
 
