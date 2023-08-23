@@ -119,7 +119,7 @@ To incorporate OMH Maps into your project, you have two options: utilize the OMH
 2. Save the file and [sync Project with Gradle Files](https://developer.android.com/studio/build#sync-files).
 
 ### Configure the OMH Core plugin
-In this sample app, we utilize the `omhConfig` definition to expand the capabilities of the existing Android Studio variants. For more details, refer to the [OMH Core Plugin Docs](https://github.com/openmobilehub/omh-core/tree/release/1.0).
+In this sample app, we utilize the `omhConfig` definition to expand the capabilities of the existing Android Studio variants. For more details, refer to the [OMH Core Plugin Docs](https://github.com/openmobilehub/omh-core).
 
    #### Basic configuration
    
@@ -135,24 +135,24 @@ In this sample app, we utilize the `omhConfig` definition to expand the capabili
       bundle("singleBuild") {
          maps {
             gmsService {
-               dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0"
+               dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0.2-beta"
             }
             nonGmsService {
-               dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0"
+               dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0.2-beta"
             }
          }
       }
       bundle("gms") {
          maps {
             gmsService {
-               dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0"
+               dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0.2-beta"
             }
          }
       }
       bundle("nonGms") {
          maps {
             nonGmsService {
-               dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0"
+               dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0.2-beta"
             }
          }
       }
@@ -167,21 +167,21 @@ In this sample app, we utilize the `omhConfig` definition to expand the capabili
    ##### Variant singleBuild
    - Define the `Service`. In this example is maps.
    - Define the `ServiceDetails`. In this example are `gmsService` and `nonGmsService`.
-   - Define the dependency and the path. In this example are `com.openmobilehub.android:maps-api-googlemaps:1.0"` and `com.openmobilehub.android:maps-api-openstreetmap:1.0`.
+   - Define the dependency and the path. In this example are `com.openmobilehub.android:maps-api-googlemaps:.2-beta"` and `com.openmobilehub.android:maps-api-openstreetmap:1.0.2-beta`.
    
       **Note: It's important to observe how a single build encompasses both GMS and Non-GMS configurations.**
 
    ##### Variant gms
    - Define the `Service`. In this example is maps.
    - Define the `ServiceDetails` . In this example is `gmsService`.
-   - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-googlemaps:1.0"`.
+   - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-googlemaps:1.0.2-beta"`.
    
       **Note:** gms build covers only GMS (Google Mobile Services).
 
    ##### Variant nonGms
    - Define the `Service`. In this example is maps.
    - Define the `ServiceDetails` . In this example is `nonGmsService`.
-   - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-openstreetmap:1.0`.
+   - Define the dependency and the path. In this example is `com.openmobilehub.android:maps-api-openstreetmap:1.0.2-beta`.
    
       **Note:** nonGms build covers only Non-GMS configurations.
    
@@ -371,7 +371,7 @@ This repository includes a [maps-sample](/maps-sample) that demonstrates the fun
 OMH Maps SDK is open-source, promoting community collaboration and plugin support from other map providers to enhance capabilities and expand supported map services. More details can be found at https://github.com/openmobilehub/omh-maps/wiki.
 
 # Contributing
-Please contribute! We will gladly review any pull requests. Make sure to read the [Contributing](https://github.com/openmobilehub/omh-maps/blob/release/1.0/CONTRIBUTING.md) page first though.
+Please contribute! We will gladly review any pull requests. Make sure to read the [Contributing](https://github.com/openmobilehub/omh-maps/blob/main/CONTRIBUTING.md) page first though.
 
 # License
 ```
