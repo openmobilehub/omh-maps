@@ -12,24 +12,24 @@ omhConfig {
     bundle("singleBuild") {
         maps {
             gmsService {
-                dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0.1-beta"
+                dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0.2-beta"
             }
             nonGmsService {
-                dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0.1-beta"
+                dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0.2-beta"
             }
         }
     }
     bundle("gms") {
         maps {
             gmsService {
-                dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0.1-beta"
+                dependency = "com.openmobilehub.android:maps-api-googlemaps:1.0.2-beta"
             }
         }
     }
     bundle("nongms") {
         maps {
             nonGmsService {
-                dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0.1-beta"
+                dependency = "com.openmobilehub.android:maps-api-openstreetmap:1.0.2-beta"
             }
         }
     }
