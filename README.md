@@ -373,6 +373,10 @@ OMH Maps SDK is open-source, promoting community collaboration and plugin suppor
 # Contributing
 Please contribute! We will gladly review any pull requests. Make sure to read the [Contributing](https://github.com/openmobilehub/omh-maps/blob/release/1.0/CONTRIBUTING.md) page first though.
 
+# Governance
+
+For details on our project's governance model and how decisions are made, please see our [Governance Policy](https://github.com/openmobilehub/admin/blob/main/GOVERNANCE.md).
+
 # License
 ```
 Copyright 2023 Open Mobile Hub
