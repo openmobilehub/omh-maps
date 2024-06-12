@@ -9,8 +9,11 @@
 [![Publish Maps API Google Maps Implementation](https://github.com/openmobilehub/omh-maps/actions/workflows/publish_maps_api_gms.yml/badge.svg)](https://github.com/openmobilehub/omh-maps/actions/workflows/publish_maps_api_gms.yml)
 [![Publish Maps API OpenStreetMap Implementation](https://github.com/openmobilehub/omh-maps/actions/workflows/publish_maps_api_ngms.yml/badge.svg)](https://github.com/openmobilehub/omh-maps/actions/workflows/publish_maps_api_ngms.yml)
 
+# OMH Maps 1.0 Client Library
 
-# OMH Maps Client Library
+> **Note:** This repository will be deprecated in August 2024. Developers should use the following repositories:
+> - [OMH 2.0 Maps Android Native repo](https://github.com/openmobilehub/android-omh-maps)
+> - [OMH 2.0 Maps React Native repo](https://github.com/openmobilehub/react-native-omh-maps)
 
 ## Overview
 OMH Maps Client Library is an Android SDK that simplifies the integration of maps on both Google Mobile Services (GMS) and non-GMS devices. It provides a unified interface and components for a consistent map experience, eliminating the need for separate codebases for different Android builds. This repository contains a detailed Getting Started guide to help developers learn and effectively implement the OMH Maps Client Library into their Android projects. For a general overview and understanding of the philosophy behind OMH, please visit the official website at https://www.openmobilehub.com.
